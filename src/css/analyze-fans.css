@@ -1,0 +1,329 @@
+/* Očuvaj samo standardni CSS i keyframes, ukloni sve @apply */
+.analyze-fans {
+    width: 100%;
+    position: relative;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    overflow: hidden;
+}
+
+.analyze-fans .bounce-bg-animt {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.analyze-fans .bounce-bg-animt .img-bg-bounce {
+    position: absolute;
+    z-index: 10;
+}
+
+.analyze-fans .bounce-bg-animt .bg-bounce-ligh-blue {
+    animation: 15s afBounceLightBlue infinite alternate;
+    left: -250px;
+    top: -200px;
+}
+
+.analyze-fans .bounce-bg-animt .bg-bounce-ligh-red {
+    animation: 15s afBounceLightRed infinite alternate;
+    right: -120px;
+    top: -120px;
+}
+
+@keyframes afBounceLightBlue {
+    from { left: 0; }
+    to { left: 70%; }
+}
+
+@keyframes afBounceLightRed {
+    from { right: 0; }
+    to { right: 70%; }
+}
+
+.analyze-fans .analyze-info,
+.analyze-fans .analyze-statistics {
+    width: 50%;
+}
+
+.analyze-fans .af-wraper {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 1280px) {
+    .analyze-fans .af-wraper {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.analyze-fans .analyze-info,
+.analyze-fans .analyze-statistics {
+    width: 50%;
+}
+
+@media (max-width: 1280px) {
+    .analyze-fans .analyze-info,
+    .analyze-fans .analyze-statistics {
+        width: 100%;
+    }
+}
+
+.analyze-fans .analyze-info .ai-wraper {
+    width: 729px;
+    padding: 70px 100px;
+    border-radius: 200px 0px;
+    background: rgba(32, 32, 32, 0.50);
+    backdrop-filter: blur(7.5px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 1280px) {
+    .analyze-fans .analyze-info .ai-wraper {
+        width: 100%;
+        max-width: 729px;
+        padding: 50px 60px;
+        border-radius: 100px 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .analyze-fans .analyze-info .ai-wraper {
+        padding: 23px 13px;
+        border-radius: 60px 0px;
+    }
+}
+
+.analyze-fans .analyze-statistics {
+    position: relative;
+}
+
+.analyze-fans .analyze-statistics .card-list {
+    position: relative;
+    z-index: 2;
+    height: 700px;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item {
+    backdrop-filter: blur(5px);
+    border-radius: 4rem;
+    transform: skewX(12deg);
+    position: relative;
+    top: 0;
+    transition: all 0.3s ease;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
+    animation: 10s afTopLayer infinite reverse;
+    position: absolute;
+    top: 1rem;
+    left: 3rem;
+    z-index: 4;
+    width: 285px;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item:nth-child(2) {
+    animation: 9s afTopLayer infinite;
+    position: absolute;
+    top: 1rem;
+    left: 22rem;
+    z-index: 4;
+    width: 285px;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item:nth-child(3) {
+    animation: 8s afTopLayer infinite reverse;
+    position: absolute;
+    top: 11.5rem;
+    left: 4rem;
+    z-index: 3;
+    width: 399px;
+}
+
+.analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) {
+    animation: 10s afTopLayer infinite;
+    width: 366px;
+    position: absolute;
+    top: 12rem;
+    left: 26.4rem;
+    z-index: 4;
+}
+.analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) > img {
+    width: 70%;
+}
+
+@media (max-width: 1440px) {
+    .analyze-fans .analyze-statistics .card-list {
+        height: 600px;
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 1280px) {
+    .analyze-fans .analyze-statistics .card-list {
+        height: 550px;
+        transform: scale(0.85);
+        margin-top: 2rem;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
+        left: 1rem;
+        top: 0rem;
+        width: 242px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(2) {
+        left: 18rem;
+        top: 0rem;
+        width: 242px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(3) {
+        left: 2rem;
+        top: 10rem;
+        width: 339px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) {
+        left: 20rem;
+        top: 12rem;
+        width: 311px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .analyze-fans .analyze-statistics .card-list {
+        height: 500px;
+        transform: scale(0.75);
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
+        left: 0rem;
+        top: 0rem;
+        width: 228px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(2) {
+        left: 15rem;
+        top: 0rem;
+        width: 228px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(3) {
+        left: 1rem;
+        top: 9rem;
+        width: 319px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) {
+        left: 16rem;
+        top: 11rem;
+        width: 293px;
+    }
+}
+
+@media (max-width: 768px) {
+    .analyze-fans .analyze-statistics .card-list {
+        height: 450px;
+        transform: scale(0.65);
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
+        left: -2rem;
+        top: 0rem;
+        width: 200px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(2) {
+        left: 12rem;
+        top: 0rem;
+        width: 200px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(3) {
+        left: -1rem;
+        top: 8rem;
+        width: 279px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) {
+        left: 13rem;
+        top: 10rem;
+        width: 256px;
+    }
+}
+
+@media (max-width: 480px) {
+    .analyze-fans .analyze-statistics .card-list {
+        height: 400px;
+        transform: scale(0.8);
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
+        left: -3rem;
+        top: 0rem;
+        width: 171px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(2) {
+        left: 8rem;
+        top: 0rem;
+        width: 171px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(3) {
+        left: -2rem;
+        top: 7rem;
+        width: 239px;
+    }
+    .analyze-fans .analyze-statistics .card-list .card-item:nth-child(4) {
+        left: 12rem;
+        top: 7rem;
+        width: 220px;
+    }
+}
+
+@keyframes afTopLayer {
+    0% { transform: translate(0px, 0px) skewX(12deg); }
+    25% { transform: translate(15px, -15px) skewX(12deg); }
+    50% { transform: translate(25px, 10px) skewX(12deg); }
+    75% { transform: translate(-15px, -5px) skewX(12deg); }
+    100% { transform: translate(0px, 0px) skewX(12deg); }
+}
+
+.analyze-fans .wave-circle-box {
+    width: 100%;
+    position: absolute;
+    top: 60%;
+    left: 16%;
+}
+
+.analyze-fans .wave-circle-box .wave-circle-1,
+.analyze-fans .wave-circle-box .wave-circle-2,
+.analyze-fans .wave-circle-box .wave-circle-3 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+@keyframes af-rotate-wave-circle {
+    from { rotate: 0; }
+    to { rotate: 360deg; }
+}
+
+.analyze-fans .wave-circle-box .wave-circle-1 {
+    animation: 10s af-rotate-wave-circle infinite alternate;
+}
+
+.analyze-fans .wave-circle-box .wave-circle-2 {
+    animation: 15s af-rotate-wave-circle infinite reverse;
+}
+
+.analyze-fans .wave-circle-box .wave-circle-3 {
+    animation: 20s af-rotate-wave-circle infinite alternate;
+}

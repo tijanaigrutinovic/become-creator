@@ -1,0 +1,652 @@
+.body{
+  background-color: #111111;
+}
+
+/* Animacija za plavu sliku */
+@keyframes bounceBlue {
+  0% {
+    transform: translateX(-10px) translateY(0); /* Početna pozicija sa desne strane */
+  }
+  50% {
+    transform: translateX(-900px) translateY(100px); /* Kretanje levo, ali ne do kraja */
+  }
+  100% {
+    transform: translateX(-10px) translateY(0); /* Povratak na početnu poziciju */
+  }
+}
+
+.animate-bounce-blue {
+  position: absolute; 
+  animation: bounceBlue 10s ease-in-out infinite;
+  left: 50%; /* Početna pozicija, 100px desno od centra */
+  top: 50%; /* Centriraj vertikalno */
+  transform: translateX(-50%); /* Poravnaj horizontalno sa centrom */
+}
+
+/* Animacija za crvenu sliku */
+@keyframes bounceRed {
+  0% {
+    transform: translateX(10px) translateY(0); /* Početna pozicija sa leve strane */
+  }
+  50% {
+    transform: translateX(1200px) translateY(200px); /* Kretanje levo i nadole */
+  }
+  100% {
+    transform: translateX(10px) translateY(0); /* Povratak na početnu poziciju */
+  }
+}
+
+.animate-bounce-red {
+  animation: bounceRed 10s ease-in-out infinite;
+  left: calc(10%); /* Početna pozicija 100px desno od centra */
+  top: calc(50% - 50px); /* Pomeranje crvene slike nadole */
+}
+
+
+@keyframes tcListSlider {
+  0% {
+    transform: translateX(0);
+  }
+
+  47% {
+    transform: translateX(calc(-100vw));
+    animation-timing-function: ease-in;
+  }
+
+  50% {
+    transform: translateX(calc(-100vw));
+  }
+
+  97% {
+    transform: translateX();
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.trusted-creators .tc-slider-wrapper::before {
+  content: '';
+  background: linear-gradient(90deg, transparent, #111 94%);
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9; /* Ovo odgovara z-9 u Tailwindu, pretpostavljajući da je to z-index: 9; */
+}
+
+.trusted-creators .tc-slider-wrapper::after {
+  content: '';
+  background: linear-gradient(90deg, #111 6%, transparent);
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9; /* Ovo odgovara z-9 u Tailwindu, pretpostavljajući da je to z-index: 9; */
+}
+
+.trusted-creators .tc-slider-wrapper .tc-slider-list {
+  -webkit-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  transition-timing-function: linear;
+  animation: tcListSlider 30s linear infinite;
+  white-space: nowrap;
+  display: flex; /* @apply flex */
+  gap: 1rem; /* @apply gap-4 (1rem = 16px, 4 = 1rem) */
+  width: 100%; /* @apply w-full */
+  position: relative; /* @apply relative */
+  z-index: 2; /* @apply z-2 */
+}
+
+.trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+  margin-top: 0.6rem;
+  width: 100%; /* @apply w-full */
+  height: auto; /* @apply h-auto */
+  max-width: 12.44rem; /* @apply max-w-[12.44rem] */
+  min-width: 12.44rem; /* @apply min-w-[12.44rem] */
+}
+
+/* Duplirani selektor, ali ostavljam ga kako je bio u originalu.
+   Ako je namera bila da se isti stil primeni, dovoljno je jednom. */
+.trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+  margin-top: 0.6rem;
+  width: 100%;
+  height: auto;
+  max-width: 12.44rem;
+  min-width: 12.44rem;
+}
+
+@media screen and (min-width: 10px) and (max-width: 992px) {
+  /* Komentarisani delovi iz originala su zadržani kao komentari */
+  /*
+  .trusted-creators .tc-slider-wrapper {
+    overflow: hidden !important;
+    position: unset !important;
+  }
+  */
+
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+    margin-bottom: 6rem; /* @apply mb-[6rem] */
+  }
+}
+
+.creators-platform {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+  overflow: hidden;
+}
+
+.creators-platform .cp-left {
+  position: relative;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-left {
+    width: 50%;
+  }
+}
+
+.creators-platform .cp-left .bcc-heading-title {
+  font-size: 3rem;
+  line-height: 4rem;
+  width: 100%;
+  max-width: 42.69rem;
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-left .bcc-heading-title {
+    font-size: 6.25rem;
+    line-height: 6.25rem;
+  }
+}
+
+.creators-platform .cp-left .ca-text-animate {
+  max-width: 38.18rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  background-color: #212121; /* midBlack */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  border-width: 1px;
+  border-radius: 1.875rem;
+  border-color: rgba(255, 255, 255, 0.05); /* fullWhite/5 */
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-left .ca-text-animate {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+}
+
+.creators-platform .cp-left .ca-text-title {
+  color: #ef4444; /* midRed */
+  min-width: 7.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-left .ca-text-title {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+  }
+}
+
+.creators-platform .cp-left .content-animate {
+  color: #ffffff; /* fullWhite */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-left .content-animate {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+  }
+}
+
+.creators-platform .cp-left .typewriter-container {
+  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.creators-platform .cp-left .typewriter-container::after {
+  content: "";
+  border-right: 10px solid #000000;
+}
+
+.creators-platform .cp-right {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 1024px) {
+  .creators-platform .cp-right {
+    width: 50%;
+  }
+}
+
+@keyframes move-img-bg-blur {
+  from {
+    transform: translateX(-5%);
+    scale: 1;
+  }
+
+  to {
+    transform: translateX(5%);
+    scale: 1.2;
+  }
+}
+
+.creators-platform .cp-right .img-bg-blur {
+  filter: blur(30px);
+  opacity: 20%;
+  animation: 30s move-img-bg-blur infinite alternate;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes cp-rotate-wave-circle {
+  from {
+    rotate: 0;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+.creators-platform .cp-right .wave-circle-box {
+  width: 150%;
+  position: absolute;
+  top: -20%;
+  right: -40%;
+}
+
+.creators-platform .cp-right .wave-circle-box .wave-circle-1,
+.creators-platform .cp-right .wave-circle-box .wave-circle-2,
+.creators-platform .cp-right .wave-circle-box .wave-circle-3 {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.creators-platform .cp-right .wave-circle-box .wave-circle-1 {
+  animation: 10s cp-rotate-wave-circle infinite alternate;
+}
+
+.creators-platform .cp-right .wave-circle-box .wave-circle-2 {
+  animation: 15s cp-rotate-wave-circle infinite reverse;
+}
+
+.creators-platform .cp-right .wave-circle-box .wave-circle-3 {
+  animation: 20s cp-rotate-wave-circle infinite alternate;
+}
+
+.creators-platform .cp-right .video-container {
+  width: 88%;
+  height: auto;
+  margin: auto;
+  position: relative;
+}
+
+.creators-platform .cp-right .video-container .video-mask {
+  transition: 0.9s;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  max-width: 700px;
+  max-height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.creators-platform .cp-right .video-container .video-mask::before,
+.creators-platform .cp-right .video-container .video-mask::after {
+  content: "";
+  max-width: 26.1%;
+  max-height: 24.12%;
+  width: 100%;
+  height: 100%;
+  border-width: 2px;
+  border-color: #ffffff; /* fullWhite */
+  position: absolute;
+}
+
+.creators-platform .cp-right .video-container .video-mask::before {
+  top: 0;
+  right: -6.7%;
+}
+
+.creators-platform .cp-right .video-container .video-mask::after {
+  bottom: -75px;
+  left: -6.7%;
+}
+
+.creators-platform .cp-right .video-container .cp-video-tag {
+  filter: grayscale(1);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  object-fit: cover;
+  border-top-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+  z-index: 1;
+  top: 5.6%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.creators-platform .cp-right .video-container .mf-container {
+  min-width: 280px;
+  width: calc(100% - 53%);
+  height: calc(100% - 27px);
+  background-image: url("/public/images/CreatorsPlatform/mobile-frame.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 8.8% 3.6% 5.4% 3.6%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: absolute;
+  top: 7.9%;
+  z-index: 2;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-header {
+  background-color: transparent;
+  width: 100%;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-footer {
+  background-color: transparent;
+  width: 100%;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider {
+  width: 100%;
+  height: 10.4rem;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content {
+  width: 100%;
+  min-height: 166px;
+  position: relative;
+  overflow: hidden;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(100%);
+  animation: slideUp 12s infinite;
+  width: 100%;
+  min-width: 230px;
+  max-height: 166px;
+  padding: 1rem;
+  border-radius: 1.517rem;
+  position: absolute;
+  bottom: 0;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide.mfc-video-call .video-call-actions .vc-action {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.4rem;
+  border-radius: 9999px; /* full-rounded */
+  width: 2.3rem;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide.mfc-video-call .video-call-actions .vc-action:nth-child(1) {
+  background-color: #ef4444; /* midRed */
+}
+
+.creators-platform .cp-right .video-container .mf-container .mf-content .items-slider .item-slide.mfc-send-message .send-message-action {
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding: 0.73rem;
+  border-radius: 0.5rem;
+  color: #ffffff; /* fullWhite */
+  font-size: 0.643rem;
+  line-height: 0.797rem;
+}
+
+@media screen and (min-width: 10px) and (max-width: 992px) {
+  .creators-platform .cp-right .img-bg-blur {
+    scale: 1.5 0.6;
+    border-radius: 70rem;
+    animation: unset;
+  }
+
+  .creators-platform .cp-right .video-container .video-mask {
+    scale: 1;
+  }
+}
+
+/* Mobile screens (below 600px) */
+@media screen and (max-width: 599px) {
+  .creators-platform .cp-right .video-container .mf-container .mf-header,
+  .creators-platform .cp-right .video-container .mf-container .mf-footer {
+    transform: scale(0.5);
+  }
+
+  .creators-platform .cp-right .video-container .mf-container .mf-content {
+    transform: scale(0.7);
+  }
+}
+.corners {
+  position: relative;
+  z-index: 0;
+}
+
+.corners::before,
+.corners::after {
+  content: '';
+  position: absolute;
+  z-index: -1; /* ispod svega unutar .corners */
+  width: 250px;
+  height: 250px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.corners::before {
+  top: -20px;
+  right: -20px; /* gornji desni ugao */
+}
+
+.corners::after {
+  bottom: -20px;
+  left: -20px; /* donji levi ugao */
+}
+
+
+@keyframes moveStroke1 {
+  0% {
+    transform: translate(0, 0); /* Početna pozicija */
+  }
+  50% {
+    transform: translate(100px, 50px); /* Pomeranje za 10px desno, 5px dole */
+  }
+  100% {
+    transform: translate(0, 0); /* Povratak na početnu poziciju */
+  }
+}
+
+@keyframes moveStroke2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-150px, 80px); /* Pomeranje za 15px levo, 8px dole */
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes moveStroke3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(120px, -70px); /* Pomeranje za 12px desno, 7px gore */
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Klase za primenu animacija na img elemente */
+.animate-stroke-1 {
+  animation: moveStroke1 5s ease-in-out infinite; /* Smanjeno sa 10s na 5s */
+}
+
+.animate-stroke-2 {
+  animation: moveStroke2 6s ease-in-out infinite; /* Smanjeno sa 12s na 6s */
+}
+
+.animate-stroke-3 {
+  animation: moveStroke3 5.5s ease-in-out infinite; /* Smanjeno sa 11s na 5.5s */
+}
+
+.circle-animation {
+  position: absolute;
+  border-radius: 50%;
+  transform-origin: center center;
+  /* Privremeno fiksne, manje dimenzije da vidimo da li su tu */
+  width: 343px;
+  height: 343px;
+  background-color: blue !important; /* Jaka boja da se istaknu */
+  opacity: 1 !important; /* Potpuno vidljivi */
+  /* Nema animacija za sada */
+  /* animation: none !important; */ /* Deaktiviraj animacije privremeno */
+}
+
+.circle-1 {
+  top: 0;
+  left: 0;
+  z-index: 100; /* Ekstremno visok z-index da budu iznad svega */
+  transform: none; /* Ukloni translate da vidimo gornji levi ugao */
+}
+
+.circle-2 {
+  top: 50px;
+  left: 50px;
+  z-index: 101;
+  transform: none;
+}
+
+.circle-3 {
+  top: 100px;
+  left: 100px;
+  z-index: 102;
+  transform: none;
+}
+
+
+
+@keyframes fillXAxis {
+  0% {
+    transform: translate(-50%, -50%) scaleX(0); /* Počni kao linija (širina 0) */
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5; /* Postepeno se pojavljuje */
+  }
+  100% {
+    transform: translate(-50%, -50%) scaleX(1); /* Puni po X osi (širi se do pune veličine) */
+    opacity: 1;
+  }
+}
+
+@keyframes rotateStandard {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes appearAndRotateFast {
+  0% {
+    transform: scale(0) rotate(0deg); /* Počni mali i rotiraj */
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg); /* Pojavi se i rotiraj brzo */
+    opacity: 1;
+  }
+}
+
