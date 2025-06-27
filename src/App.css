@@ -514,6 +514,10 @@
   width: 250px;
   height: 250px;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  @media screen and (max-width: 767px) {
+    width: 117px;
+    height: 117px;
+  }
 }
 
 .corners::before {
@@ -522,6 +526,35 @@
 }
 
 .corners::after {
+  bottom: -20px;
+  left: -20px; /* donji levi ugao */
+}
+
+.corners-hero {
+  position: relative;
+  z-index: 0;
+}
+
+.corners-hero::before,
+.corners-hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1; /* ispod svega unutar .corners */
+  width: 250px;
+  height: 250px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  @media screen and (max-width: 767px) {
+    width: 117px;
+    height: 117px;
+  }
+}
+
+.corners-hero::before {
+  top: -20px;
+  right: -20px; /* gornji desni ugao */
+}
+
+.corners-hero::after {
   bottom: -20px;
   left: -20px; /* donji levi ugao */
 }
@@ -576,41 +609,6 @@
   animation: moveStroke3 5.5s ease-in-out infinite; /* Smanjeno sa 11s na 5.5s */
 }
 
-.circle-animation {
-  position: absolute;
-  border-radius: 50%;
-  transform-origin: center center;
-  /* Privremeno fiksne, manje dimenzije da vidimo da li su tu */
-  width: 343px;
-  height: 343px;
-  background-color: blue !important; /* Jaka boja da se istaknu */
-  opacity: 1 !important; /* Potpuno vidljivi */
-  /* Nema animacija za sada */
-  /* animation: none !important; */ /* Deaktiviraj animacije privremeno */
-}
-
-.circle-1 {
-  top: 0;
-  left: 0;
-  z-index: 100; /* Ekstremno visok z-index da budu iznad svega */
-  transform: none; /* Ukloni translate da vidimo gornji levi ugao */
-}
-
-.circle-2 {
-  top: 50px;
-  left: 50px;
-  z-index: 101;
-  transform: none;
-}
-
-.circle-3 {
-  top: 100px;
-  left: 100px;
-  z-index: 102;
-  transform: none;
-}
-
-
 
 @keyframes fillXAxis {
   0% {
@@ -649,4 +647,3 @@
     opacity: 1;
   }
 }
-

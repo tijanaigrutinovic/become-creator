@@ -14,8 +14,8 @@ const CreatorsPlatform = () => {
   const [globalScrollY, setGlobalScrollY] = useState(0);
   const [shouldTransition, setShouldTransition] = useState(false);
 
-  const TRANSITION_THRESHOLD = 0.25;
-  const TRANSITION_COMPLETE = 0.85;
+  const TRANSITION_THRESHOLD = 0;
+  const TRANSITION_COMPLETE = 0;
 
   const handleScroll = useCallback(() => {
     if (sectionRef.current) {
@@ -86,14 +86,15 @@ const CreatorsPlatform = () => {
         const currentY = startY + (targetY - startY) * easedProgress;
         
         // Skaliranje - počinje sa 1, završava sa 0.8
-        const scale = 1 - (easedProgress * 0.2);
+        const scale = 1 - (easedProgress * 0);
         
         // Opacity ostaje 1 - mobile frame ostaje vidljiv
         const opacity = 1;
+        const zIndex = 100;
         
         // Dodatna animacija kada počne Trusted sekcija
         let finalY = currentY;
-        if (transitionProgress > 0.85) {
+        if (transitionProgress >1) {
           // Kada počne Trusted animacija, mobile frame ide gore
           const trustedProgress = (transitionProgress - 0.85) / 0.15;
           const moveUpDistance = 200; // Pomeri se gore za 200px
@@ -299,20 +300,20 @@ const CreatorsPlatform = () => {
       {/* Levi sadržaj */}
       <div className="flex-1 relative z-10" ref={leftContentRef}>
         <div className="mb-[15px]">
-            <h1 className="text-white text-8xl font-gilroy capitalize leading-[100px] font-[1000]">
+            <h1 className="text-white 2xl:text-8xl md:text-6xl text-2xl font-gilroy capitalize md:leading-[100px] leading-9 font-[1000]">
                 The Creator's platform
                 <br />
                 of the{' '}
-                <span className="text-[#E91E63] text-8xl font-gilroy capitalize leading-[100px] font-[1000]">
+                <span className="text-[#E91E63]">
                     Future
                 </span>
             </h1>
         </div>
-        <div className="w-[683px] flex p-10 rounded-[30px] border border-white/5 bg-white/0 mb-[15px]">
-            <p className="text-pink-600 text-xl font-gilroy capitalize leading-loose pr-[15px] font-[1000]">
+        <div className="max-w-[683px] flex md:p-10 p-5 md:rounded-[30px] rounded-[20px] border border-white/5 bg-white/0 mb-[15px]">
+            <p className="text-pink-600 md:text-xl text-sm font-gilroy capitalize leading-loose pr-[15px] font-[1000]">
                 Linkstackz Where
             </p>
-            <div className="text-white text-xl font-gilroy capitalize leading-loose font-[1000]">
+            <div className="text-white md:text-xl text-sm font-gilroy capitalize leading-loose font-[1000]">
                 <div className="content-animate font-gilroy">
                     <Typewriter
                         sentences={[
@@ -325,17 +326,15 @@ const CreatorsPlatform = () => {
             </div>
         </div>
         <div className="mb-[15px]">
-            <p className="text-white text-lg font-bold font-gilroy capitalize leading-loose">
+            <p className="text-white md:text-lg text-xs font-bold font-gilroy capitalize leading-loose">
                 Put your exclusive content behind a paywall for your top fans to subscribe to, generating you recurring revenue.
             </p>
         </div>
         <div className="flex gap-4">
-            <button className="relative items-center bg-[#E91E63] text-white px-[25px] py-[10px] rounded-[25px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group">
-                <div className="absolute inset-0 z-0">
-                    <span className="circle-animation circle-1 bg-[#E91E63]/21"></span>
-                    <span className="circle-animation circle-2 bg-[#E91E63]/21"></span>
-                    <span className="circle-animation circle-3 bg-[#E91E63]/21"></span>
-                </div>
+            <button className="relative items-center bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group animated-button">
+                <div class="circle circle1"></div>
+                <div class="circle circle2"></div>
+                <div class="circle circle3"></div>
                 <div className="relative z-10 flex items-center">
                     <img
                         src="/icons/become-a-creator-icon.svg"
@@ -345,46 +344,35 @@ const CreatorsPlatform = () => {
                     Become a creator
                 </div>
             </button>
-            <button className="items-center bg-[#181818] text-white px-[25px] py-[10px] rounded-[20px] text-base font-bold font-gilroy capitalize flex">
+            <button className="items-center bg-[#181818] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[20px] rounded-[15px] text-sm font-bold font-gilroy capitalize flex">
                 Sign up as a Fan
             </button>
         </div>
       </div>
 
       {/* Desni sadržaj */}
-      <div className="relative w-fit corners z-10" ref={rightContentRef}>
-        <div className="relative w-[818.66px] h-[804.73px]">
+      <div className="relative w-full max-w-[818.66px] aspect-[818.66/804.73] md:aspect-[818.66/804.73] h-auto corners z-10" ref={rightContentRef}>
+        <div className="relative w-full h-full">
           <video
             src="/images/CreatorsPlatform/cp-video.webm"
             autoPlay
             muted
             loop
             playsInline
-            className="w-[747.25px] h-[728.78px] object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 filter grayscale rounded-tl-[300px] rounded-br-[300px]"
+            className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px]"
           />
 
           <div
-            className="absolute overflow-hidden z-20 rounded-[40px]"
-            style={{
-              width: '296.554px',
-              height: '636.192px',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-            >
+            className="absolute overflow-hidden z-20 w-full h-full top-0 left-0"
+            style={{}}
+          >
             <video
               src="/images/CreatorsPlatform/cp-video.webm"
               autoPlay
               muted
               loop
               playsInline
-              className="w-[747.25px] h-[728.78px] object-cover absolute"
-              style={{
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
+              className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px]"
             />
 
             <div className="absolute inset-0 z-25 flex flex-col items-center justify-center p-4 text-center text-white">
@@ -404,7 +392,7 @@ const CreatorsPlatform = () => {
 
           <img
               src="/images/CreatorsPlatform/mobile-frame.svg"
-              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none w-[85%] h-[85%] md:w-[270px] md:h-[636px]"
               alt="Mobile Frame"
               ref={mobileFrameRef}
           />

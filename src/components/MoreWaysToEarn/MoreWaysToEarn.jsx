@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import BgBounceAnimate from '../Common/bg-bounce-animate';
 import WaveCircleBox from '../Common/wave-circle-box';
+import Slide1 from './Slide1';
+import Slide2 from './Slide2';
+import Slide3 from './Slide3';
 
 const MoreWaysToEarn = () => {
   const sectionRef = useRef(null);
@@ -136,42 +139,8 @@ const MoreWaysToEarn = () => {
     }
   };
 
-  // Podatci za slajdove
-  const slides = [
-    {
-      image: '/images/more-ways-to-earn/iphone.png',
-      icon: '/images/more-ways-to-earn/3d-clock.png',
-      title: (
-        <>Pay-Per-Minute <span className="text-[#E91E63]">Video Call</span></>
-      ),
-      description:
-        'Connect with your fans in real-time through live video calls and charge by the minute. This feature allows you to set your rate and engage directly with fans, providing them with a personalized experience while you earn.',
-      button: 'Become a creator',
-    },
-    {
-      image: '/images/more-ways-to-earn/iphone.png',
-      icon: '/images/more-ways-to-earn/3d-clock.png',
-      title: (
-        <> Locked <span className="text-[#E91E63]">Content</span> (Pay-to-View)</>
-      ),
-      description:
-        ' Sell exclusive photos, videos, and posts that fans must pay to unlock.  Sell exclusive photos, videos, and posts that fans must pay to unlock.',
-      button: 'Become a creator',
-    },
-    {
-      image: '/images/more-ways-to-earn/iphone.png',
-      icon: '/images/more-ways-to-earn/3d-clock.png',
-      title: (
-        <><span className="text-[#E91E63]">Tips</span></>
-      ),
-      description:
-        "Let your fans show their appreciation with tips. Whether it's during a live session or in response to your content, tips are an easy way for fans to support you and for you to increase your earnings effortlessly.",
-      button: 'Become a creator',
-    },
-  ];
-
   // Izračunaj trenutni slajd i progress
-  const SLIDE_COUNT = slides.length;
+  const SLIDE_COUNT = 3;
   
   // Mapiraj scroll progress na slajdove - smooth prelazak
   const getSlideData = () => {
@@ -197,6 +166,27 @@ const MoreWaysToEarn = () => {
   // Smooth easing funkcija
   const easeInOutQuart = (t) => {
     return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+  };
+
+  // Renderuj slajd komponentu na osnovu indeksa
+  const renderSlide = (slideIndex, isTransitioning, progress) => {
+    const slideProps = {
+      isActive: slideIndex === slideData.currentIndex,
+      isTransitioning,
+      progress,
+      easeInOutQuart
+    };
+
+    switch (slideIndex) {
+      case 0:
+        return <Slide1 key={`slide-${slideIndex}`} {...slideProps} />;
+      case 1:
+        return <Slide2 key={`slide-${slideIndex}`} {...slideProps} />;
+      case 2:
+        return <Slide3 key={`slide-${slideIndex}`} {...slideProps} />;
+      default:
+        return <Slide1 key={`slide-${slideIndex}`} {...slideProps} />;
+    }
   };
 
   return (
@@ -242,76 +232,22 @@ const MoreWaysToEarn = () => {
             transform: isVisible ? "translateY(0)" : "translateY(-80px)",
           }}
         >
-          <h2 className="text-5xl font-bold text-white leading-[70px] font-[1000]">
+          <h2 className="md:text-5xl text-2xl font-bold text-white leading-[70px] font-[1000]">
           More Ways to <span className="text-[#E91E63] font-gilroy capitalize">Earn</span>
           </h2>
-          <p className="text-white text-lg font-bold font-gilroy capitalize leading-loose">
+          <p className="md:block hidden text-white text-lg font-bold font-gilroy capitalize leading-loose">
           From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
           </p>
         </div>
 
         {/* Sadržaj slajdova */}
-        <div ref={contentRef} className="flex flex-col gap-10 relative" style={{height: '600px'}}>
+        <div ref={contentRef} className="relative" style={{height: '600px'}}>
           {/* Trenutni slajd */}
-          <div
-            className="flex flex-col md:flex-row items-center gap-10"
-            style={{
-              opacity: slideData.isTransitioning ? 1 - easeInOutQuart(slideData.progress) : 1,
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              zIndex: 2,
-              transform: slideData.isTransitioning 
-                ? `translateX(${-easeInOutQuart(slideData.progress) * 100}%)` 
-                : 'translateX(0%)',
-              transition: 'none', // Uklanjamo CSS transition jer koristimo JS animaciju
-            }}
-          >
-            {/* Leva strana – slika */}
-            <div className="w-full md:w-1/2">
-              <img
-                src={slides[slideData.currentIndex].image}
-                alt="Feature"
-                className="rounded-[30px] w-full h-auto object-cover"
-              />
-            </div>
-            {/* Desna strana – card */}
-            <div className="w-full md:w-1/2 relative corners z-0">
-              <div className="relative z-10 rounded-tl-[150px] rounded-br-[150px] p-20 bg-[#202020b3] backdrop-blur-[7px]">
-                {/* Ikonica */}
-                <div className="text-pink-500 text-4xl h-[82px]">
-                  <img
-                    src={slides[slideData.currentIndex].icon}
-                    alt="3d-clock"
-                    className="p-5"
-                  />
-                </div>
-                {/* Naslov */}
-                <h3 className="text-white text-4xl font-gilroy capitalize leading-[70px] font-[1000]">
-                  {slides[slideData.currentIndex].title}
-                </h3>
-                {/* Opis */}
-                <p className="text-white text-lg font-bold font-gilroy capitalize leading-loose">
-                  {slides[slideData.currentIndex].description}
-                </p>
-                {/* Dugme */}
-                <button className="mt-[15px] items-center bg-[#E91E63] text-white px-[25px] py-[10px] rounded-[25px] text-sm font-bold font-gilroy capitalize flex">
-                  <img
-                    src="/icons/become-a-creator-icon.svg"
-                    alt="Become a creator"
-                    className="my-2 mr-[10px] w-6 h-6"
-                  />
-                  {slides[slideData.currentIndex].button}
-                </button>
-              </div>
-            </div>
-          </div>
+          {renderSlide(slideData.currentIndex, slideData.isTransitioning, slideData.progress)}
 
           {/* Sledeći slajd (tokom tranzicije) */}
           {slideData.isTransitioning && slideData.currentIndex !== slideData.nextIndex && (
             <div
-              className="flex flex-col md:flex-row items-center gap-10"
               style={{
                 opacity: easeInOutQuart(slideData.progress),
                 position: 'absolute',
@@ -323,44 +259,7 @@ const MoreWaysToEarn = () => {
                 transition: 'none',
               }}
             >
-              {/* Leva strana – slika */}
-              <div className="w-full md:w-1/2">
-                <img
-                  src={slides[slideData.nextIndex].image}
-                  alt="Feature"
-                  className="rounded-[30px] w-full h-auto object-cover"
-                />
-              </div>
-              {/* Desna strana – card */}
-              <div className="w-full md:w-1/2 relative corners z-0">
-                <div className="relative z-10 rounded-tl-[150px] rounded-br-[150px] p-20 bg-[#202020b3] backdrop-blur-[7px]">
-                  {/* Ikonica */}
-                  <div className="text-pink-500 text-4xl h-[82px]">
-                    <img
-                      src={slides[slideData.nextIndex].icon}
-                      alt="3d-clock"
-                      className="p-5"
-                    />
-                  </div>
-                  {/* Naslov */}
-                  <h3 className="text-white text-4xl font-gilroy capitalize leading-[70px] font-[1000]">
-                    {slides[slideData.nextIndex].title}
-                  </h3>
-                  {/* Opis */}
-                  <p className="text-white text-lg font-bold font-gilroy capitalize leading-loose">
-                    {slides[slideData.nextIndex].description}
-                  </p>
-                  {/* Dugme */}
-                  <button className="mt-[15px] items-center bg-[#E91E63] text-white px-[25px] py-[10px] rounded-[25px] text-sm font-bold font-gilroy capitalize flex">
-                    <img
-                      src="/icons/become-a-creator-icon.svg"
-                      alt="Become a creator"
-                      className="my-2 mr-[10px] w-6 h-6"
-                    />
-                    {slides[slideData.nextIndex].button}
-                  </button>
-                </div>
-              </div>
+              {renderSlide(slideData.nextIndex, false, 0)}
             </div>
           )}
         </div>

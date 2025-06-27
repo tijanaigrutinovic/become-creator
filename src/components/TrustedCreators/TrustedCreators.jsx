@@ -202,9 +202,8 @@ const TrustedCreators = () => {
                             <div key={`tcs-index-${index}`} className="tc-slider-item">
                                 <img
                                     src={`/images/trusted-creators/${sItem}`}
-                                    className="tcs-img-slide"
-                                    width={199}
-                                    height={296}
+                                    className="tcs-img-slide rounded-[30px]"
+                                    style={{ width: '280px', height: '420px', objectFit: 'fill', display: 'block' }}
                                     alt={`slide-${index}`}
                                 />
                             </div>

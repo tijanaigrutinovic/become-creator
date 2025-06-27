@@ -1,7 +1,6 @@
-
 const LockToView = () => {
   return (
-    <div className="mfc-lock-to-view item-slide">
+    <div className="bg-[rgba(0,0,0,0.6)] opacity-0 translate-y-full animate-[slideUp_12s_infinite] w-full min-w-[230px] max-h-[166px] p-4 rounded-[1.517rem] absolute bottom-0">
       <div className="flex items-center justify-center gap-2">
         <img
           src="/Images/icons/lock.svg"

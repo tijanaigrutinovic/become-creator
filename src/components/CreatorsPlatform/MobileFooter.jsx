@@ -1,7 +1,6 @@
-
 const MobileFooter = () => {
   return (
-    <div className="mf-footer flex items-center justify-between mt-6">
+    <div className="bg-transparent w-full flex items-center justify-between mt-6">
       <div className="mff-info text-[0.554rem] leading-[.900rem] font-semibold capitalize w-[11.4rem]">I love music and singing, start together. Sing aloud with me. come along</div>
       <div className="mfff-user-actions flex items-center justify-end gap-x-2">
         <img

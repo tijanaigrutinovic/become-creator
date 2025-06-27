@@ -224,7 +224,7 @@
   min-width: 280px;
   width: calc(100% - 53%);
   height: calc(100% - 27px);
-  background-image: url("/images/creators-platform/mobile-frame.svg");
+  background-image: url("/public/images/CreatorsPlatform/mobile-frame.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 8.8% 3.6% 5.4% 3.6%;
@@ -362,4 +362,43 @@
   .creators-platform .cp-right .video-container .mf-container .mf-content {
     transform: scale(0.7);
   }
+}
+
+/* Animacija za sliku u MoreWaysToEarn komponenti */
+
+/* Animacije za MoreWaysToEarn slajdove */
+@keyframes videoCallFloat {
+    0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+    25% { transform: translate(10px, -10px) rotate(1deg) scale(1.02); }
+    50% { transform: translate(15px, 8px) rotate(-0.5deg) scale(1.01); }
+    75% { transform: translate(-8px, -5px) rotate(0.5deg) scale(1.02); }
+    100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+}
+
+@keyframes lockedContentFloat {
+    0% { transform: translate(0px, 0px) skewX(0deg); }
+    25% { transform: translate(-12px, -8px) skewX(2deg); }
+    50% { transform: translate(8px, 12px) skewX(-1deg); }
+    75% { transform: translate(-5px, -10px) skewX(1deg); }
+    100% { transform: translate(0px, 0px) skewX(0deg); }
+}
+
+@keyframes tipsFloat {
+    0% { transform: translate(0px, 0px) rotateY(0deg); }
+    25% { transform: translate(8px, -12px) rotateY(5deg); }
+    50% { transform: translate(-10px, 8px) rotateY(-3deg); }
+    75% { transform: translate(12px, -5px) rotateY(2deg); }
+    100% { transform: translate(0px, 0px) rotateY(0deg); }
+}
+
+.animate-video-call-float {
+    animation: 15s videoCallFloat infinite ease-in-out;
+}
+
+.animate-locked-content-float {
+    animation: 12s lockedContentFloat infinite ease-in-out;
+}
+
+.animate-tips-float {
+    animation: 18s tipsFloat infinite ease-in-out;
 }

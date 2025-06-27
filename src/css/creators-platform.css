@@ -1,0 +1,149 @@
+.animated-button {
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  background: #E91E63;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.animated-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+}
+
+.button-icon {
+  margin: 8px 10px 8px 0;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #E91E63;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.circle1 {
+  width: 343px;
+  height: 343px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(233, 30, 99, 0.1));
+  animation: moveCircle1 4s infinite ease-in-out;
+}
+
+.circle2 {
+  width: 343px;
+  height: 343px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(233, 30, 99, 0.15));
+  animation: moveCircle2 3.5s infinite ease-in-out 0.5s;
+}
+
+.circle3 {
+  width: 343px;
+  height: 343px;
+  background: linear-gradient(27deg, rgba(255, 255, 255, 0.25), rgba(233, 30, 99, 0.08));
+  animation: moveCircle3 3s infinite ease-in-out 1s;
+}
+
+@keyframes moveCircle1 {
+  0% { transform: translate(-100px, -120px) scale(0.8); opacity: 0.4; }
+  25% { transform: translate(-50px, -120px) scale(1.1); opacity: 0.7; }
+  50% { transform: translate(0px, -120px) scale(0.9); opacity: 0.8; }
+  75% { transform: translate(50px, -120px) scale(1.2); opacity: 0.6; }
+  100% { transform: translate(-100px, -120px) scale(0.8); opacity: 0.4; }
+}
+
+@keyframes moveCircle2 {
+  0% {
+      transform: translate(-80px, 15px) scale(1);
+      opacity: 0.4;
+  }
+  30% {
+      transform: translate(-10px, -8px) scale(1.3);
+      opacity: 0.6;
+  }
+  60% {
+      transform: translate(-20px, 12px) scale(0.7);
+      opacity: 0.8;
+  }
+  100% {
+      transform: translate(-80px, 15px) scale(1);
+      opacity: 0.4;
+  }
+}
+
+@keyframes moveCircle3 {
+  0% {
+      transform: translate(50px, -15px) scale(0.9);
+      opacity: 0.5;
+  }
+  40% {
+      transform: translate(-10px, 8px) scale(1.4);
+      opacity: 0.7;
+  }
+  70% {
+      transform: translate(30px, -12px) scale(0.6);
+      opacity: 0.9;
+  }
+  100% {
+      transform: translate(50px, -15px) scale(0.9);
+      opacity: 0.5;
+  }
+}
+
+/* Dodatni efekat punjenja */
+.animated-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+      left: -100%;
+  }
+  100% {
+      left: 100%;
+  }
+}
+
+.button-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes mwteImageFloat {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(8px, -8px) rotate(1deg); }
+  50% { transform: translate(12px, 5px) rotate(-0.5deg); }
+  75% { transform: translate(-6px, -3px) rotate(0.5deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.mwte-image-animate {
+  animation: 12s mwteImageFloat infinite ease-in-out;
+}

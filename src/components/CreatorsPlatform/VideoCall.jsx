@@ -1,7 +1,6 @@
-
 const VideoCall = () => {
   return (
-    <div className="mfc-video-call item-slide">
+    <div className="bg-[rgba(0,0,0,0.6)] opacity-0 translate-y-full animate-[slideUp_12s_infinite] w-full min-w-[230px] max-h-[166px] p-4 rounded-[1.517rem] absolute bottom-0">
       <div className="flex items-center justify-center gap-2">
         <img
           src="/Images/icons/video.svg"
@@ -17,8 +16,8 @@ const VideoCall = () => {
       >
         {"pay $6 for for video call"}
       </button>
-      <div className="video-call-actions w-full flex items-center justify-center mt-3 gap-2">
-        <div className="vc-action">
+      <div className="w-full flex items-center justify-center mt-3 gap-2">
+        <div className="bg-[rgba(0,0,0,0.4)] p-[0.4rem] rounded-full w-[2.3rem] h-[2.3rem] flex items-center justify-center">
           <img
             src="/Images/icons/call-end.svg"
             width={24}
@@ -27,7 +26,7 @@ const VideoCall = () => {
             className="text-fullWhite"
           />
         </div>
-        <div className="vc-action">
+        <div className="bg-[rgba(0,0,0,0.4)] p-[0.4rem] rounded-full w-[2.3rem] h-[2.3rem] flex items-center justify-center bg-midRed">
           <img
             src="/Images/icons/video.svg"
             width={24}
@@ -35,7 +34,7 @@ const VideoCall = () => {
             alt="video"
           />
         </div>
-        <div className="vc-action">
+        <div className="bg-[rgba(0,0,0,0.4)] p-[0.4rem] rounded-full w-[2.3rem] h-[2.3rem] flex items-center justify-center">
           <img
             src="/Images/icons/volume-up.svg"
             width={24}
@@ -43,7 +42,7 @@ const VideoCall = () => {
             alt="volume-up"
           />
         </div>
-        <div className="vc-action">
+        <div className="bg-[rgba(0,0,0,0.4)] p-[0.4rem] rounded-full w-[2.3rem] h-[2.3rem] flex items-center justify-center">
           <img
             src="/Images/icons/voice.svg"
             width={24}

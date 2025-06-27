@@ -1,11 +1,10 @@
-
 const MobileHeader = () => {
   return (
-    <div className="mf-header flex items-center justify-between">
+    <div className="bg-transparent w-full flex items-center justify-between">
       <div className="mfh-user-details flex gap-x-2 items-center justify-start">
         <div className="profile-pic">
           <img
-            src="/Images/become-creator/creators-platform/mf-header-profile-pic.svg"
+            src="/images/CreatorsPlatform/mobile-frame.svg"
             width={35}
             height={35}
             alt="user-profile"

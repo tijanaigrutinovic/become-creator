@@ -1,7 +1,6 @@
-
 const SendMessage = () => {
   return (
-    <div className="mfc-send-message item-slide">
+    <div className="bg-[rgba(0,0,0,0.6)] opacity-0 translate-y-full animate-[slideUp_12s_infinite] w-full min-w-[230px] max-h-[166px] p-4 rounded-[1.517rem] absolute bottom-0">
       <div className="flex items-center justify-center gap-2">
         <img
           src="/Images/icons/share.svg"
@@ -17,7 +16,7 @@ const SendMessage = () => {
       >
         {"pay $6 for send message"}
       </button>
-      <div className="send-message-action">
+      <div className="bg-[rgba(0,0,0,0.2)] w-full flex items-center justify-between mt-3 p-[0.73rem] rounded-lg text-fullWhite text-[0.643rem] leading-[0.797rem]">
         <div className="flex items-center justify-center gap-1">
           <img
             src="/Images/icons/emoji-smile.svg"
