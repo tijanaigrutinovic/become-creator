@@ -1,11 +1,9 @@
-import React, { useRef } from "react";
+// src/components/WhyLinkstackz.jsx
 import WaveCircleBox from "../Common/wave-circle-box";
-import BgBounceAnimate from '../Common/bg-bounce-animate';
 import DataList from './DataList';
-import SnapScrollSection from '../Common/SnapScrollSection';
 
-const WhyLinkstackz = () => {
-  const titleRef = useRef(null);
+// WhyLinkstackz sada prima isActive i transitionDirection prop
+const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id, nextSectionId }) => {
 
   const dataList = [
     {
@@ -24,7 +22,7 @@ const WhyLinkstackz = () => {
       image: "item-3.png",
     },
     {
-      title: "Built-in Promotion ",
+      title: "Built-in Promotion",
       desc: "We help drive traffic to your page, so you can start making money right away.",
       image: "item-4.png",
     },
@@ -35,49 +33,40 @@ const WhyLinkstackz = () => {
     },
     {
       title: "Monetize Without Subscriptions",
-      desc: "Get paid instantly through video calls, locked content, and direct fan engagement",
+      desc: "Get paid instantly through video calls, locked content, and direct fan engagement.",
       image: "item-6.png",
-    }
+    },
   ];
 
-  const triggerNextSectionAnimation = (progress) => {
-    const nextSection = document.getElementById('section5');
-    if (nextSection) {
-      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-      const easedProgress = easeOutCubic(progress);
-      nextSection.style.opacity = easedProgress;
-      nextSection.style.transform = `translateY(${(1 - easedProgress) * 100}px)`;
-      nextSection.style.zIndex = '30';
-      nextSection.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    }
-  };
+  
 
   return (
-    <SnapScrollSection
-      id="why-linkstackz-section"
-      nextSectionId="section5"
-      onNextSectionTrigger={triggerNextSectionAnimation}
-      className="max-w-[1544px] mx-auto px-6 py-24 flex flex-col items-center justify-center"
-    >
-      <div className="flex flex-col items-center justify-center md:mb-20 mb-5" ref={titleRef}>
-        <h2 className="text-5xl font-bold text-white"><span className="text-[#E91E63] font-gilroy capitalize leading-[100px] font-[1000]">Why</span> Linkstackz?</h2>
-        <p className="text-white text-lg font-bold font-gilroy capitalize leading-loose">
-          From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
+    <div
+    id={id}
+    data-animation-in="why-linkstackz-anim"
+    className={`test max-w-[1544px] mx-auto lg:px-6 px-[10px] lg:py-12 pt-[150px] pb-2 flex flex-col items-center justify-center`}
+>
+    {/* ISPRAVLJENO: Premesti 'mwte-title' na ovaj div */}
+    <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
+        </h2>
+        <p className="text-white text-lg font-gilroy font-bold max-w-2xl lg:block hidden">
+            From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
         </p>
+    </div>
+
+      <div className="w-full rounded-[50px] overflow-hidden">
+        <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-[5px] p-[5px] rounded-[50px] h-full">
+          {dataList.map((item, index) => (
+            <DataList key={`dl-${index}`} data={item} />
+          ))}
+        </div>
       </div>
-      <div
-        className="data-list grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-1 rounded-[50px] justify-items-center items-center h-auto md:h-[600px] w-full max-w-full overflow-hidden"
-      >
-        {dataList?.map((item, index) =>
-          <DataList
-            key={`dl-${index}`}
-            data={item}
-          />
-        )}
-      </div>
+
       <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
-    </SnapScrollSection>
+    </div>
   );
-}
+};
 
 export default WhyLinkstackz;

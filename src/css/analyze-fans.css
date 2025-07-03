@@ -47,7 +47,6 @@
 
 .analyze-fans .af-wraper {
     display: flex;
-    align-items: flex-start;
     gap: 1rem;
     position: relative;
     z-index: 2;
@@ -98,8 +97,7 @@
 
 @media (max-width: 768px) {
     .analyze-fans .analyze-info .ai-wraper {
-        padding: 23px 13px;
-        border-radius: 60px 0px;
+        padding: 40px 35px;
     }
 }
 
@@ -179,7 +177,6 @@
     .analyze-fans .analyze-statistics .card-list {
         height: 550px;
         transform: scale(0.85);
-        margin-top: 2rem;
     }
     .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
         left: 1rem;
@@ -260,7 +257,7 @@
 @media (max-width: 480px) {
     .analyze-fans .analyze-statistics .card-list {
         height: 400px;
-        transform: scale(0.8);
+        transform: scale(0.95);
     }
     .analyze-fans .analyze-statistics .card-list .card-item:nth-child(1) {
         left: -3rem;

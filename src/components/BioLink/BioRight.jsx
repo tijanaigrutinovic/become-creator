@@ -21,11 +21,13 @@ const BioRight = () => {
   const [animateOut, setAnimateOut] = useState([false, false, false, false]);
   const [showGroup, setShowGroup] = useState(true);
   const [justAppeared, setJustAppeared] = useState([true, true, true, true]);
+  const [resetPosition, setResetPosition] = useState([false, false, false, false]);
 
   useEffect(() => {
     if (!showGroup) return;
     // Reset fade-in state
     setJustAppeared([true, true, true, true]);
+    setResetPosition([false, false, false, false]);
     // Fade-in animacija za drugu grupu
     if (phase === 1) {
       let fadeTimers = [];
@@ -59,6 +61,20 @@ const BioRight = () => {
         }, ANIMATION_DELAYS[i] + 1200)
       );
     });
+    
+    // Reset pozicije nakon što se animacija završi
+    (phase === 0 ? imgsEven : imgsOdd).forEach((_, i) => {
+      timers.push(
+        setTimeout(() => {
+          setResetPosition((v) => {
+            const nv = [...v];
+            nv[i] = true;
+            return nv;
+          });
+        }, ANIMATION_DELAYS[i] + 1200 + ANIMATION_DURATION)
+      );
+    });
+    
     // Kada sve slike nestanu, prikaži sledeću grupu
     timers.push(
       setTimeout(() => {
@@ -66,6 +82,7 @@ const BioRight = () => {
         setTimeout(() => {
           setPhase((p) => (p === 0 ? 1 : 0));
           setAnimateOut([false, false, false, false]);
+          setResetPosition([false, false, false, false]);
           setShowGroup(true);
         }, 200);
       }, Math.max(...ANIMATION_DELAYS) + ANIMATION_DURATION + 1200)
@@ -84,7 +101,9 @@ const BioRight = () => {
             <div
               key={img}
               className={`img-wraper grid-img ${
-                animateOut[i]
+                resetPosition[i]
+                  ? "reset-position"
+                  : animateOut[i]
                   ? "slide-up-animate"
                   : phase === 1 && justAppeared[i]
                   ? "fade-in-animate"

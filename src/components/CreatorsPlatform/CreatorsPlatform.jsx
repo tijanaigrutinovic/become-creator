@@ -13,9 +13,25 @@ const CreatorsPlatform = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [globalScrollY, setGlobalScrollY] = useState(0);
   const [shouldTransition, setShouldTransition] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // Novo stanje za detekciju mobilnog uređaja
 
   const TRANSITION_THRESHOLD = 0;
-  const TRANSITION_COMPLETE = 0;
+  // Povećao sam raspon skrola za animaciju kako bi se video skroz pomerio na mobilnom
+  const TRANSITION_SCROLL_RANGE = 0.3; // Npr. animacija se dešava tokom 30% skrola sekcije
+
+  // Funkcija za detekciju veličine ekrana
+  const handleResize = useCallback(() => {
+    setIsMobile(window.innerWidth < 768); // Pretpostavljamo da je 768px breakpoint za 'md'
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Početna provera
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   const handleScroll = useCallback(() => {
     if (sectionRef.current) {
@@ -39,7 +55,7 @@ const CreatorsPlatform = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Pokreni pri učitavanju
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -48,9 +64,11 @@ const CreatorsPlatform = () => {
 
   // Hero sekcija animacije
   useEffect(() => {
+    const effectiveTransitionComplete = TRANSITION_THRESHOLD + TRANSITION_SCROLL_RANGE;
+
     if (shouldTransition && scrollProgress >= TRANSITION_THRESHOLD) {
       const transitionProgress = Math.min(
-        (scrollProgress - TRANSITION_THRESHOLD) / (TRANSITION_COMPLETE - TRANSITION_THRESHOLD), 
+        (scrollProgress - TRANSITION_THRESHOLD) / (effectiveTransitionComplete - TRANSITION_THRESHOLD), 
         1
       );
 
@@ -60,132 +78,66 @@ const CreatorsPlatform = () => {
       
       const easedProgress = easeInOutCubic(transitionProgress);
 
-      if (leftContentRef.current) {
-        const translateX = -easedProgress * 120;
-        leftContentRef.current.style.transform = `translateX(${translateX}%)`;
-        leftContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      }
-
-      if (rightContentRef.current) {
-        const translateX = easedProgress * 120;
-        rightContentRef.current.style.transform = `translateX(${translateX}%)`;
-        rightContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      }
-
-      if (mobileFrameRef.current) {
-        // Početna pozicija (u Creators sekciji)
-        const startX = window.innerWidth / 2;
-        const startY = window.innerHeight / 2;
-        
-        // Ciljna pozicija - mobile frame ide na levo
-        const targetX = window.innerWidth * -0.5;
-        const targetY = window.innerHeight * 0.8;
-        
-        // Interpolacija između početne i ciljne pozicije
-        const currentX = startX + (targetX - startX) * easedProgress;
-        const currentY = startY + (targetY - startY) * easedProgress;
-        
-        // Skaliranje - počinje sa 1, završava sa 0.8
-        const scale = 1 - (easedProgress * 0);
-        
-        // Opacity ostaje 1 - mobile frame ostaje vidljiv
-        const opacity = 1;
-        const zIndex = 100;
-        
-        // Dodatna animacija kada počne Trusted sekcija
-        let finalY = currentY;
-        if (transitionProgress >1) {
-          // Kada počne Trusted animacija, mobile frame ide gore
-          const trustedProgress = (transitionProgress - 0.85) / 0.15;
-          const moveUpDistance = 200; // Pomeri se gore za 200px
-          finalY = currentY - (moveUpDistance * trustedProgress);
+      if (isMobile) {
+        // Logika za mobilne uređaje: naslov ide gore, video ide skroz dole
+        if (leftContentRef.current) {
+          const translateY = -easedProgress * 150; // Pomeri naslov za 150% visine gore
+          leftContentRef.current.style.transform = `translateY(${translateY}%)`;
+          leftContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         }
-        
-        mobileFrameRef.current.style.position = 'fixed';
-        mobileFrameRef.current.style.top = `${finalY}px`;
-        mobileFrameRef.current.style.left = `${currentX}px`;
-        mobileFrameRef.current.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        mobileFrameRef.current.style.opacity = opacity;
-        mobileFrameRef.current.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        mobileFrameRef.current.style.zIndex = '50';
-        
-        // Debug informacije
-        console.log('Mobile Frame animacija:', {
-          easedProgress,
-          transitionProgress,
-          startX,
-          startY,
-          targetX,
-          targetY,
-          currentX,
-          currentY,
-          finalY,
-          scale,
-          opacity,
-          shouldTransition,
-          scrollProgress
-        });
+
+        if (rightContentRef.current) {
+          const translateY = easedProgress * 200; // Pomeri video za 200% visine dole, da ode skroz van
+          rightContentRef.current.style.transform = `translateY(${translateY}%)`;
+          rightContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          // Dodatno, ako želite da nestane (opacity), to bi ovde dodali
+          rightContentRef.current.style.opacity = 1 - easedProgress; // Neka postepeno nestaje
+        }
+      } else {
+        // Logika za desktop: sadržaj se pomera levo/desno (originalna logika)
+        if (leftContentRef.current) {
+          const translateX = -easedProgress * 120;
+          leftContentRef.current.style.transform = `translateX(${translateX}%)`;
+          leftContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        }
+
+        if (rightContentRef.current) {
+          const translateX = easedProgress * 120;
+          rightContentRef.current.style.transform = `translateX(${translateX}%)`;
+          rightContentRef.current.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        }
       }
 
+
+      // Pokreni sledeću sekciju (ova logika je univerzalna)
       if (transitionProgress > 0.85) {
         triggerNextSectionAnimation((transitionProgress - 0.85) / 0.15);
       }
     } else {
+      // Reset animacije kada nije u tranziciji
       if (leftContentRef.current) {
-        leftContentRef.current.style.transform = 'translateX(0%)';
+        leftContentRef.current.style.transform = 'translate(0%, 0%)';
         leftContentRef.current.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       }
       if (rightContentRef.current) {
-        rightContentRef.current.style.transform = 'translateX(0%)';
+        rightContentRef.current.style.transform = 'translate(0%, 0%)';
         rightContentRef.current.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      }
-      // Mobile frame se resetuje samo ako nije već animiran
-      if (mobileFrameRef.current && scrollProgress < 0.1) {
-        mobileFrameRef.current.style.position = 'absolute';
-        mobileFrameRef.current.style.top = '50%';
-        mobileFrameRef.current.style.left = '50%';
-        mobileFrameRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
-        mobileFrameRef.current.style.opacity = '1';
-        mobileFrameRef.current.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        mobileFrameRef.current.style.zIndex = '30';
-        
-        // Debug informacije za reset
-        console.log('Mobile Frame RESET:', {
-          shouldTransition,
-          scrollProgress,
-          TRANSITION_THRESHOLD
-        });
-      } else if (mobileFrameRef.current && !shouldTransition && scrollProgress < 0.2) {
-        // Dodatna provera - resetuj ako nema transition-a i scroll je blizu početka
-        mobileFrameRef.current.style.position = 'absolute';
-        mobileFrameRef.current.style.top = '50%';
-        mobileFrameRef.current.style.left = '50%';
-        mobileFrameRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
-        mobileFrameRef.current.style.opacity = '1';
-        mobileFrameRef.current.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        mobileFrameRef.current.style.zIndex = '30';
-        
-        console.log('Mobile Frame RESET - dodatna provera:', {
-          shouldTransition,
-          scrollProgress
-        });
-      } else if (mobileFrameRef.current && globalScrollY < 100) {
-        // Resetuj kada se vratite na sam početak stranice
-        mobileFrameRef.current.style.position = 'absolute';
-        mobileFrameRef.current.style.top = '50%';
-        mobileFrameRef.current.style.left = '50%';
-        mobileFrameRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
-        mobileFrameRef.current.style.opacity = '1';
-        mobileFrameRef.current.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        mobileFrameRef.current.style.zIndex = '30';
-        
-        console.log('Mobile Frame RESET - na početak stranice:', {
-          globalScrollY,
-          shouldTransition,
-          scrollProgress
-        });
+        rightContentRef.current.style.opacity = '1'; // Reset opacity
       }
       
+      // Reset mobile frame
+      if (mobileFrameRef.current && (scrollProgress < 0.1 || globalScrollY < 100)) {
+        
+        mobileFrameRef.current.style.position = 'absolute';
+        mobileFrameRef.current.style.top = '50%';
+        mobileFrameRef.current.style.left = '50%';
+        mobileFrameRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
+        mobileFrameRef.current.style.opacity = '1';
+        mobileFrameRef.current.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        mobileFrameRef.current.style.zIndex = '30';
+      }
+      
+      // Reset sledeće sekcije
       const nextSection = document.getElementById('section2');
       if (nextSection) {
         nextSection.style.opacity = '0';
@@ -194,7 +146,7 @@ const CreatorsPlatform = () => {
         const sliderWrapper = nextSection.querySelector('[data-slider-wrapper]');
         
         if (titleContainer) {
-          titleContainer.style.transform = 'translateY(-120px)';
+          titleContainer.style.transform = 'translateY(120px)';
           titleContainer.style.opacity = '0';
           titleContainer.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease-out';
         }
@@ -205,7 +157,7 @@ const CreatorsPlatform = () => {
         }
       }
     }
-  }, [shouldTransition, scrollProgress]);
+  }, [shouldTransition, scrollProgress, isMobile]);
 
   const triggerNextSectionAnimation = (progress) => {
     const nextSection = document.getElementById('section2');
@@ -290,7 +242,7 @@ const CreatorsPlatform = () => {
 
   return (
     <section
-      className="h-[100vh] creators-platform-section max-w-[1670px] mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10 min-h-screen relative"
+      className="h-screen creators-platform-section max-w-[1670px] mx-auto md:px-6 px-[15px] md:py-16 pb-[15px] pt-[150px] flex flex-col md:flex-row items-center gap-10 relative"
       ref={sectionRef}
       style={{
         perspective: '1500px',
@@ -298,7 +250,7 @@ const CreatorsPlatform = () => {
       }}
     >
       {/* Levi sadržaj */}
-      <div className="flex-1 relative z-10" ref={leftContentRef}>
+      <div className="flex-1 relative z-5 md:h-full h-auto flex flex-col justify-center" ref={leftContentRef}>
         <div className="mb-[15px]">
             <h1 className="text-white 2xl:text-8xl md:text-6xl text-2xl font-gilroy capitalize md:leading-[100px] leading-9 font-[1000]">
                 The Creator's platform
@@ -309,15 +261,15 @@ const CreatorsPlatform = () => {
                 </span>
             </h1>
         </div>
-        <div className="max-w-[683px] flex md:p-10 p-5 md:rounded-[30px] rounded-[20px] border border-white/5 bg-white/0 mb-[15px]">
-            <p className="text-pink-600 md:text-xl text-sm font-gilroy capitalize leading-loose pr-[15px] font-[1000]">
+        <div className="max-w-[683px] flex md:p-10 p-4 md:rounded-[30px] rounded-[20px] border border-white/5 bg-white/0 mb-[15px]">
+            <p className="text-pink-600 md:text-xl text-sm font-gilroy capitalize leading-loose pr-[15px] font-[1000] whitespace-nowrap">
                 Linkstackz Where
             </p>
             <div className="text-white md:text-xl text-sm font-gilroy capitalize leading-loose font-[1000]">
                 <div className="content-animate font-gilroy">
                     <Typewriter
                         sentences={[
-                            'Real Fans Meat Real Creator',
+                            'Real Fans Meet Real Creator',
                             'Monetize Without Subscriptions',
                             'Exclusive To Real Creator',
                         ]}
@@ -331,27 +283,27 @@ const CreatorsPlatform = () => {
             </p>
         </div>
         <div className="flex gap-4">
-            <button className="relative items-center bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group animated-button">
-                <div class="circle circle1"></div>
-                <div class="circle circle2"></div>
-                <div class="circle circle3"></div>
+            <button className="relative items-center bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group animated-button whitespace-nowrap">
+                <div className="circle circle1"></div>
+                <div className="circle circle2"></div>
+                <div className="circle circle3"></div>
                 <div className="relative z-10 flex items-center">
                     <img
                         src="/icons/become-a-creator-icon.svg"
                         alt="Become a creator"
-                        className="my-2 mr-[10px] w-6 h-6"
+                        className="md:my-2 md:mr-[10px] w-6 h-6"
                     />
                     Become a creator
                 </div>
             </button>
-            <button className="items-center bg-[#181818] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[20px] rounded-[15px] text-sm font-bold font-gilroy capitalize flex">
+            <button className="items-center bg-[#181818] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[20px] rounded-[15px] text-sm font-bold font-gilroy capitalize flex whitespace-nowrap">
                 Sign up as a Fan
             </button>
         </div>
       </div>
 
       {/* Desni sadržaj */}
-      <div className="relative w-full max-w-[818.66px] aspect-[818.66/804.73] md:aspect-[818.66/804.73] h-auto corners z-10" ref={rightContentRef}>
+      <div className="relative w-full md:max-w-[747px] md:aspect-[747/728] aspect-[348/340] max-w-[348px] md:max-h-[728px] max-h-[340px] md:h-auto corners z-15" ref={rightContentRef}>
         <div className="relative w-full h-full">
           <video
             src="/images/CreatorsPlatform/cp-video.webm"
@@ -359,7 +311,7 @@ const CreatorsPlatform = () => {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px]"
+            className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] md:max-w-[747.25px] md:max-h-[728.78px] max-w-[348px] max-h-[340px]"
           />
 
           <div
@@ -372,29 +324,38 @@ const CreatorsPlatform = () => {
               muted
               loop
               playsInline
-              className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px]"
+              className="w-full h-full object-cover absolute top-0 left-0 md:rounded-tl-[300px] md:rounded-br-[300px] rounded-tl-[150px] rounded-br-[150px] md:max-w-[747.25px] md:max-h-[728.78px] max-w-[348px] max-h-[340px]"
             />
 
-            <div className="absolute inset-0 z-25 flex flex-col items-center justify-center p-4 text-center text-white">
-                <img
-                  src="/images/your-content-image.jpg"
-                  alt="Content on phone"
-                  className="w-2/3 h-auto rounded-lg mb-4"
-                />
-                <p className="text-lg font-bold">
-                  Evo tvog teksta unutar telefona!
-                </p>
-                <p className="text-sm mt-2">
-                  Možeš dodati još detalja ovde.
-                </p>
-            </div>
+            <div className="lock-slides-container absolute z-30 top-1/2 left-1/2 -translate-x-1/2 md:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
+                    <img
+                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      alt="Content on phone"
+                      className="lock-slide lock-slide-1"
+                    />
+                     <img
+                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      alt="Content on phone"
+                      className="lock-slide lock-slide-2"
+                    />
+                     <img
+                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      alt="Content on phone"
+                      className="lock-slide lock-slide-3"
+                    />
+                </div>
           </div>
 
           <img
               src="/images/CreatorsPlatform/mobile-frame.svg"
-              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none w-[85%] h-[85%] md:w-[270px] md:h-[636px]"
+              className="absolute z-30 top-1/2 left-1/2-translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] md:w-[319px] md:h-[651px]"
               alt="Mobile Frame"
               ref={mobileFrameRef}
+          />
+          <img
+              src="/images/CreatorsPlatform/mobile-mask.png"
+              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] md:w-[300px] md:h-[651px]"
+              alt="Mobile Frame"
           />
         </div>
       </div>

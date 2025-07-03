@@ -1,0 +1,474 @@
+.fixed-viewport {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.screen-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto; /* Omogućava skrolovanje unutar sekcije ako je potrebno */
+}
+
+.screen-section.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.screen-section.section-leaving {
+    opacity: 1; /* Zadržava opacity tokom animacije odlaska */
+    pointer-events: none;
+}
+
+/* Osiguraj da animacije budu glatke */
+.screen-section * {
+    box-sizing: border-box;
+}
+
+/* Ako imaš probleme sa z-index-om */
+.screen-section {
+    z-index: 1;
+}
+
+.screen-section.active {
+    z-index: 2;
+}
+
+.screen-section.section-leaving {
+    z-index: 3; /* Najviši z-index tokom animacije odlaska */
+}
+
+/* ========================================================================== */
+/* --- STILOVI I ANIMACIJE ZA CreatorsPlatform SEKCIJU                      */
+/* (data-animation-in="creators-platform-anim")                             */
+/* ========================================================================== */
+
+/* Inicijalne pozicije elemenata unutar CreatorsPlatform sekcije (kada sekcija nije aktivna) */
+
+/* Levi blok sadržaja (tekst i dugmad) počinje van ekrana sa leve strane */
+.screen-section[data-animation-in="creators-platform-anim"] .cp-left-block {
+    opacity: 1; /* Sakrij ga inicijalno */
+    transform: translateX(-1000px); /* Pomeri ga 100% širine bloka ulevo */
+    /* Tranzicija za ulazak: opacititet traje 1s i transform 1s */
+    transition: opacity 1s ease-out, transform 1s ease-in;
+}
+
+/* Desni blok sadržaja (slike ili slajder) počinje van ekrana sa desne strane */
+.screen-section[data-animation-in="creators-platform-anim"] .cp-right-block {
+    opacity: 1; /* Sakrij ga inicijalno */
+    transform: translateX(1000px); /* Pomeri ga 100% širine bloka udesno */
+    /* Tranzicija za ulazak: opacititet traje 1s i transform 1s */
+    transition: opacity 1s ease-out, transform 1s ease-in;
+}
+
+
+
+
+/* Kašnjenje za pojavljivanje pojedinačnih elemenata unutar levog bloka */
+/* Ovi delay-i se primenjuju kada cela .cp-left-block počne da se animira */
+.screen-section[data-animation-in="creators-platform-anim"] .cp-heading {
+    transition-delay: 0.1s; /* Naslov se pojavljuje 0.1s nakon cp-left-block */
+}
+.screen-section[data-animation-in="creators-platform-anim"] .cp-typewriter-box {
+    transition-delay: 0.2s; /* Typewriter box se pojavljuje 0.2s nakon cp-left-block */
+}
+.screen-section[data-animation-in="creators-platform-anim"] .cp-paragraph {
+    transition-delay: 0.3s; /* Paragraf se pojavljuje 0.3s nakon cp-left-block */
+}
+.screen-section[data-animation-in="creators-platform-anim"] .cp-buttons {
+    transition-delay: 0.4s; /* Dugmad se pojavljuju 0.4s nakon cp-left-block */
+}
+
+/* Finalno stanje ulazne animacije za levi i desni blok */
+/* Kada je CreatorsPlatform sekcija aktivna, blokovi dolaze na svoje pozicije */
+.screen-section.active[data-animation-in="creators-platform-anim"] .cp-left-block,
+.screen-section.active[data-animation-in="creators-platform-anim"] .cp-right-block {
+    opacity: 1; /* Postaju potpuno vidljivi */
+    transform: translateX(0); /* Dolaze na originalnu poziciju (centar) */
+}
+
+/* Izlazne animacije za levi i desni blok kada sekcija napušta ekran */
+.screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-left-block {
+    opacity: 0; /* Sakrij ga */
+    transform: translateX(-100%); /* Pomeri ga nazad ulevo */
+    transition-delay: 0s !important; /* Odmah počinje sa nestajanjem, bez kašnjenja */
+}
+
+.screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-right-block {
+    opacity: 0; /* Sakrij ga */
+    transform: translateX(100%); /* Pomeri ga nazad udesno */
+    transition-delay: 1.1s !important; /* Nestaje sa kašnjenjem od 1.1s (možda namerno da ostane duže vidljiv) */
+}
+
+/* Dodatne animacije za .cp-lock-slides element (pretpostavljam da je to deo .cp-right-block) */
+.screen-section[data-animation-in="creators-platform-anim"] .cp-lock-slides {
+    opacity: 0; /* Inicijalno nevidljiv */
+    transform: scale(0.8); /* Malo smanjen inicijalno */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Brzina animacije */
+}
+
+/* Ulazna animacija za .cp-lock-slides kada je sekcija aktivna */
+.screen-section.active[data-animation-in="creators-platform-anim"] .cp-lock-slides {
+    opacity: 1; /* Postaje vidljiv */
+    transform: scale(1); /* Vraća se na normalnu veličinu */
+    transition-delay: 1.1s; /* Pojavljuje se sa kašnjenjem od 1.1s */
+}
+
+/* Izlazna animacija za .cp-lock-slides kada sekcija napušta ekran */
+.screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-lock-slides {
+    opacity: 0; /* Sakrij ga */
+    transform: scale(0.8); /* Smanji ga nazad */
+    transition-delay: 1.1s !important; /* Nestaje sa kašnjenjem od 1.1s */
+}
+
+/* ========================================================================== */
+/* --- STILOVI I ANIMACIJE ZA TrustedCreators SEKCIJU                       */
+/* (data-animation-in="trusted-creators-anim")                              */
+/* ========================================================================== */
+
+/* Cela TrustedCreators sekcija dobija kašnjenje u pojavljivanju. */
+/* App.jsx će postaviti opacity i transform, ali browser čeka 2s pre nego što počne tu tranziciju */
+
+
+/* Inicijalne pozicije elemenata unutar TrustedCreators sekcije */
+.screen-section[data-animation-in="trusted-creators-anim"] .tc-heading {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: translateY(-300px); /* Počinje 100px iznad ekrana */
+    transition: opacity 1s ease, transform 1.2s ease; /* Trajanje animacije za ovaj element */
+    /* animation-delay ovde nema efekta jer nema @keyframes animacije. Koristi se transition-delay. */
+    transition-delay: 0.5s;
+}
+
+.screen-section[data-animation-in="trusted-creators-anim"] .tc-paragraph {
+    opacity: 0; /* Inicijalno nevidljiv */
+    transform: translateY(-300px); /* Počinje 100px iznad ekrana */
+    transition: opacity 1s ease, transform 1.2s ease; /* Trajanje animacije za ovaj element */
+    /* animation-delay ovde nema efekta. */
+    /* transition-delay: 1s; <-- Ukupno 3s delay */
+    transition-delay: 0.5s;
+
+}
+
+.screen-section[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: translateY(700px); /* Počinje 100px ispod ekrana */
+    transition: opacity 1.2s ease, transform 1.2s ease; /* Trajanje animacije za ovaj element */
+    transition-delay: 0.5s;
+
+    /* transition-delay: 0.2s; <-- Ukupno 2.2s delay (nakon globalnog delay-a od 2s) */
+    /* transition-delay: 1s; <-- Ovaj red je dupliran i prebrisace 0.2s, ukupno 3s delay. Preporučuje se ukloniti duplikat. */
+}
+
+/* Ulazna animacija za elemente TrustedCreators sekcije kada je sekcija aktivna */
+.screen-section.active[data-animation-in="trusted-creators-anim"] .tc-heading,
+.screen-section.active[data-animation-in="trusted-creators-anim"] .tc-paragraph,
+.screen-section.active[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
+    opacity: 1; /* Postaju potpuno vidljivi */
+    transform: translateY(0); /* Dolaze na originalnu poziciju (centar) */
+    /* Delay za ove elemente se vec kontrolise u gornjim pravilima (inicijalno stanje) */
+}
+
+/* Izlazna animacija za elemente TrustedCreators sekcije kada sekcija napušta ekran */
+.screen-section.section-leaving[data-animation-in="trusted-creators-anim"] .tc-heading {
+    opacity: 0; /* Sakrij ga */
+    transform: translateY(-100px); /* Ide nazad nagore */
+    transition-delay: 0s !important; /* Odmah počinje sa nestajanjem */
+    transition-delay: 1.5s;
+
+}
+
+.screen-section.section-leaving[data-animation-in="trusted-creators-anim"] .tc-paragraph {
+    opacity: 0; /* Sakrij ga */
+    transform: translateY(-50px); /* Ide nazad nagore */
+    transition-delay: 0s !important; /* Odmah počinje sa nestajanjem */
+    transition-delay: 1.5s;
+
+}
+
+.screen-section.section-leaving[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
+    opacity: 0; /* Sakrij ga */
+    transform: translateY(100px); /* Ide nazad nadole */
+    transition-delay: 0s !important; /* Odmah počinje sa nestajanjem */
+    transition-delay: 1s;
+
+}
+
+/* ========================================================================== */
+/* --- STILOVI I ANIMACIJE ZA MoreWaysToEarn SEKCIJU                        */
+/* (data-animation-in="more-ways-to-earn-anim")                             */
+/* ========================================================================== */
+
+/* Cela sekcija (kontejner za sav sadržaj osim naslova, ako je naslov fiksiran) */
+.screen-section[data-animation-in="more-ways-to-earn-anim"] .mwte-section-content {
+    opacity: 1; /* Inicijalno nevidljiva */
+    transform: translateY(100%); /* Počinje 100% visine bloka ispod ekrana */
+    /* Tranzicija sa custom cubic-bezier za 'bounce' efekat */
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition-delay: 0.6s !important; /* Nestaje sa kašnjenjem od 1s */
+
+}
+
+/* Ulazna animacija za glavni sadržaj MoreWaysToEarn sekcije */
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-section-content {
+    opacity: 1; /* Postaje potpuno vidljiv */
+    transform: translateY(100px); /* Dolazi na originalnu poziciju (centar) */
+    
+}
+
+/* Izlazna animacija za glavni sadržaj MoreWaysToEarn sekcije */
+.screen-section.section-leaving[data-animation-in="more-ways-to-earn-anim"] .mwte-section-content {
+    opacity: 1; /* Sakrij ga */
+    transform: translateY(-100px); /* Izlazi nazad nadole */
+    transition-delay: 1s !important; /* Nestaje sa kašnjenjem od 1s */
+}
+
+/* Animacije za naslov sekcije (može biti fiksiran ili ne) */
+.screen-section[data-animation-in="more-ways-to-earn-anim"] .mwte-title {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* Ulazna animacija za naslov MoreWaysToEarn sekcije */
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-title {
+    opacity: 1; /* Postaje potpuno vidljiv */
+    transform: translateY(0); /* Dolazi na originalnu poziciju */
+}
+
+/* Izlazna animacija za naslov MoreWaysToEarn sekcije */
+.screen-section.section-leaving[data-animation-in="more-ways-to-earn-anim"] .mwte-title {
+    opacity: 1; /* Sakrij ga */
+    transform: translateY(100px); /* Izlazi nazad nadole */
+    transition-delay: 1s !important; /* Odmah počinje sa nestajanjem */
+}
+
+/* ========================================================================== */
+/* Animacije za horizontalne slajdove unutar MoreWaysToEarn (mwte-slide-content) */
+/* Ovi stilovi se odnose na pojedinačne elemente unutar svakog slajda.       */
+/* ========================================================================== */
+
+/* Početna stanja za elemente unutar slajdova (pre nego što slajd postane aktivan) */
+.mwte-slide-content .mwte-image-animate {
+    opacity: 1; /* Inicijalno nevidljiva */
+    transform: translateX(-50px); /* Pomerena 50px ulevo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Trajanje animacije */
+}
+.mwte-slide-content .mwte-overlay-animate {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: scale(0.8); /* Malo smanjen */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 0.2s; /* Pojavljuje se 0.2s nakon ostalih elemenata slajda */
+}
+.mwte-slide-content .mwte-content-box-animate {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: translateX(50px); /* Pomeren 50px udesno */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.mwte-slide-content .mwte-icon-animate {
+    opacity: 1; /* Inicijalno nevidljiva */
+    transform: translateY(-20px); /* Pomerena 20px nagore */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 0.1s; /* Pojavljuje se 0.1s nakon ostalih */
+}
+.mwte-slide-content .mwte-slide-heading,
+.mwte-slide-content .mwte-slide-paragraph {
+    opacity: 1; /* Inicijalno nevidljivi */
+    transform: translateY(20px); /* Pomereni 20px nadole */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.mwte-slide-content .mwte-slide-heading { transition-delay: 0.2s; } /* Kašnjenje za naslov slajda */
+.mwte-slide-content .mwte-slide-paragraph { transition-delay: 0.3s; } /* Kašnjenje za paragraf slajda */
+
+
+/* Animacija kada je specifični slajd unutar MoreWaysToEarn aktivan */
+/* Ovo se aktivira kada je cela sekcija aktivna (.screen-section.active) I trenutni slajd je aktivan (.mwte-slide.active) */
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-image-animate,
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-overlay-animate,
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-content-box-animate,
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-icon-animate,
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-slide-heading,
+.screen-section.active[data-animation-in="more-ways-to-earn-anim"] .mwte-slide.active .mwte-slide-paragraph {
+    opacity: 1; /* Postaju potpuno vidljivi */
+    transform: translateX(0) translateY(0) scale(1); /* Dolaze na originalne pozicije i veličine */
+    /* Delay-i za ove elemente se kontrolišu u inicijalnim stanjima (.mwte-slide-content ...) */
+}
+
+
+/* ========================================================================== */
+/* ANALYZE FANS ANIMATIONS (Dodatno za AnalyzeFans sekciju)                 */
+/* ========================================================================== */
+
+/* Animacija za levi blok (tekst + dugme) unutar AnalyzeFans sekcije */
+/* Inicijalno stanje (kontrolisano i preko JS u komponenti za ulazak/izlazak) */
+#analyze-fans.screen-section .ai-wraper {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: translatey(800px) skewX(-10deg) skewY(-10deg);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out ; /* Trajanje animacije */
+}
+
+#analyze-fans.screen-section .ai-wraper {
+    opacity: 1; /* Inicijalno nevidljiv */
+    transform: translatey(800px) skewX(-10deg);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out ; /* Trajanje animacije */
+}
+
+/* Ulazna animacija za levi blok kada je AnalyzeFans sekcija aktivna */
+#analyze-fans.screen-section.active .ai-wraper {
+    opacity: 1; /* Postaje potpuno vidljiv */
+    transform: translateX(0px) skewX(0deg); /* Dolazi na originalnu poziciju */
+    transition-delay: 0s; /* Mali delay nakon što sekcija uđe na ekran */
+}
+
+/* Animacija za kartice (card-item) unutar AnalyzeFans sekcije */
+#analyze-fans.screen-section .test {
+    opacity: 1; /* Inicijalno nevidljiva */
+    transform: translateY(800px) skewX(-12deg); /* Počinje 100px dole sa blagim iskrivljenjem */
+    transition: opacity 0.8s ease-out, transform 0.8s ease; /* Trajanje animacije i easing */
+}
+
+/* Ulazna animacija za kartice kada je AnalyzeFans sekcija aktivna */
+#analyze-fans.screen-section.active .test {
+    opacity: 1; /* Postaje potpuno vidljiva */
+    transform: translateY(100px); /* Dolazi na originalnu poziciju sa iskrivljenjem */
+}
+
+/* Specifični delay-i za svaku karticu (kaskadni efekat pojavljivanja) */
+#analyze-fans.screen-section.active .card-item:nth-child(1) { transition-delay: 0.6s; }
+#analyze-fans.screen-section.active .card-item:nth-child(2) { transition-delay: 0.7s; }
+#analyze-fans.screen-section.active .card-item:nth-child(3) { transition-delay: 0.8s; }
+#analyze-fans.screen-section.active .card-item:nth-child(4) { transition-delay: 0.9s; }
+
+
+/* Animacija nestajanja kada AnalyzeFans sekcija odlazi */
+#analyze-fans.screen-section.section-leaving .ai-wraper {
+    opacity: 0; /* Sakrij ga */
+    transform: translateX(-100px); /* Ide levo i nestaje */
+    transition: opacity 0.6s ease-in, transform 0.6s ease-in; /* Brzina nestajanja */
+    transition-delay: 0.1s; /* Nestaje malo pre kartica */
+}
+
+#analyze-fans.screen-section.section-leaving .card-item {
+    opacity: 0; /* Sakrij ih */
+    transform: translateY(-100px) skewX(12deg); /* Ide gore i nestaje */
+    transition: opacity 0.6s ease-in, transform 0.6s ease-in; /* Brzina nestajanja */
+}
+/* Opciono: obrnuti delay za nestajanje kartica */
+#analyze-fans.screen-section.section-leaving .card-item:nth-child(4) { transition-delay: 0.2s; }
+#analyze-fans.screen-section.section-leaving .card-item:nth-child(3) { transition-delay: 0.3s; }
+#analyze-fans.screen-section.section-leaving .card-item:nth-child(2) { transition-delay: 0.4s; }
+#analyze-fans.screen-section.section-leaving .card-item:nth-child(1) { transition-delay: 0.5s; }
+
+
+/* src/animations.css */
+
+/* ... (postojeći globalni stilovi i ostale sekcije) ... */
+
+
+/* ========================================================================== */
+/* --- STILOVI I ANIMACIJE ZA Faq SEKCIJU (data-animation-in="faq-anim") --- */
+/* ========================================================================== */
+
+/* Cela Faq sekcija (bc-faq-body) - ulazak i izlazak */
+/* Inicijalno stanje cele Faq sekcije (kada NIJE aktivna) */
+/* App.jsx postavlja opacity:0 i transform: translateY(100%) ili translateY(-100%) */
+.screen-section[data-animation-in="faq-anim"] {
+    /* Globalni transition se primenjuje od .screen-section */
+    /* Nema potrebe da se ponavlja opacity: 0; i transform: ...; ovde, jer App.jsx to radi */
+}
+
+/* Stanje kada je Faq sekcija aktivna (na ekranu) */
+.screen-section.active[data-animation-in="faq-anim"] {
+    /* App.jsx postavlja opacity: 1; i transform: translateY(0); */
+    /* Nema potrebe da se ponavlja ovde */
+}
+
+/* Izlazna animacija cele Faq sekcije kada se skroluje NA DOLE (ka sledećoj sekciji) */
+/* Cela sekcija ide GORE i nestaje */
+.screen-section.section-leaving.leaving-down[data-animation-in="faq-anim"] {
+    opacity: 0;
+    transform: translateY(-100%) !important; /* Ide GORE */
+    transition-delay: 0s !important; /* Odmah počinje da nestaje */
+}
+
+/* Izlazna animacija cele Faq sekcije kada se skroluje NA GORE (ka prethodnoj sekciji) */
+/* Cela sekcija ide DOLE i nestaje */
+.screen-section.section-leaving.leaving-up[data-animation-in="faq-anim"] {
+    opacity: 0;
+    transform: translateY(100%) !important; /* Ide DOLE */
+    transition-delay: 0s !important; /* Odmah počinje da nestaje */
+}
+
+
+
+/* 1. FAQ Wrapper (faq-wraper) - glavni kontejner FAQ sadržaja */
+/* Inicijalno stanje */
+#faq-section.screen-section .faq-wraper {
+    opacity: 0;
+    transform: translateY(1000px); /* Malo smanjen */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Ulazna animacija */
+#faq-section.screen-section.active .faq-wraper {
+    opacity: 1;
+    transform: scale(1); /* Dolazi na normalnu veličinu */
+    transition-delay: 0.3s; /* Pojavljuje se malo nakon što sekcija uđe */
+}
+
+/* Izlazna animacija kada se skroluje NA DOLE (wrapper ide GORE) */
+#faq-section.screen-section.section-leaving.leaving-down .faq-wraper {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.8); /* Ide gore i smanjuje se */
+    transition-delay: 0s !important;
+}
+
+/* Izlazna animacija kada se skroluje NA GORE (wrapper ide DOLE) */
+#faq-section.screen-section.section-leaving.leaving-up .faq-wraper {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8); /* Ide dole i smanjuje se */
+    transition-delay: 0s !important;
+}
+
+
+/* Napomena: FaqItems komponenta verovatno ima svoje interne elemente.
+   Ako želite da se i oni animiraju, moraćete da im dodelite klase
+   i definišete pravila slično DataList komponenti u WhyLinkstackz. */
+
+.screen-section[data-animation-in="why-linkstackz-anim"] .test,
+.screen-section[data-animation-in="why-linkstackz-anim"] .test {
+    opacity: 0;
+    transform: translateY(-500px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+
+/* Kada sekcija postaje aktivna - elementi se pojavljuju */
+.screen-section.active[data-animation-in="why-linkstackz-anim"] .test,
+.screen-section.active[data-animation-in="why-linkstackz-anim"] .test {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.screen-section.test.section-leaving.leaving-up[data-animation-in="why-linkstackz-anim"] .test {
+    opacity: 1;
+    transform: translateY(-100px); /* Ide prema gore */
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.screen-section.section-leaving.leaving-down[data-animation-in="why-linkstackz-anim"] .test {
+    opacity: 1;
+    transform: translateY(150px); /* Ide prema dole */
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}

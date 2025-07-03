@@ -24,14 +24,14 @@ const BioLink = () => {
       id="section6"
       nextSectionId="section7"
       onNextSectionTrigger={triggerNextSectionAnimation}
-      className="bio-link h-[100vh]"
+      className="bio-link h-screen relative"
     >
-      <div className="bl-wraper">
+      <div className="bl-wraper flex flex-col lg:flex-row items-center justify-center h-full px-4 relative z-10">
         <BioLeft />
         <BioCenter />
         <BioRight />
       </div>
-      <WaveCircleBox style={{ width: '100%', top: '40%', left: '0%' }} />
+      <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
     </SnapScrollSection>
   );
 }

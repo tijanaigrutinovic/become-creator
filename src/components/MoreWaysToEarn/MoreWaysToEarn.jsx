@@ -7,7 +7,6 @@ import Slide3 from './Slide3';
 
 const MoreWaysToEarn = () => {
   const sectionRef = useRef(null);
-  const placeholderRef = useRef(null);
   const titleRef = useRef(null);
   const contentRef = useRef(null);
   
@@ -16,23 +15,47 @@ const MoreWaysToEarn = () => {
   const [shouldTransition, setShouldTransition] = useState(false);
   const [hideSection, setHideSection] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   // Threshold za animaciju
   const TRANSITION_THRESHOLD = 0.15;
   const TRANSITION_COMPLETE = 0.85;
 
   // Za snap-scroll na WhyLinkstackz
-  const WHY_LINKSTACKZ_ID = 'why-linkstackz-section';
+  const WHY_LINKSTACKZ_ID = 'why-linkstackz';
+
+  // Detect mobile/tablet
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   const handleScroll = useCallback(() => {
-    if (placeholderRef.current) {
-      const placeholderTop = placeholderRef.current.getBoundingClientRect().top;
-      const placeholderHeight = placeholderRef.current.offsetHeight;
+    if (sectionRef.current && !isMobile) {
+      const sectionTop = sectionRef.current.getBoundingClientRect().top;
+      const sectionHeight = sectionRef.current.offsetHeight;
       const viewportHeight = window.innerHeight;
 
-      let progress = -placeholderTop / (placeholderHeight - viewportHeight);
+      // Kalkulacija progress-a na osnovu pozicije sekcije
+      let progress = -sectionTop / (sectionHeight - viewportHeight);
       progress = Math.max(0, Math.min(1, progress));
       setScrollProgress(progress);
+
+      // Snap to slide logic
+      const slideProgress = progress * 3; // 3 slajda
+      const newSlideIndex = Math.round(slideProgress);
+      const clampedSlideIndex = Math.max(0, Math.min(newSlideIndex, 2));
+      
+      if (clampedSlideIndex !== currentSlideIndex) {
+        setCurrentSlideIndex(clampedSlideIndex);
+      }
 
       if (progress >= TRANSITION_THRESHOLD) {
         setShouldTransition(true);
@@ -46,34 +69,34 @@ const MoreWaysToEarn = () => {
       } else {
         setIsVisible(false);
       }
+
+      // Kada se dostigne kraj, sakrij sekciju
+      if (progress > 0.9) {
+        setHideSection(true);
+      } else {
+        setHideSection(false);
+      }
     }
-  }, []);
+  }, [isMobile, currentSlideIndex]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    if (!isMobile) {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
-
-  useEffect(() => {
-    if (scrollProgress > 0.98) {
-      setHideSection(true);
-      // Snap-scroll na WhyLinkstackz
-      setTimeout(() => {
-        const el = document.getElementById(WHY_LINKSTACKZ_ID);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100); // mali delay da se animacija završi
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
     } else {
-      setHideSection(false);
+      // Na mobile, samo prikaži sve
+      setIsVisible(true);
+      setIsInitialized(true);
     }
-  }, [scrollProgress]);
+  }, [handleScroll, isMobile]);
 
-  // Scroll animacija za MoreWaysToEarn
+  // Scroll animacije (samo za desktop)
   useEffect(() => {
-    if (shouldTransition && scrollProgress >= TRANSITION_THRESHOLD) {
+    if (!isMobile && shouldTransition && scrollProgress >= TRANSITION_THRESHOLD) {
       const transitionProgress = Math.min(
         (scrollProgress - TRANSITION_THRESHOLD) / (TRANSITION_COMPLETE - TRANSITION_THRESHOLD), 
         1
@@ -85,9 +108,9 @@ const MoreWaysToEarn = () => {
       
       const easedProgress = easeInOutCubic(transitionProgress);
 
-      // Naslov se pomera na gore - ostaje vidljiv duže
+      // Naslov animacija
       if (titleRef.current) {
-        const titleFadeStart = 0.8; // Naslov počinje da nestaje tek na 80% progress-a
+        const titleFadeStart = 0.8;
         let titleOpacity = 1;
         let titleTranslateY = 0;
         
@@ -99,77 +122,49 @@ const MoreWaysToEarn = () => {
         
         titleRef.current.style.transform = `translateY(${titleTranslateY}px)`;
         titleRef.current.style.opacity = titleOpacity;
-        titleRef.current.style.transition = 'transform 0.4s ease-out, opacity 0.4s ease-out';
+        titleRef.current.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
       }
-
-      if (transitionProgress > 0.3) {
-        triggerNextSectionAnimation((transitionProgress - 0.3) / 0.7);
-      }
-    } else {
+    } else if (!isMobile) {
       // Reset animacije
       if (titleRef.current) {
         titleRef.current.style.transform = 'translateY(0px)';
         titleRef.current.style.opacity = '1';
         titleRef.current.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease-out';
       }
-      
-      const nextSection = document.getElementById('next-section');
-      if (nextSection) {
-        nextSection.style.opacity = '0';
-        nextSection.style.transform = 'translateY(100px)';
-        nextSection.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-        nextSection.style.zIndex = '1';
-      }
     }
-  }, [shouldTransition, scrollProgress]);
+  }, [shouldTransition, scrollProgress, isMobile]);
 
-  const triggerNextSectionAnimation = (progress) => {
-    const nextSection = document.getElementById('next-section');
-    if (nextSection) {
-      const easeOutCubic = (t) => {
-        return 1 - Math.pow(1 - t, 3);
-      };
-      
-      const easedProgress = easeOutCubic(progress);
-
-      nextSection.style.opacity = easedProgress;
-      nextSection.style.transform = `translateY(${(1 - easedProgress) * 100}px)`;
-      nextSection.style.zIndex = '30';
-      nextSection.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    }
-  };
-
-  // Izračunaj trenutni slajd i progress
+  // Slide logika za snap scrolling
   const SLIDE_COUNT = 3;
   
-  // Mapiraj scroll progress na slajdove - smooth prelazak
   const getSlideData = () => {
-    // Scroll progress ide od 0 do 1, podelimo na slajdove
-    const totalSlideProgress = scrollProgress * SLIDE_COUNT;
-    const currentSlideIndex = Math.floor(totalSlideProgress);
-    const slideProgress = totalSlideProgress - currentSlideIndex;
-    
-    // Osiguraj da ne izađemo iz granica
-    const safeCurrentIndex = Math.max(0, Math.min(currentSlideIndex, SLIDE_COUNT - 1));
-    const safeNextIndex = Math.min(safeCurrentIndex + 1, SLIDE_COUNT - 1);
+    if (isMobile) {
+      return {
+        currentIndex: 0,
+        nextIndex: 0,
+        progress: 0,
+        isTransitioning: false
+      };
+    }
+
+    // Za snap scrolling, koristimo trenutni slide index
+    const nextIndex = Math.min(currentSlideIndex + 1, SLIDE_COUNT - 1);
     
     return {
-      currentIndex: safeCurrentIndex,
-      nextIndex: safeNextIndex,
-      progress: slideProgress,
-      isTransitioning: slideProgress > 0 && safeCurrentIndex !== safeNextIndex
+      currentIndex: currentSlideIndex,
+      nextIndex: nextIndex,
+      progress: 0, // Nema tranzicije jer se odmah prebacuje
+      isTransitioning: false
     };
   };
 
   const slideData = getSlideData();
 
-  // Smooth easing funkcija
   const easeInOutQuart = (t) => {
     return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
   };
 
-  // Renderuj slajd komponentu na osnovu indeksa
-  const renderSlide = (slideIndex, isTransitioning, progress) => {
+  const renderSlide = (slideIndex, isTransitioning, progress, isNextSlide = false) => {
     const slideProps = {
       isActive: slideIndex === slideData.currentIndex,
       isTransitioning,
@@ -179,93 +174,158 @@ const MoreWaysToEarn = () => {
 
     switch (slideIndex) {
       case 0:
-        return <Slide1 key={`slide-${slideIndex}`} {...slideProps} />;
+        return <Slide1 key={`slide-${slideIndex}-${isNextSlide ? 'next' : 'current'}`} {...slideProps} />;
       case 1:
-        return <Slide2 key={`slide-${slideIndex}`} {...slideProps} />;
+        return <Slide2 key={`slide-${slideIndex}-${isNextSlide ? 'next' : 'current'}`} {...slideProps} />;
       case 2:
-        return <Slide3 key={`slide-${slideIndex}`} {...slideProps} />;
+        return <Slide3 key={`slide-${slideIndex}-${isNextSlide ? 'next' : 'current'}`} {...slideProps} />;
       default:
-        return <Slide1 key={`slide-${slideIndex}`} {...slideProps} />;
+        return <Slide1 key={`slide-${slideIndex}-${isNextSlide ? 'next' : 'current'}`} {...slideProps} />;
     }
   };
 
-  return (
-    <>
-      {/* Placeholder div - povećana visina za smooth scroll */}
-      <div 
-        ref={placeholderRef}
-        className="more-ways-placeholder" 
-        style={{ 
-          height: '400vh', // Veća visina za glatki scroll
-          width: '100%'
-        }}
-      />
+  // Preload state
+  const [slidesInitialized, setSlidesInitialized] = useState(false);
+  const [fadeInComplete, setFadeInComplete] = useState(false);
+  const [slidesPreloaded, setSlidesPreloaded] = useState(false);
 
-      {/* Fixed pozicionirana sekcija */}
+  // Preload slike
+  useEffect(() => {
+    const preloadImages = async () => {
+      const images = [
+        '/images/more-ways-to-earn/iphone.png',
+        '/images/more-ways-to-earn/video-call.png',
+        '/images/more-ways-to-earn/3d-clock.png',
+        '/images/more-ways-to-earn/3d-lock.png',
+        '/images/more-ways-to-earn/flip-1.png',
+        '/icons/become-a-creator-icon.svg'
+      ];
+
+      try {
+        await Promise.all(
+          images.map(src => {
+            return new Promise((resolve, reject) => {
+              const img = new Image();
+              img.onload = resolve;
+              img.onerror = reject;
+              img.src = src;
+            });
+          })
+        );
+        setSlidesPreloaded(true);
+      } catch (error) {
+        console.warn('Some images failed to preload:', error);
+        setSlidesPreloaded(true);
+      }
+    };
+
+    preloadImages();
+  }, []);
+
+  useEffect(() => {
+    if (slidesPreloaded) {
+      const timer = setTimeout(() => {
+        setSlidesInitialized(true);
+        setTimeout(() => {
+          setFadeInComplete(true);
+        }, 200);
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [slidesPreloaded]);
+
+  // Mobile rendering - prikaži sve slajdove vertikalno
+  if (isMobile) {
+    return (
       <section
         ref={sectionRef}
-        id="more-ways-section"
-        className="max-w-[1670px] mx-auto px-6 py-24 relative"
-        style={{
-          opacity: isInitialized ? (hideSection ? 0 : 1) : 0,
-          transform: 'translateY(0px)',
-          position: hideSection ? 'relative' : 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '100vh',
-          zIndex: 15,
-          pointerEvents: isInitialized ? (hideSection ? 'none' : 'auto') : 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          transition: 'opacity 0.7s ease-out, transform 0.7s',
-        }}
+        id="more-ways-to-earn"
+        className="w-full min-h-screen bg-transparent py-16 px-4"
       >
+        {/* Naslov */}
+        <div className="text-center mx-auto mb-12 max-w-[400px]">
+          <h2 className="text-2xl font-bold text-white leading-tight font-[1000] mb-4">
+            More Ways to <span className="text-[#E91E63] font-gilroy capitalize">Earn</span>
+          </h2>
+          <p className="text-white text-base font-bold font-gilroy capitalize leading-relaxed">
+            From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
+          </p>
+        </div>
 
-        {/* Naslov - ostaje vidljiv duže */}
+        {/* Svi slajdovi jedan ispod drugog - BEZ absolute pozicioniranja */}
+        <div className="max-w-[400px] mx-auto">
+          {[0, 1, 2].map(slideIndex => (
+            <div key={`mobile-slide-${slideIndex}`} className="mb-16 relative" style={{ minHeight: '400px' }}>
+              <div className="w-full h-full">
+                {renderSlide(slideIndex, false, 0)}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <WaveCircleBox style={{ top: '40%', left: '-50%' }} />
+      </section>
+    );
+  }
+
+  // Desktop rendering - snap scrolling sa 3 slajda od 100vh svaki
+  return (
+    <section
+      ref={sectionRef}
+      id="more-ways-to-earn"
+      className="md:max-w-[1670px] max-w-[400px] md:mx-auto relative w-full"
+      style={{
+        height: '300vh', // 3 slajda x 100vh svaki
+        opacity: hideSection ? 0 : 1,
+        pointerEvents: hideSection ? 'none' : 'auto',
+        transition: 'opacity 0.7s ease-out',
+      }}
+    >
+      {/* Sticky kontejner koji ostaje na mestu tokom scroll-a */}
+      <div 
+        className=" top-0 w-full h-screen flex flex-col justify-center"
+        style={{ zIndex: 15 }}
+      >
+        {/* Naslov */}
         <div
           ref={titleRef}
-          className="text-center max-w-3xl mx-auto mb-20 transition-all duration-500"
+          className="text-center mx-auto transition-all duration-500 mb-8"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(-80px)",
           }}
         >
           <h2 className="md:text-5xl text-2xl font-bold text-white leading-[70px] font-[1000]">
-          More Ways to <span className="text-[#E91E63] font-gilroy capitalize">Earn</span>
+            More Ways to <span className="text-[#E91E63] font-gilroy capitalize">Earn</span>
           </h2>
           <p className="md:block hidden text-white text-lg font-bold font-gilroy capitalize leading-loose">
-          From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
+            From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
           </p>
         </div>
 
         {/* Sadržaj slajdova */}
-        <div ref={contentRef} className="relative" style={{height: '600px'}}>
-          {/* Trenutni slajd */}
-          {renderSlide(slideData.currentIndex, slideData.isTransitioning, slideData.progress)}
-
-          {/* Sledeći slajd (tokom tranzicije) */}
-          {slideData.isTransitioning && slideData.currentIndex !== slideData.nextIndex && (
+        <div ref={contentRef} className="relative flex-1 max-h-[600px]">
+          {slidesInitialized && slidesPreloaded ? (
             <div
               style={{
-                opacity: easeInOutQuart(slideData.progress),
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                zIndex: 1,
-                transform: `translateX(${(1 - easeInOutQuart(slideData.progress)) * 100}%)`,
-                transition: 'none',
+                opacity: fadeInComplete ? 1 : 0,
+                transition: 'opacity 0.3s ease-in-out',
               }}
             >
-              {renderSlide(slideData.nextIndex, false, 0)}
+              {/* Trenutni slajd */}
+              {renderSlide(currentSlideIndex, false, 0)}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-white text-lg">Loading...</div>
             </div>
           )}
         </div>
-        <WaveCircleBox style={{ width: '100%', top: '40%', left: '-50%' }} />
-      </section>
-    </>
+        
+        <WaveCircleBox style={{ top: '40%', left: '-50%' }} />
+      </div>
+    </section>
   );
 };
 

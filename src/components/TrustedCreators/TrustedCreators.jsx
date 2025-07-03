@@ -169,7 +169,7 @@ const TrustedCreators = () => {
                 <BgBounceAnimate />
 
                 <div
-                    className="text-center mb-[4rem]"
+                    className="text-center md:mb-[4rem] px-[15px]"
                     ref={titleContainerRef}
                     data-title-container
                     style={{ 
@@ -177,19 +177,19 @@ const TrustedCreators = () => {
                         opacity: 1 
                     }}
                 >
-                    <h2 className="text-white text-5xl font-gilroy capitalize leading-[70px] font-[1000]">
+                    <h2 className="text-white md:text-5xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
                         Trusted By The World&apos;s Biggest{" "}
                         <span className="text-[#E91E63]">Creators</span>
                     </h2>
-                    <p className="max-w-[766px] text-white text-lg font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
+                    <p className="max-w-[766px] text-white md:text-lg text-xs font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
                         Ladies, it&apos;s time to take control and start earning like the boss you are.
                         Linkstackz isn&apos;t just another link site out there — it&apos;s your gateway to
                         finding out which fans are really about that life before they subscribe to your other platforms.
                     </p>
                 </div>
-
+                
                 <div
-                    className="tc-slider-wrapper relative py-[7rem] z-[-1]"
+                    className="tc-slider-wrapper relative md:py-[7rem] pt-[56px] z-[-1]"
                     ref={sliderWrapperRef}
                     data-slider-wrapper
                     style={{ 
@@ -202,10 +202,11 @@ const TrustedCreators = () => {
                             <div key={`tcs-index-${index}`} className="tc-slider-item">
                                 <img
                                     src={`/images/trusted-creators/${sItem}`}
-                                    className="tcs-img-slide rounded-[30px]"
-                                    style={{ width: '280px', height: '420px', objectFit: 'fill', display: 'block' }}
+                                    className="tcs-img-slide rounded-[30px] md:w-[280px] md-h[420px]"
+                                    style={{ objectFit: 'fill', display: 'block' }}
                                     alt={`slide-${index}`}
                                 />
+                                
                             </div>
                         ))}
                     </div>

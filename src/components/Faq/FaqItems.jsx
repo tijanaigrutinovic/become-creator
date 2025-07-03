@@ -26,9 +26,9 @@ const FaqItems = () => {
         >
           <div className={`flex justify-between gap-2 ${ isExpandId === item.key ? "items-start" : "items-center" }`}>
             <div className="details-content">
-              <h4 className="fl-title font-gilroy font-bold text-xl text-white ">{item.title}</h4>
+              <h4 className="fl-title font-gilroy font-bold md:text-xl text-base text-white ">{item.title}</h4>
               {isExpandId === item.key &&
-                <p className="fl-desc font-gilroy pt-[13px] pb-[15px] font-normal text-lg text-white">{item.desc}</p>
+                <p className="fl-desc font-gilroy pt-[13px] pb-[15px] font-normal md:text-lg text-xs text-white">{item.desc}</p>
               }
             </div>
             <div className="toggel-action">

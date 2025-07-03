@@ -514,7 +514,7 @@
   width: 250px;
   height: 250px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1024px) {
     width: 117px;
     height: 117px;
   }
@@ -543,7 +543,7 @@
   width: 250px;
   height: 250px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1024px) {
     width: 117px;
     height: 117px;
   }
@@ -555,7 +555,7 @@
 }
 
 .corners-hero::after {
-  bottom: -20px;
+  bottom: 20px;
   left: -20px; /* donji levi ugao */
 }
 
@@ -647,3 +647,4 @@
     opacity: 1;
   }
 }
+
