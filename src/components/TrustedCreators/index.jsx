@@ -1,4 +1,8 @@
 import useInView from "../../hooks/seInView";
+import BgBounceAnimate from "../Common/bg-bounce-animate";
+import WaveCircleBox from "../Common/wave-circle-box";
+
+
 
 const TcSliderList = [
   "10.png", "11.png", "12.png", "13.png", "14.png", "15.png",
@@ -12,19 +16,21 @@ const TestTruseted = () => {
     // Uklonite ref={ref}, overflow-x-hidden, snap-start, h-[100vh], i sve klase za animaciju
     // Sekcija tag i osnovni layout (h-[100vh], snap-start) ce biti kontrolisani iz App.jsx.
     // Ostavljamo samo unutrasnji raspored i staticke Tailwind klase.
-    <div className="content-wrapper flex flex-col items-center justify-center text-center px-[15px] lg:pt-[120px] lg:pb-[130px] pt-[80px]">
-        {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-heading' za CSS ciljanje. */}
-        <h2 className="tc-heading text-white md:text-5xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
-            Trusted By The World&apos;s Biggest{" "}
-            <span className="text-[#E91E63]">Creators</span>
-        </h2>
-        {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-paragraph' za CSS ciljanje. */}
-        <p className="tc-paragraph max-w-[766px] text-white md:text-lg text-xs font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
-            Ladies, it&apos;s time to take control and start earning like the boss you are.
-            Linkstackz isn&apos;t just another link site out there — it&apos;s your gateway to
-            finding out which fans are really about that life before they subscribe to your other platforms.
-        </p>
-
+    <div className="trusted-creators content-wrapper flex flex-col items-center justify-center text-center px-[15px] lg:pt-[120px] lg:pb-[130px] pt-[80px]">
+        <BgBounceAnimate/>
+        <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
+        <div className="tc-content ">
+          <h2 className="tc-heading text-white md:text-5xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
+              Trusted By The World&apos;s Biggest{" "}
+              <span className="text-[#E91E63]">Creators</span>
+          </h2>
+          {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-paragraph' za CSS ciljanje. */}
+          <p className="tc-paragraph max-w-[766px] text-white md:text-lg text-xs font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
+              Ladies, it&apos;s time to take control and start earning like the boss you are.
+              Linkstackz isn&apos;t just another link site out there — it&apos;s your gateway to
+              finding out which fans are really about that life before they subscribe to your other platforms.
+          </p>
+        </div>
         {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-slider-wrapper-anim' za CSS ciljanje. */}
         <div
             className="tc-slider-wrapper-anim tc-slider-wrapper relative lg:pt-[130px] pt-[80px]"

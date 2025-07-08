@@ -42,7 +42,7 @@ const Typewriter = ({ sentences }) => {
     return () => clearTimeout(timeout);
   }, [text, charIndex, isDeleting, sentenceIndex, sentences]);
 
-  return <div className="typewriter-container">{text}</div>;
+  return <div className="typewriter-container">{text} |</div>;
 };
 
 export default Typewriter;

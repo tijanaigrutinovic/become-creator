@@ -3,14 +3,10 @@ import React, { forwardRef } from 'react';
 const WaveCircleBox = forwardRef(({ style = {}, className = '', ...props }, ref) => {
   return (
     <div
-      className={`absolute z-[-1] wave-circle-box ${className}`}
+      className={`absolute z-[-1] wave-circle-box ${className} top-[-20%] left-[-45%] w-[100%] opacity-1 right-[auto]`}
       ref={ref}
       style={{
-        top: '-20%',
-        left: '45%',
-        width: '100%',
-        opacity: '1',
-        right: 'auto',
+        
         ...style,
       }}
       {...props}

@@ -1,6 +1,6 @@
 const BgBounceAnimate = () => {
   return (
-    <div className="w-full h-full absolute">
+    <div className="w-full h-full absolute top-[-50%]">
       {/* Plava slika */}
       <img
         src="/images/common/light-blue.png"

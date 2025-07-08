@@ -1,9 +1,11 @@
-// src/components/WhyLinkstackz.jsx
+import { useEffect, useRef } from 'react';
 import WaveCircleBox from "../Common/wave-circle-box";
 import DataList from './DataList';
+import BgBounceAnimate from '../Common/bg-bounce-animate';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
-// WhyLinkstackz sada prima isActive i transitionDirection prop
 const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id, nextSectionId }) => {
+  const sectionRef = useRef();
 
   const dataList = [
     {
@@ -38,23 +40,22 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
     },
   ];
 
-  
+  useScrollAnimation(sectionRef, isActive, transitionDirection);
 
   return (
     <div
-    id={id}
-    data-animation-in="why-linkstackz-anim"
-    className={`test max-w-[1544px] mx-auto lg:px-6 px-[10px] lg:py-12 pt-[150px] pb-2 flex flex-col items-center justify-center`}
->
-    {/* ISPRAVLJENO: Premesti 'mwte-title' na ovaj div */}
-    <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
+      id={id}
+      ref={sectionRef}
+      className={`max-w-[1544px] mx-auto lg:px-6 px-[10px] lg:py-12 pt-[150px] pb-2 flex flex-col items-center justify-center`}
+    >
+      <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
+          <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
         </h2>
         <p className="text-white text-lg font-gilroy font-bold max-w-2xl lg:block hidden">
-            From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
+          From pay-per-minute video calls to paid attachments and interactive toys, Linkstackz maximizes your income potential.
         </p>
-    </div>
+      </div>
 
       <div className="w-full rounded-[50px] overflow-hidden">
         <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-[5px] p-[5px] rounded-[50px] h-full">
@@ -65,6 +66,7 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
       </div>
 
       <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
+      <BgBounceAnimate />
     </div>
   );
 };
