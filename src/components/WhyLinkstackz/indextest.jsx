@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import WaveCircleBox from "../Common/wave-circle-box";
 import DataList from './DataList';
-import useInView from "../../hooks/seInView";
 
 
 // WhyLinkstackz sada prima isActive prop
 const WhyLinkstackzTest = ({ isActive, onNextSectionTrigger, id, nextSectionId }) => {
-  const [ref, isVisible] = useInView(0.1); // ← threshold 0.1
 
   const dataList = [
     {

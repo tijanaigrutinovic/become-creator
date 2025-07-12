@@ -1,7 +1,5 @@
-import useInView from "../../hooks/seInView";
 import BgBounceAnimate from "../Common/bg-bounce-animate";
 import WaveCircleBox from "../Common/wave-circle-box";
-
 
 
 const TcSliderList = [
@@ -13,7 +11,7 @@ const TcSliderList = [
 const TestTruseted = () => {
 
   return (
-    <div className="trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
+    <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
         <BgBounceAnimate/>
         <div className="tc-content ">
           <h2 className="tc-heading text-white 3xl:text-5xl xl:text-4xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
@@ -27,19 +25,11 @@ const TestTruseted = () => {
           </p>
         </div>
         <div
-            className="tc-slider-wrapper-anim tc-slider-wrapper relative 3xl:pt-[130px] xl:pt-[100px] pt-[80px]"
+            className="overflow-hidden tc-slider-wrapper-anim tc-slider-wrapper relative 3xl:pt-[130px] xl:pt-[100px] pt-[80px]"
             data-slider-wrapper
         >
            
-            <div
-  id="mobile-frame-anchor"
-  className="relative w-[209px] h-[427px] lg:hidden block mx-auto z-10"
-  style={{
-    position: "relative",
-    top: "-120px", // ili koliko god ti treba da se poravna
-  }}
-></div>
-            {/* Mobile frame je sada globalan, ne prikazuj ga ovde! */}
+            
             <img
                 src="/images/CreatorsPlatform/mobile-frame.svg"
                 className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[427px] xl:w-[209px] 3xl:h-[651px] xl:h-[500px]"

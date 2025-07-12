@@ -11,3 +11,24 @@
     height: 100px;
   }
 }
+.star-bg-img1, .star-bg-img2 {
+  z-index: 1 !important;
+  pointer-events: none; /* Da ne blokiraju klikove! */
+}
+
+.faq-items {
+  position: relative;
+  z-index: 100;
+}
+.faq-item {
+  position: relative;
+  z-index: 100;
+}
+
+.faq-items, .faq-item, .fl-desc {
+  z-index: 9999 !important;
+  position: relative !important;
+}
+.star-bg-img1, .star-bg-img2 {
+  display: none !important;
+}

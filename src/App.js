@@ -11,7 +11,7 @@ import TrustedCreators from './components/TrustedCreators';
 import MoreWaysToEarn from './components/MoreWaysToEarn';
 import WhyLinkstackz from './components/WhyLinkstackz';
 import AnalyzeFans from './components/AnalyzeFans';
-import Faq from './components/Faq';
+import Faqtest from './components/Faq/indextest';
 import BioLinkTest from './components/BioLink/indextest';
 
 const SectionContent = ({ id, title, description, elements }) => (
@@ -53,8 +53,7 @@ function App() {
         const startRect = creatorsFrameRef.current.getBoundingClientRect();
         const scrollY = window.scrollY || window.pageYOffset;
     
-        console.log("📦 START rect:", startRect);
-        console.log("📏 scrollY:", scrollY);
+
     
         // Postavi početnu poziciju
         setMobileFrameState({
@@ -87,13 +86,13 @@ function App() {
             // Prvo proveri da li je sekcija renderovana
             const trustedSection = document.getElementById('trusted-creators');
             if (!trustedSection) {
-                console.log("⏱️ Čekam da se trusted-creators sekcija renderuje...");
+
                 setTimeout(waitForAnchor, 50);
                 return;
             }
     
             if (!trustedFrameAnchorRef.current) {
-                console.log("⏱️ Čekam da se trustedFrameAnchorRef pojavi...");
+
                 setTimeout(waitForAnchor, 50);
                 return;
             }
@@ -102,27 +101,20 @@ function App() {
             const windowWidth = window.innerWidth;
             const isMobile = windowWidth < 1024;
             
-            console.log("🔍 Debug trustedFrameAnchorRef:", {
-                width: endRect.width,
-                height: endRect.height,
-                windowWidth,
-                isMobile,
-                display: trustedFrameAnchorRef.current.style.display,
-                computedDisplay: window.getComputedStyle(trustedFrameAnchorRef.current).display
-            });
+
     
             // Ako je desktop, koristi fiksne koordinate
             if (!isMobile) {
-                console.log("🖥️ Desktop detektovan, koristim fiksne koordinate");
+
                 
                 // Fiksne koordinate za desktop (trusted-creators sekcija)
                 const trustedSectionRect = trustedSection.getBoundingClientRect();
-                const endTop = trustedSectionRect.top + scrollY + 200; // Centar sekcije
-                const endLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 104.5; // Centar (209px / 2)
+                const endTop = trustedSectionRect.top + scrollY + 150; // Centar sekcije
+                const endLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170; // Centar (209px / 2)
                 const endWidth = 209;
                 const endHeight = 427;
                 
-                console.log("📦 Desktop END rect:", { top: endTop, left: endLeft, width: endWidth, height: endHeight });
+
                 
                 // Pokreni animaciju
                 const animatingState = {
@@ -135,14 +127,14 @@ function App() {
                         width: `${endWidth}px`,
                         height: `${endHeight}px`,
                         zIndex: 1000,
-                        transform: 'translate(100px, 100px)',
+                        transform: 'translate(100px, 150px)',
                         transformOrigin: 'top left',
                         opacity: 1,
                         transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
                     },
                 };
                 
-                console.log("🎬 Postavljam animating state:", animatingState);
+
                 setMobileFrameState(animatingState);
                 
                 // Završna pozicija
@@ -163,7 +155,7 @@ function App() {
                         },
                     };
                     
-                    console.log("🎯 Postavljam trusted state:", trustedState);
+
                     setMobileFrameState(trustedState);
                 }, 1300);
                 
@@ -171,12 +163,12 @@ function App() {
             }
     
             if (endRect.width === 0 || endRect.height === 0) {
-                console.log("⏱️ Čekam da se trustedFrameAnchorRef ima dimenzije...");
+
                 setTimeout(waitForAnchor, 50);
                 return;
             }
     
-            console.log("📦 END rect (nakon čekanja):", endRect);
+
     
             // Pokreni animaciju za mobilne
             setMobileFrameState({
@@ -208,7 +200,7 @@ function App() {
                         width: `${endRect.width}px`,
                         height: `${endRect.height}px`,
                         zIndex: 1000,
-                        transform: 'none',
+                        transform: 'translateX(100px, 100px)',
                         opacity: 1,
                         transition: 'none',
                     },
@@ -219,75 +211,74 @@ function App() {
         waitForAnchor(); // 👈 pokreni proveru
     }, []);
 
-    const animateMobileFrameBack = useCallback(() => {
-        console.log("🔄 animateMobileFrameBack() pokrenuta");
+    const animateMobileFrameToTrusted = useCallback(() => {
+
     
-        // Koristi fiksne koordinate za creators-platform sekciju
-        const creatorsSection = document.getElementById('creators-platform');
-        if (!creatorsSection) {
-            console.log("❌ animateMobileFrameBack() - creators-platform sekcija nije pronađena");
+        // Koristi fiksne koordinate za trusted-creators sekciju
+        const trustedSection = document.getElementById('trusted-creators');
+        if (!trustedSection) {
+
             return;
         }
         
-        const creatorsSectionRect = creatorsSection.getBoundingClientRect();
+        const trustedSectionRect = trustedSection.getBoundingClientRect();
         const scrollY = window.scrollY || window.pageYOffset;
         
-        // Fiksne koordinate za creators poziciju (centar sekcije)
-        const endTop = creatorsSectionRect.top + scrollY + (creatorsSectionRect.height / 2) - 152; // Centar (304px / 2)
-        const endLeft = creatorsSectionRect.left + (creatorsSectionRect.width / 2) - 159.5; // Centar (319px / 2)
-        const endWidth = 319;
-        const endHeight = 450;
+        // Fiksne koordinate za trusted poziciju
+        const endTop = trustedSectionRect.top + scrollY + 150;
+        const endLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170;
+        const endWidth = 209;
+        const endHeight = 427;
     
-        console.log("📦 BACK - Fiksne koordinate:", { top: endTop, left: endLeft, width: endWidth, height: endHeight });
-        console.log("📏 BACK - scrollY:", scrollY);
+
     
-        // Postavi početnu poziciju (iz trusted pozicije)
-        const backStartState = {
+        // Postavi početnu poziciju (iz treće sekcije)
+        const toTrustedStartState = {
             visible: true,
             position: 'animating',
             style: {
                 position: 'fixed',
-                top: `${endTop + 150}px`,
-                left: `${endLeft + 100}px`,
+                top: `${endTop - 1000}px`, // Počinje od dole
+                left: `${endLeft}px`,
                 width: `${endWidth}px`,
                 height: `${endHeight}px`,
                 zIndex: 1000,
-                transform: 'translate(100px, 100px)',
-                transition: 'none',
+                transform: 'translateY(500px)',
+                transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
             },
         };
-        console.log("🎬 BACK - Postavljam početnu poziciju:", backStartState);
-        setMobileFrameState(backStartState);
+
+        setMobileFrameState(toTrustedStartState);
     
-        // Pokreni animaciju povratka
+        // Pokreni animaciju prelaska u trusted
         setTimeout(() => {
-            const backAnimatingState = {
+            const toTrustedAnimatingState = {
                 visible: true,
                 position: 'animating',
                 style: {
                     position: 'fixed',
-                    top: `${endTop}px`,
+                    top: `${endTop + 150}px`,
                     left: `${endLeft}px`,
                     width: `${endWidth}px`,
                     height: `${endHeight}px`,
                     zIndex: 1000,
-                    transform: 'none',
+                    transform: '',
                     opacity: 1,
                     transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
                 },
             };
-            console.log("🎬 BACK - Pokrećem animaciju povratka:", backAnimatingState);
-            setMobileFrameState(backAnimatingState);
+
+            setMobileFrameState(toTrustedAnimatingState);
         }, 50);
     
-        // Završna pozicija (creators)
+        // Završna pozicija (trusted)
         setTimeout(() => {
-            const backFinalState = {
+            const toTrustedFinalState = {
                 visible: true,
-                position: 'creators',
+                position: 'trusted',
                 style: {
                     position: 'fixed',
-                    top: `${endTop}px`,
+                    top: `${endTop + 150}px`,
                     left: `${endLeft}px`,
                     width: `${endWidth}px`,
                     height: `${endHeight}px`,
@@ -297,7 +288,87 @@ function App() {
                     transition: 'none',
                 },
             };
-            console.log("🎯 BACK - Završna pozicija (creators):", backFinalState);
+
+            setMobileFrameState(toTrustedFinalState);
+        }, 1300);
+    }, []);
+
+    const animateMobileFrameBack = useCallback(() => {
+
+    
+        // Koristi creatorsFrameRef kao u animateMobileFrame()
+        if (!creatorsFrameRef.current || !mobileFrameRef.current) {
+            return;
+        }
+
+        const startRect = creatorsFrameRef.current.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        
+        // Koristi fiksne koordinate za creators poziciju (centar sekcije)
+        const creatorsSection = document.getElementById('creators-platform');
+        const creatorsSectionRect = creatorsSection.getBoundingClientRect();
+        const endTop = creatorsSectionRect.top + scrollY + (creatorsSectionRect.height / 2) - 152; // Centar (304px / 2)
+        const endLeft = creatorsSectionRect.left + (creatorsSectionRect.width / 2) - 159.5; // Centar (319px / 2)
+        const endWidth = 319;
+        const endHeight = 450;
+    
+
+    
+        // Postavi početnu poziciju (iz trusted pozicije - ista kao trusted finalna pozicija)
+        const trustedSection = document.getElementById('trusted-creators');
+        const trustedSectionRect = trustedSection.getBoundingClientRect();
+        const trustedTop = trustedSectionRect.top + scrollY + 150;
+        const trustedLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170;
+        const trustedWidth = 209;
+        const trustedHeight = 427;
+    
+        const backStartState = {
+            visible: true,
+            position: 'animating',
+            style: {
+                position: 'fixed',
+                top: `${trustedTop + 150}px`, // Iz trusted finalne pozicije
+                left: `${trustedLeft + 100}px`, // Iz trusted finalne pozicije
+                width: `${trustedWidth}px`, // Iz trusted pozicije
+                height: `${trustedHeight}px`, // Iz trusted pozicije
+                zIndex: 1000,
+                transform: 'none',
+                transition: 'none',
+            },
+        };
+
+        setMobileFrameState(backStartState);
+    
+        // Pokreni animaciju povratka - koristi istu logiku kao animateMobileFrame()
+        setTimeout(() => {
+            // Koristi startRect kao u animateMobileFrame()
+            const backAnimatingState = {
+                visible: true,
+                position: 'animating',
+                style: {
+                    position: 'fixed',
+                    top: `${startRect.top + scrollY}px`,
+                    left: `${startRect.left}px`,
+                    width: `${startRect.width}px`,
+                    height: `450px`,
+                    zIndex: 1000,
+                    transform: 'translate(340px, -20px)', // Ista transformacija kao u animateMobileFrame()
+                    transformOrigin: 'top left',
+                    opacity: 1,
+                    transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                },
+            };
+
+            setMobileFrameState(backAnimatingState);
+        }, 50);
+    
+        // Završna pozicija (creators) - koristi CSS klase
+        setTimeout(() => {
+            const backFinalState = {
+                visible: true,
+                position: 'creators',
+                style: {}, // Prazan style - koristi CSS klase iz className
+            };
             setMobileFrameState(backFinalState);
         }, 1300);
     }, []);
@@ -322,6 +393,7 @@ function App() {
         }
         // Ideš NA GORE (trusted -> creators)
         else if (prevSectionIndex === 1 && currentSectionIndex === 0) {
+
             if (isMobile) {
                 setMobileFrameState({
                     visible: true,
@@ -330,7 +402,20 @@ function App() {
                 });
             } else {
                 // Ovde implementiraj animaciju povratka!
+
                 animateMobileFrameBack();
+            }
+        }
+        // Ideš iz treće sekcije u trusted (more-ways-to-earn -> trusted-creators)
+        else if (prevSectionIndex === 2 && currentSectionIndex === 1) {
+            if (isMobile) {
+                setMobileFrameState({
+                    visible: true,
+                    position: 'trusted',
+                    style: {},
+                });
+            } else {
+                animateMobileFrameToTrusted();
             }
         }
         else if (currentSectionIndex === 0) {
@@ -340,7 +425,7 @@ function App() {
                 style: {},
             });
         } else if (currentSectionIndex === 1) {
-            console.log("🎯 Dolazim u trusted-creators sekciju, trenutna pozicija:", mobileFrameState.position);
+
             if (isMobile) {
                 setMobileFrameState({
                     visible: true,
@@ -350,35 +435,28 @@ function App() {
             } else {
                 // Proveri da li je animacija već u toku ili završena
                 if (mobileFrameState.position !== 'animating' && mobileFrameState.position !== 'trusted') {
-                    console.log("🎬 Pokrećem animateMobileFrame()");
                     animateMobileFrame();
                 } else if (mobileFrameState.position === 'trusted' && !mobileFrameState.visible) {
-                    console.log("🔄 MobileFrame je u trusted poziciji ali nije vidljiv, pokrećem animateMobileFrameBack()");
                     animateMobileFrameBack();
-                } else {
-                    console.log("✅ MobileFrame je već u trusted poziciji i vidljiv");
                 }
             }
         } else {
-            console.log("🚪 Napuštaš sekciju, prevSectionIndex:", prevSectionIndex, "currentSectionIndex:", currentSectionIndex);
+
             // Ako napuštaš TrustedCreators sekciju, pokreni izlaznu animaciju
             if (prevSectionIndex === 1) {
                 // Proveri da li ideš u sekciju gde MobileFrame treba da ostane vidljiv
                 const nextSectionId = sectionsData[currentSectionIndex]?.id;
-                console.log("🎭 Napuštaš trusted-creators, idem u:", nextSectionId);
                 
                 // Ako ideš u sekciju gde MobileFrame nije potreban, pokreni izlaznu animaciju
                 if (nextSectionId && !['more-ways-to-earn', 'why-linkstackz', 'analyze-fans', 'bio-link', 'faq-section'].includes(nextSectionId)) {
-                    console.log("🎭 Pokrećem izlaznu animaciju iz trusted-creators");
                     setExitDirection(currentSectionIndex > prevSectionIndex ? 'down' : 'up');
                     setIsExitingTrusted(true);
                 } else {
-                    console.log("🎭 Pokrećem izlaznu animaciju iz trusted-creators u sekciju:", nextSectionId);
                     setExitDirection(currentSectionIndex > prevSectionIndex ? 'down' : 'up');
                     setIsExitingTrusted(true);
                 }
             } else {
-                console.log("❌ Skrivam MobileFrame jer nisi bio u trusted-creators");
+
                 setMobileFrameState({
                     visible: false,
                     position: '',
@@ -386,7 +464,7 @@ function App() {
                 });
             }
         }
-    }, [currentSectionIndex, animateMobileFrame, animateMobileFrameBack, prevSectionIndex]);
+    }, [currentSectionIndex, animateMobileFrame, animateMobileFrameBack, animateMobileFrameToTrusted, prevSectionIndex]);
 
     // Animacija izlaska MobileFrame-a iz TrustedCreators
     useEffect(() => {
@@ -428,7 +506,7 @@ function App() {
         'why-linkstackz': WhyLinkstackz,
         'analyze-fans': AnalyzeFans,
         'bio-link': BioLinkTest,
-        'faq-section': Faq,
+        'faq-section': Faqtest,
     };
 
     const goToSection = useCallback((index, direction) => { // <-- VAŽNO: direction je ovde prisutan
@@ -621,7 +699,6 @@ function App() {
                     }
                 }
             }
-            
             goToSection(currentSectionIndex + direction, direction);
         };
         // --- END NEW: Touch Event Handlers ---
@@ -704,7 +781,7 @@ function App() {
                 }}
             />
             
-            {console.log("🔍 MobileFrame render state:", mobileFrameState)}
+
             {mobileFrameState.visible && (
                 <MobileFrame
                     ref={mobileFrameRef}

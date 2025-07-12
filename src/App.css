@@ -94,8 +94,7 @@
     margin-top: 0.6rem;
     width: 100%;
     height: auto;
-    max-height: 280px; /* @apply max-w-[12.44rem] */
-    max-width: unset;
+    max-width: 200px;
   }
   .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
     margin-bottom: 6rem; /* @apply mb-[6rem] */

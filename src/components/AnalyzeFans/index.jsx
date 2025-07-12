@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import '../../css/analyze-fans.css';
 import BgBounceAnimate from "../Common/bg-bounce-animate";
-import useInView from "../../hooks/seInView";
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 

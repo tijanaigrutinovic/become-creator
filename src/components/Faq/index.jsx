@@ -37,7 +37,7 @@ const Faq = ({ isActive, transitionDirection, id, nextSectionId }) => {
               />
             </div>
             {/* Dodaj klasu za tekstualni info radi animacije */}
-            <div className="text-info text-center max-w-[516px] mx-auto text-white capitalize 2xl:text-4xl md:text-3xl text-2xl font-bold font-gilroy">
+            <div className="text-info text-center max-w-[516px] mx-auto text-white capitalize 3xl:text-4xl lg:text-3xl text-2xl font-bold font-gilroy">
               <h3 className="p-text-4xl font-bold font-gilroy text-center text-white capitalize md:leading-[50px] leading-9 ">The <span className="text-[#FFB800]">No.1</span> Adult bio link website trusted by millions of adult content <span className="text-[#E91E63]">creators</span> across the globe</h3>
             </div>
             {/* Zvezde sa animacijama */}
