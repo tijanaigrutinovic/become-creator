@@ -2,70 +2,27 @@
   background-color: #111111;
 }
 
-/* Animacija za plavu sliku */
-@keyframes bounceBlue {
-  0% {
-    transform: translateX(-10px) translateY(0); /* Početna pozicija sa desne strane */
-  }
-  50% {
-    transform: translateX(-900px) translateY(100px); /* Kretanje levo, ali ne do kraja */
-  }
-  100% {
-    transform: translateX(-10px) translateY(0); /* Povratak na početnu poziciju */
-  }
+.screen-section {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+  overflow: hidden;
 }
 
-.animate-bounce-blue {
-  position: absolute; 
-  animation: bounceBlue 10s ease-in-out infinite;
-  left: 50%; /* Početna pozicija, 100px desno od centra */
-  top: 50%; /* Centriraj vertikalno */
-  transform: translateX(-50%); /* Poravnaj horizontalno sa centrom */
+.screen-section.active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative; /* Aktivna sekcija zauzima normalan flow */
 }
 
-/* Animacija za crvenu sliku */
-@keyframes bounceRed {
-  0% {
-    transform: translateX(10px) translateY(0); /* Početna pozicija sa leve strane */
-  }
-  50% {
-    transform: translateX(1200px) translateY(200px); /* Kretanje levo i nadole */
-  }
-  100% {
-    transform: translateX(10px) translateY(0); /* Povratak na početnu poziciju */
-  }
+.mobile-frame {
+  /* Osnovni stilovi za mobile frame */
+  user-select: none;
+  pointer-events: none;
 }
 
-.animate-bounce-red {
-  animation: bounceRed 10s ease-in-out infinite;
-  left: calc(10%); /* Početna pozicija 100px desno od centra */
-  top: calc(50% - 50px); /* Pomeranje crvene slike nadole */
-}
-
-
-@keyframes tcListSlider {
-  0% {
-    transform: translateX(0);
-  }
-
-  47% {
-    transform: translateX(calc(-100vw));
-    animation-timing-function: ease-in;
-  }
-
-  50% {
-    transform: translateX(calc(-100vw));
-  }
-
-  97% {
-    transform: translateX();
-    animation-timing-function: ease-out;
-  }
-
-  100% {
-    transform: translateX(0%);
-  }
-}
 
 .trusted-creators .tc-slider-wrapper::before {
   content: '';
@@ -108,8 +65,7 @@
   margin-top: 0.6rem;
   width: 100%; /* @apply w-full */
   height: auto; /* @apply h-auto */
-  max-width: 12.44rem; /* @apply max-w-[12.44rem] */
-  min-width: 12.44rem; /* @apply min-w-[12.44rem] */
+  max-width: 280px; /* @apply max-w-[12.44rem] */
 }
 
 /* Duplirani selektor, ali ostavljam ga kako je bio u originalu.
@@ -118,19 +74,29 @@
   margin-top: 0.6rem;
   width: 100%;
   height: auto;
-  max-width: 12.44rem;
-  min-width: 12.44rem;
+  max-width: 280px; /* @apply max-w-[12.44rem] */
+}
+
+@media screen and (min-width: 10px) and (max-width: 1640px) {
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+    margin-top: 0.6rem;
+    width: 100%;
+    height: auto;
+    max-width: 240px;
+  }
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+    margin-bottom: 6rem; /* @apply mb-[6rem] */
+  }
 }
 
 @media screen and (min-width: 10px) and (max-width: 992px) {
-  /* Komentarisani delovi iz originala su zadržani kao komentari */
-  /*
-  .trusted-creators .tc-slider-wrapper {
-    overflow: hidden !important;
-    position: unset !important;
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+    margin-top: 0.6rem;
+    width: 100%;
+    height: auto;
+    max-height: 280px; /* @apply max-w-[12.44rem] */
+    max-width: unset;
   }
-  */
-
   .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
     margin-bottom: 6rem; /* @apply mb-[6rem] */
   }

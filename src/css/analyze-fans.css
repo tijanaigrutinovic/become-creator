@@ -108,7 +108,7 @@
 .analyze-fans .analyze-statistics .card-list {
     position: relative;
     z-index: 2;
-    height: 700px;
+    height: auto;
 }
 
 .analyze-fans .analyze-statistics .card-list .card-item {
@@ -287,40 +287,4 @@
     50% { transform: translate(25px, 10px) skewX(12deg); }
     75% { transform: translate(-15px, -5px) skewX(12deg); }
     100% { transform: translate(0px, 0px) skewX(12deg); }
-}
-
-.analyze-fans .wave-circle-box {
-    width: 100%;
-    position: absolute;
-    top: 60%;
-    left: 16%;
-}
-
-.analyze-fans .wave-circle-box .wave-circle-1,
-.analyze-fans .wave-circle-box .wave-circle-2,
-.analyze-fans .wave-circle-box .wave-circle-3 {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-}
-
-@keyframes af-rotate-wave-circle {
-    from { rotate: 0; }
-    to { rotate: 360deg; }
-}
-
-.analyze-fans .wave-circle-box .wave-circle-1 {
-    animation: 10s af-rotate-wave-circle infinite alternate;
-}
-
-.analyze-fans .wave-circle-box .wave-circle-2 {
-    animation: 15s af-rotate-wave-circle infinite reverse;
-}
-
-.analyze-fans .wave-circle-box .wave-circle-3 {
-    animation: 20s af-rotate-wave-circle infinite alternate;
 }

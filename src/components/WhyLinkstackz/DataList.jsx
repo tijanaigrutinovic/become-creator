@@ -7,11 +7,11 @@ const DataList = ({ data }) => {
         <div className="lg:text-xl text-base font-extrabold mb-2">{data.title}</div>
         <p className="text-xs lg:text-base text-gray-300">{data.desc}</p>
       </div>
-      <div className="md:mt-0 md:ml-6 md:h-32 h-11 mb-5">
+      <div className="md:mt-0 2xl:ml-6 3xl:h-32 h-11 mb-5">
         <img
           src={`/images/why-linkstackz/${data.image}`}
           alt={data.title}
-          className="lg:h-32 h-11 object-contain"
+          className="2xl:h-32 xl:h-20 h-11 object-contain"
         />
       </div>
     </div>

@@ -165,9 +165,8 @@ const TrustedCreators = () => {
                     pointerEvents: isInitialized ? 'auto' : 'none',
                     transition: 'opacity 0.7s ease-out',
                 }}
-            >
+                >
                 <BgBounceAnimate />
-
                 <div
                     className="text-center md:mb-[4rem] px-[15px]"
                     ref={titleContainerRef}

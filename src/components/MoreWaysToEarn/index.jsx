@@ -12,6 +12,7 @@ import React, {
   import WaveCircleBox from '../Common/wave-circle-box';
   import MoreWaysToEarnSlide1 from './indexslide1';
   import MoreWaysToEarnSlide2 from './indexslide2';
+  import MoreWaysToEarnSlide3 from './indexslide3';
   
   const SLIDE_TRANSITION_DURATION = 1000; // Trajanje animacije horizontalnog slajdera
   
@@ -21,17 +22,15 @@ import React, {
     const slideContainerRef = useRef(null);
     const isHorizontalAnimating = useRef(false);
   
-    const slides = [MoreWaysToEarnSlide1, MoreWaysToEarnSlide2];
+    const slides = [MoreWaysToEarnSlide1, MoreWaysToEarnSlide2, MoreWaysToEarnSlide3];
   
     // Ulazna animacija
     useEffect(() => {
       const el = sectionRef.current;
       if (!el) {
-        console.log('❌ MoreWaysToEarn: sectionRef.current nije definisan');
         return;
       }
   
-      console.log('➡️ MoreWaysToEarn useEffect (ulaz) pokrenut, isActive:', isActive);
       if (isActive) {
         el.style.transition = 'none';
   
@@ -40,7 +39,6 @@ import React, {
         if (transitionDirection === 'up') startY = '-1000px';
         else if (transitionDirection === 'down') startY = '1000px';
   
-        console.log(`🎬 Ulazna animacija, startY = ${startY}`);
   
         el.style.transform = `translateY(${startY})`;
         el.style.opacity = '0';
@@ -50,7 +48,8 @@ import React, {
             el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
             el.style.transform = 'translateY(0)';
             el.style.opacity = '1';
-            console.log('✅ Ulazna animacija pokrenuta');
+            el.style.transitionDelay = '0.5s';
+
           });
         });
       }
@@ -60,11 +59,9 @@ import React, {
     useEffect(() => {
         const el = sectionRef.current;
         if (!el) {
-          console.log('❌ MoreWaysToEarn: sectionRef.current nije definisan za izlaz');
           return;
         }
       
-        console.log('➡️ MoreWaysToEarn useEffect (izlaz) pokrenut, isActive:', isActive, 'currentSlideIndex:', currentSlideIndex);
       
         if (!isActive) {
           let translateYValue = '0px';
@@ -80,19 +77,16 @@ import React, {
             translateYValue = '0px';
           }
       
-          console.log(`📤 Pokrećem izlaznu animaciju sa translateY(${translateYValue})`);
       
           el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
           el.style.transform = `translateY(${translateYValue})`;
       
           const timeout = setTimeout(() => {
-            console.log('♻️ Izlazna animacija završena');
             // Resetuj ako treba
           }, SLIDE_TRANSITION_DURATION);
       
           return () => {
             clearTimeout(timeout);
-            console.log('⏹️ Timeout za izlaznu animaciju očišćen');
           };
         }
       }, [isActive, currentSlideIndex]);
@@ -100,18 +94,15 @@ import React, {
     const goToSlide = useCallback(
       (direction) => {
         if (isHorizontalAnimating.current || !slideContainerRef.current) {
-          console.log('⚠️ Ne mogu da promenim slajd jer je animacija u toku ili ref nije spreman');
           return false; // Vec se animira ili ref nije spreman
         }
   
         const newIndex = currentSlideIndex + direction;
   
         if (newIndex < 0 || newIndex >= slides.length) {
-          console.log(`⚠️ Novi indeks (${newIndex}) je van opsega slajdova`);
           return false; // Van granica
         }
   
-        console.log(`➡️ Pokrećem animaciju prelaza na slajd ${newIndex}`);
   
         isHorizontalAnimating.current = true;
         const offset = newIndex * -100;
@@ -135,7 +126,6 @@ import React, {
           if (nextSlideEl) {
             nextSlideEl.classList.add('active');
           }
-          console.log(`✅ Slajd promenjen na ${newIndex}, animacija završena`);
         }, SLIDE_TRANSITION_DURATION);
   
         return true;
@@ -150,7 +140,6 @@ import React, {
       },
       canGoFurther: (direction) => {
         if (isHorizontalAnimating.current) {
-          console.log('⚠️ Ne može se ići dalje, animacija je u toku');
           return false;
         }
         if (direction === -1) {
@@ -175,12 +164,10 @@ import React, {
       <div
         ref={sectionRef}
         className="mwte-section-content w-full h-full flex flex-col items-center"
-        style={{ position: 'relative' }}
       >
         <BgBounceAnimate />
-        <WaveCircleBox style={{ top: '40%', left: '-50%' }} />
-        <div className="mwte-title text-center mx-auto mb-12 max-w-[766px]">
-          <h2 className="text-2xl lg:text-5xl font-bold font-[1000] text-white leading-tight mb-4">
+        <div className="mwte-title text-center mx-auto max-w-[766px]">
+          <h2 className="text-2xl 3xl:text-5xl xl:text-4xl font-bold font-[1000] text-white leading-tight mb-4">
             More Ways to
             <span className="text-[#E91E63] font-gilroy capitalize"> Earn</span>
           </h2>

@@ -31,12 +31,12 @@ const FaqItems = () => {
                 <p className="fl-desc font-gilroy pt-[13px] pb-[15px] font-normal md:text-lg text-xs text-white">{item.desc}</p>
               }
             </div>
-            <div className="toggel-action">
-              <div>
+            <div className="toggel-action w-[24px] h-[24px]" >
+              <div className="w-[24px] h-[24px]">
                 {isExpandId === item.key ? (
-                  <img src="/icons/arrow-up.svg" alt="arrow down" width={24} height={24} />
+                  <img src="/icons/arrow-up.svg" alt="arrow down" width={24} height={24} className="w-[24px] h-[24px]"/>
                 ) : (
-                  <img src="/icons/arrow-down.svg" alt="arrow up" width={24} height={24}/>
+                  <img src="/icons/arrow-down.svg" alt="arrow up" width={24} height={24}className="w-[24px] h-[24px]"/>
                 )}
               </div>
             </div>

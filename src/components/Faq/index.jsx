@@ -25,7 +25,7 @@ const Faq = ({ isActive, transitionDirection, id, nextSectionId }) => {
       // isActive klasa se dodaje/uklanja iz App.jsx
       // transitionDirection prop se koristi za CSS klase leaving-down/up u App.jsx
     >
-      <div className="bc-faq pt-[150px]">
+      <div className="bc-faq pt-[140px]">
         <div className="max-w-[1645px] mx-auto faq-wraper grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-9 px-0 lg:px-[4.75rem] lg:py-[3.75rem] py-4 rounded-[100px_100px_0_0] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_0%,rgba(0,141,131,0.10)_100%)] backdrop-blur-[17px]">
           {/* Levi deo sa medaljom i tekstom */}
           <div className="faq-desc relative lg:border-r lg:border-b-0 border-b border-white/10 p-2 lg:pr-[50px]">
@@ -37,7 +37,7 @@ const Faq = ({ isActive, transitionDirection, id, nextSectionId }) => {
               />
             </div>
             {/* Dodaj klasu za tekstualni info radi animacije */}
-            <div className="text-info text-center max-w-[516px] mx-auto text-white capitalize md:text-4xl text-2xl font-bold font-gilroy">
+            <div className="text-info text-center max-w-[516px] mx-auto text-white capitalize 2xl:text-4xl md:text-3xl text-2xl font-bold font-gilroy">
               <h3 className="p-text-4xl font-bold font-gilroy text-center text-white capitalize md:leading-[50px] leading-9 ">The <span className="text-[#FFB800]">No.1</span> Adult bio link website trusted by millions of adult content <span className="text-[#E91E63]">creators</span> across the globe</h3>
             </div>
             {/* Zvezde sa animacijama */}
@@ -68,7 +68,6 @@ const Faq = ({ isActive, transitionDirection, id, nextSectionId }) => {
             <FaqItems /> {/* Pretpostavljamo da FaqItems ima svoje interne animacije ili da ćemo ih dodati */}
           </div>
         </div>
-        <WaveCircleBox style={{ width: '100%', top: '50%', left: '33%',}} />
       </div>
       <BgBounceAnimate/> {/* Ovo je verovatno globalna pozadina, pa može biti i van main div-a */}
     </section>

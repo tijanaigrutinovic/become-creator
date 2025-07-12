@@ -46,8 +46,10 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
     <div
       id={id}
       ref={sectionRef}
-      className={`max-w-[1544px] mx-auto lg:px-6 px-[10px] lg:py-12 pt-[150px] pb-2 flex flex-col items-center justify-center`}
+      className={`max-w-[1544px] mx-auto lg:px-6 px-[10px] pb-2 flex flex-col items-center justify-center`}
     >
+      <BgBounceAnimate />
+
       <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
           <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
@@ -64,9 +66,6 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
           ))}
         </div>
       </div>
-
-      <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
-      <BgBounceAnimate />
     </div>
   );
 };

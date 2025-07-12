@@ -1,4 +1,80 @@
-.fixed-viewport {
+@keyframes bounceBlue {
+    0% {
+      transform: translateX(-10px) translateY(0); /* Početna pozicija sa desne strane */
+    }
+    50% {
+      transform: translateX(-900px) translateY(100px); /* Kretanje levo, ali ne do kraja */
+    }
+    100% {
+      transform: translateX(-10px) translateY(0); /* Povratak na početnu poziciju */
+    }
+  }
+  
+  .animate-bounce-blue {
+    position: absolute; 
+    animation: bounceBlue 10s ease-in-out infinite;
+    left: 50%; 
+    top: 50%;
+    transform: translateX(-50%); 
+  }
+  @media screen and (max-width:979px){
+    .animate-bounce-blue {
+      position: absolute; 
+      animation: bounceBlue 10s ease-in-out infinite;
+      left: 20%; 
+      top: 20%;
+      transform: translateX(10%); 
+    }
+  }
+  
+  @keyframes bounceRed {
+    0% {
+      transform: translateX(10px) translateY(0); 
+    }
+    50% {
+      transform: translateX(1200px) translateY(200px);
+    }
+    100% {
+      transform: translateX(10px) translateY(0);
+    }
+  }
+  
+  .animate-bounce-red {
+    animation: bounceRed 10s ease-in-out infinite;
+    left: calc(10%);
+    top: calc(50% - 50px);
+  }
+  @media screen and (max-width:979px){
+    .animate-bounce-red {
+      left: calc(10%);
+      top: calc(50% - 50px);
+    }
+  }
+  
+  @keyframes tcListSlider {
+    0% {
+      transform: translateX(0);
+    }
+  
+    47% {
+      transform: translateX(calc(-100vw));
+      animation-timing-function: ease-in;
+    }
+  
+    50% {
+      transform: translateX(calc(-100vw));
+    }
+  
+    97% {
+      transform: translateX();
+      animation-timing-function: ease-out;
+    }
+  
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  .fixed-viewport {
     position: fixed;
     top: 0;
     left: 0;
@@ -302,4 +378,145 @@
     opacity: 1;
     transform: translateY(150px); /* Ide prema dole */
     transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+
+/* Pozadinski elementi koji se transformišu */
+.section-bg-anim {
+  background: rgba(32, 32, 32, 0.5);
+  backdrop-filter: blur(7.5px);
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1), transform 1s cubic-bezier(0.075, 0.82, 0.165, 1), border-radius 0.8s ease;
+}
+
+/* Sakrij originalne pozadinske elemente */
+.ai-wraper {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+.bl-col-center-bg {
+  opacity: 0 !important;
+}
+
+.screen-section.test.section-leaving.leaving-up[data-animation-in="analyze-fans-anim"] .analyze-content {
+  opacity: 1;
+  transform: translateY(-100px) translateX(200px);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.screen-section.section-leaving.leaving-down[data-animation-in="analyze-fans-anim"] .analyze-content {
+  opacity: 1;
+  transform: translateY(150px) translateX(200px);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+/* Stilovi za ostale sekcije - sakrij pozadinski element */
+.section-bg-anim.creators-platform-anim,
+.section-bg-anim.trusted-creators-anim,
+.section-bg-anim.more-ways-to-earn-anim,
+.section-bg-anim.why-linkstackz-anim,
+.section-bg-anim.faq-anim {
+  opacity: 0;
+  transform: translateY(-200px) scale(0.8);
+}
+
+/* Ostale sekcije - sakrij pozadinski element */
+.section-bg-anim:not(.analyze-fans-anim):not(.bio-link-anim) {
+  opacity: 0;
+  transform: translateY(-200px) scale(0.8);
+}
+
+/* Tekst animacije — sa odloženim pojavljivanjem */
+.screen-section[data-animation-in="analyze-fans-anim"] .analyze-content {
+  opacity: 0;
+  transform: translateY(-100px);
+  transform: translateX(-200px);
+  transition: opacity 1s ease-out, transform 1s ease;
+  transition-delay: 0.3s;
+}
+.screen-section.active[data-animation-in="analyze-fans-anim"] .analyze-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes subtleFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-80px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.section-bg-anim.analyze-fans-anim,
+.section-bg-anim.bio-link-anim {
+  animation: subtleFloat 1s ease;
+  will-change: transform;
+}
+
+
+/* Specifični stilovi za različite sekcije */
+
+/* Analyze Fans stilovi */
+.section-bg-anim.analyze-fans-anim {
+  border-radius: 200px 0px 200px 0px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  width: 650px;
+  height: 400px;
+  left: 30% !important;
+}
+
+/* Bio Link stilovi */
+.section-bg-anim.bio-link-anim {
+  border-radius: 1000px 1000px 0px 0px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  max-width: 624px;
+  width: 100%;
+  height: 100%;
+  left: 50% !important;
+  margin-top: 140px;
+  backdrop-filter: blur(7.5px);
+}
+
+/* Ostale sekcije - sakrij pozadinski element */
+.section-bg-anim:not(.analyze-fans-anim):not(.bio-link-anim) {
+  opacity: 0;
+  transform: translateY(-200px) scale(0.8);
+}
+
+/* Responsive stilovi */
+@media screen and (max-width: 1280px) {
+  .section-bg-anim.analyze-fans-anim {
+    border-radius: 100px 0px 100px 0px;
+    width: 600px;
+    height: 350px;
+    left: 50% !important;
+  }
+  
+  .section-bg-anim.bio-link-anim {
+    border-radius: 800px 800px 0px 0px;
+    width: 550px;
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section-bg-anim.analyze-fans-anim {
+    border-radius: 60px 0px 60px 0px;
+    width: 400px;
+    height: 300px;
+    left: 50% !important;
+  }
+  
+  .section-bg-anim.bio-link-anim {
+    border-radius: 600px 600px 0px 0px;
+    width: 350px;
+    height: 400px;
+  }
 }

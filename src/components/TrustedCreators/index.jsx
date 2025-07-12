@@ -13,30 +13,40 @@ const TcSliderList = [
 const TestTruseted = () => {
 
   return (
-    // Uklonite ref={ref}, overflow-x-hidden, snap-start, h-[100vh], i sve klase za animaciju
-    // Sekcija tag i osnovni layout (h-[100vh], snap-start) ce biti kontrolisani iz App.jsx.
-    // Ostavljamo samo unutrasnji raspored i staticke Tailwind klase.
-    <div className="trusted-creators content-wrapper flex flex-col items-center justify-center text-center px-[15px] lg:pt-[120px] lg:pb-[130px] pt-[80px]">
+    <div className="trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
         <BgBounceAnimate/>
-        <WaveCircleBox style={{ width: '100%', top: 'unset', left: '33%' }} />
         <div className="tc-content ">
-          <h2 className="tc-heading text-white md:text-5xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
+          <h2 className="tc-heading text-white 3xl:text-5xl xl:text-4xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
               Trusted By The World&apos;s Biggest{" "}
               <span className="text-[#E91E63]">Creators</span>
           </h2>
-          {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-paragraph' za CSS ciljanje. */}
-          <p className="tc-paragraph max-w-[766px] text-white md:text-lg text-xs font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
+          <p className="tc-paragraph max-w-[766px] text-white 2xl:text-lg lg:text-base text-xs font-bold font-gilroy capitalize leading-loose font-[700] mx-auto mt-4">
               Ladies, it&apos;s time to take control and start earning like the boss you are.
               Linkstackz isn&apos;t just another link site out there — it&apos;s your gateway to
               finding out which fans are really about that life before they subscribe to your other platforms.
           </p>
         </div>
-        {/* Uklonite isVisible uslove za animaciju iz klasa. Dodajte 'tc-slider-wrapper-anim' za CSS ciljanje. */}
         <div
-            className="tc-slider-wrapper-anim tc-slider-wrapper relative lg:pt-[130px] pt-[80px]"
+            className="tc-slider-wrapper-anim tc-slider-wrapper relative 3xl:pt-[130px] xl:pt-[100px] pt-[80px]"
             data-slider-wrapper
         >
+           
+            <div
+  id="mobile-frame-anchor"
+  className="relative w-[209px] h-[427px] lg:hidden block mx-auto z-10"
+  style={{
+    position: "relative",
+    top: "-120px", // ili koliko god ti treba da se poravna
+  }}
+></div>
+            {/* Mobile frame je sada globalan, ne prikazuj ga ovde! */}
+            <img
+                src="/images/CreatorsPlatform/mobile-frame.svg"
+                className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[427px] xl:w-[209px] 3xl:h-[651px] xl:h-[500px]"
+                alt="Mobile Frame"
+            />
             <div className="tc-slider-list flex gap-6">
+            
                 {TcSliderList.concat(TcSliderList).map((sItem, index) => (
                     <div key={`tcs-index-${index}`} className="tc-slider-item shrink-0">
                         <img

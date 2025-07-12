@@ -1,7 +1,6 @@
 const BgBounceAnimate = () => {
   return (
-    <div className="w-full h-full absolute top-[-50%]">
-      {/* Plava slika */}
+    <div className="w-full h-full absolute lg:top-[-50%]">
       <img
         src="/images/common/light-blue.png"
         className="absolute z-10 animate-bounce-blue"
@@ -9,7 +8,6 @@ const BgBounceAnimate = () => {
         height={869}
         alt="bounce-light-blue"
       />
-      {/* Crvena slika */}
       <img
         src="/images/common/light-red.png"
         className="absolute z-10 animate-bounce-red"
