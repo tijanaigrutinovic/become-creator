@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import WaveCircleBox from "../Common/wave-circle-box";
 import DataList from './DataList';
+import { getImagePath } from "../../utils/imagePath";
 
 
 // WhyLinkstackz sada prima isActive prop

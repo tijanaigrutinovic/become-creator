@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Typewriter from './Typewriter';
 import WaveCircleBox from "../Common/wave-circle-box";
+import { getImagePath } from "../../utils/imagePath";
 
 const CreatorsPlatform = () => {
   const sectionRef = useRef(null);
@@ -289,7 +290,7 @@ const CreatorsPlatform = () => {
                 <div className="circle circle3"></div>
                 <div className="relative z-10 flex items-center">
                     <img
-                        src="/icons/become-a-creator-icon.svg"
+                        src={getImagePath("/icons/become-a-creator-icon.svg")}
                         alt="Become a creator"
                         className="md:my-2 md:mr-[10px] w-6 h-6"
                     />
@@ -306,7 +307,7 @@ const CreatorsPlatform = () => {
       <div className="relative w-full md:max-w-[747px] md:aspect-[747/728] aspect-[348/340] max-w-[348px] md:max-h-[728px] max-h-[340px] md:h-auto corners z-15" ref={rightContentRef}>
         <div className="relative w-full h-full">
           <video
-            src="/images/CreatorsPlatform/cp-video.webm"
+            src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
             autoPlay
             muted
             loop
@@ -319,7 +320,7 @@ const CreatorsPlatform = () => {
             style={{}}
           >
             <video
-              src="/images/CreatorsPlatform/cp-video.webm"
+              src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
               autoPlay
               muted
               loop
@@ -329,17 +330,17 @@ const CreatorsPlatform = () => {
 
             <div className="lock-slides-container absolute z-30 top-1/2 left-1/2 -translate-x-1/2 md:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
                     <img
-                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                       alt="Content on phone"
                       className="lock-slide lock-slide-1"
                     />
                      <img
-                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                       alt="Content on phone"
                       className="lock-slide lock-slide-2"
                     />
                      <img
-                      src="/images/CreatorsPlatform/lock-to-view.svg"
+                      src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                       alt="Content on phone"
                       className="lock-slide lock-slide-3"
                     />
@@ -347,13 +348,13 @@ const CreatorsPlatform = () => {
           </div>
 
           <img
-              src="/images/CreatorsPlatform/mobile-frame.svg"
+              src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
               className="absolute z-30 top-1/2 left-1/2-translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] md:w-[319px] md:h-[651px]"
               alt="Mobile Frame"
               ref={mobileFrameRef}
           />
           <img
-              src="/images/CreatorsPlatform/mobile-mask.png"
+              src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
               className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] md:w-[300px] md:h-[651px]"
               alt="Mobile Frame"
           />

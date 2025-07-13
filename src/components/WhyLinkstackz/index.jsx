@@ -3,6 +3,7 @@ import WaveCircleBox from "../Common/wave-circle-box";
 import DataList from './DataList';
 import BgBounceAnimate from '../Common/bg-bounce-animate';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { getImagePath } from "../../utils/imagePath";
 
 const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id, nextSectionId }) => {
   const sectionRef = useRef();

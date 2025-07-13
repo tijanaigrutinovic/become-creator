@@ -41,7 +41,7 @@ const TestTrusted = () => {
                 {TcSliderList.concat(TcSliderList).map((sItem, index) => (
                     <div key={`tcs-index-${index}`} className="tc-slider-item shrink-0">
                         <img
-                            src={`/images/trusted-creators/${sItem}`}
+                            src={getImagePath(`/images/trusted-creators/${sItem}`)}
                             className="tcs-img-slide rounded-[30px] w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] h-auto"
                             style={{ objectFit: "fill", display: "block" }}
                             alt={`slide-${index}`}

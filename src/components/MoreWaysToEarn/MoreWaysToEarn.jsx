@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { getImagePath } from "../../utils/imagePath";
 import BgBounceAnimate from '../Common/bg-bounce-animate';
 import WaveCircleBox from '../Common/wave-circle-box';
 import Slide1 from './Slide1';
@@ -193,12 +194,12 @@ const MoreWaysToEarn = () => {
   useEffect(() => {
     const preloadImages = async () => {
       const images = [
-        '/images/more-ways-to-earn/iphone.png',
-        '/images/more-ways-to-earn/video-call.png',
-        '/images/more-ways-to-earn/3d-clock.png',
-        '/images/more-ways-to-earn/3d-lock.png',
-        '/images/more-ways-to-earn/flip-1.png',
-        '/icons/become-a-creator-icon.svg'
+        getImagePath('/images/more-ways-to-earn/iphone.png'),
+        getImagePath('/images/more-ways-to-earn/video-call.png'),
+        getImagePath('/images/more-ways-to-earn/3d-clock.png'),
+        getImagePath('/images/more-ways-to-earn/3d-lock.png'),
+        getImagePath('/images/more-ways-to-earn/flip-1.png'),
+                  getImagePath('/icons/become-a-creator-icon.svg')
       ];
 
       try {

@@ -4,6 +4,7 @@ import BioLeft from "./BioLeft";
 import BioRight from "./BioRight";
 import BgBounceAnimate from "../Common/bg-bounce-animate";
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { getImagePath } from "../../utils/imagePath";
 
 
 const BioLinkTest = ({ isActive, transitionDirection, onNextSectionTrigger, id, }) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getImagePath } from "../../utils/imagePath";
 
 const DataList = ({ data }) => {
   return (
@@ -9,7 +10,7 @@ const DataList = ({ data }) => {
       </div>
       <div className="md:mt-0 2xl:ml-6 3xl:h-32 h-11 mb-5">
         <img
-          src={`/images/why-linkstackz/${data.image}`}
+          src={getImagePath(`/images/why-linkstackz/${data.image}`)}
           alt={data.title}
           className="2xl:h-32 xl:h-20 h-11 object-contain"
         />

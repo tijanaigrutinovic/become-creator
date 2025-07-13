@@ -7,6 +7,7 @@ import React, {
     forwardRef,
     useImperativeHandle,
   } from 'react';
+import { getImagePath } from "../../utils/imagePath";
   
   import BgBounceAnimate from '../Common/bg-bounce-animate';
   import WaveCircleBox from '../Common/wave-circle-box';

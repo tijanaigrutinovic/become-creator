@@ -1,5 +1,6 @@
 // src/components/AnimatedMobileFrame.jsx
 import React, { useRef, useEffect } from 'react';
+import { getImagePath } from "../../utils/imagePath";
 
 const AnimatedMobileFrame = ({ 
     className = "", 
@@ -34,7 +35,7 @@ const AnimatedMobileFrame = ({
                 <div className="relative w-full h-full">
                     {/* Background video */}
                     <video
-                        src="/images/CreatorsPlatform/cp-video.webm"
+                        src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
                         autoPlay
                         muted
                         loop
@@ -45,7 +46,7 @@ const AnimatedMobileFrame = ({
                     {/* Overlay with second video */}
                     <div className="absolute overflow-hidden z-20 w-full h-full top-0 left-0">
                         <video
-                            src="/images/CreatorsPlatform/cp-video.webm"
+                            src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
                             autoPlay
                             muted
                             loop
@@ -56,17 +57,17 @@ const AnimatedMobileFrame = ({
                         {/* Lock slides */}
                         <div className="cp-lock-slides lock-slides-container absolute z-30 top-[44%] left-1/2 -translate-x-1/2 lg:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
                             <img
-                                src="/images/CreatorsPlatform/lock-to-view.svg"
+                                src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                 alt="Content on phone"
                                 className="lock-slide lock-slide-1 p-[25px]"
                             />
                             <img
-                                src="/images/CreatorsPlatform/lock-to-view.svg"
+                                src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                 alt="Content on phone"
                                 className="lock-slide lock-slide-2 p-[25px]"
                             />
                             <img
-                                src="/images/CreatorsPlatform/lock-to-view.svg"
+                                src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                 alt="Content on phone"
                                 className="lock-slide lock-slide-3 p-[25px]"
                             />
@@ -75,12 +76,12 @@ const AnimatedMobileFrame = ({
 
                     {/* Mobile frame overlay */}
                     <img
-                        src="/images/CreatorsPlatform/mobile-frame.svg"
+                        src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
                         className="mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[500px]"
                         alt="Mobile Frame"
                     />
                     <img
-                        src="/images/CreatorsPlatform/mobile-mask.png"
+                        src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
                         className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] 3xl:w-[300px] 3xl:h-[651px] lg:h-[500px]"
                         alt="Mobile Frame"
                     />

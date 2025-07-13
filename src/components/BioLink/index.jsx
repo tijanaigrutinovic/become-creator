@@ -5,6 +5,7 @@ import BioLeft from "./BioLeft";
 import BioRight from "./BioRight";
 import '../../css/bio-link.css';
 import SnapScrollSection from '../Common/SnapScrollSection';
+import { getImagePath } from "../../utils/imagePath";
 
 const BioLink = () => {
   const triggerNextSectionAnimation = (progress) => {

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback } from "react";
 import '../../css/analyze-fans.css';
 import BgBounceAnimate from "../Common/bg-bounce-animate";
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { getImagePath } from "../../utils/imagePath";
 
 
 const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, }) => { // Prima isActive, id, nextSectionId props
@@ -41,7 +42,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
                   <div className="circle circle3"></div>
                   <div className="relative z-10 flex items-center">
                     <img
-                      src="/icons/become-a-creator-icon.svg"
+                      src={getImagePath("/icons/become-a-creator-icon.svg")}
                       alt="Become a creator"
                       className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
                     />
@@ -60,7 +61,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
           <div className="test card-list relative z-2 xl:scale-85 lg:h-[500px] lg:scale-75 scale-150 md:h-[450px] md:scale-65 sm:h-[400px] sm:scale-80">
             <div className="card-item absolute top-[1rem] left-[3rem] z-4 w-[285px] rounded-[4rem] backdrop-blur-[5px] skew-x-[12deg] transition-all animate-afTopLayer">
               <img
-                src="/images/analyze-fans/card-1.png"
+                src={getImagePath("/images/analyze-fans/card-1.png")}
                 width={285}
                 height={210}
                 alt="card-1"
@@ -69,7 +70,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
             </div>
             <div className="card-item absolute top-[1rem] left-[22rem] z-4 w-[285px] rounded-[4rem] backdrop-blur-[5px] skew-x-[12deg] transition-all animate-afTopLayer">
               <img
-                src="/images/analyze-fans/card-2.png"
+                src={getImagePath("/images/analyze-fans/card-2.png")}
                 width={285}
                 height={210}
                 alt="card-2"
@@ -78,7 +79,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
             </div>
             <div className="card-item absolute top-[11.5rem] left-[4rem] z-3 w-[399px] rounded-[4rem] backdrop-blur-[5px] skew-x-[12deg] transition-all animate-afTopLayer">
               <img
-                src="/images/analyze-fans/card-3.png"
+                src={getImagePath("/images/analyze-fans/card-3.png")}
                 width={399}
                 height={412}
                 alt="card-3"
@@ -87,7 +88,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
             </div>
             <div className="card-item absolute top-[12rem] left-[26.4rem] z-4 w-[366px] rounded-[4rem] backdrop-blur-[5px] skew-x-[12deg] transition-all animate-afTopLayer">
               <img
-                src="/images/analyze-fans/card-4.png"
+                src={getImagePath("/images/analyze-fans/card-4.png")}
                 width={366}
                 height={191}
                 alt="card-4"

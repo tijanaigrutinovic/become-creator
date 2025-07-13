@@ -1,6 +1,7 @@
 import React from "react";
 import BgBounceAnimate from "../Common/bg-bounce-animate";
 import FaqItems from './FaqItems'
+import { getImagePath } from "../../utils/imagePath";
 
 const Faqtest = () => {
 
@@ -14,7 +15,7 @@ const Faqtest = () => {
           <div className="faq-desc relative lg:border-r lg:border-b-0 border-b border-white/10 p-2 lg:pr-[50px]">
             <div className="medal-gold w-[50%] mx-auto lg:w-full md:mb-6">
               <img
-                src="/images/faq/medal-gold.png"
+                src={getImagePath("/images/faq/medal-gold.png")}
               
                 alt="medal-gold"
                 className="mx-auto"
@@ -25,7 +26,7 @@ const Faqtest = () => {
             </div>
             <div className="star-bg-img1 w-full absolute top-4 right-4 my-0 mx-auto z-9 animate-[faqAnimateStars1_5s_infinite_alternate]">
               <img
-                src="/images/faq/bg-star.png"
+                src={getImagePath("/images/faq/bg-star.png")}
                 width={803}
                 height={550}
                 alt="bg-star"
@@ -33,7 +34,7 @@ const Faqtest = () => {
             </div>
             <div className="star-bg-img2 w-[110%] absolute top-[-4rem] left-0 right-0 my-0 mx-auto z-9 animate-[faqAnimateStars2_5s_infinite_alternate]">
               <img
-                src="/images/faq/bg-star.png"
+                src={getImagePath("/images/faq/bg-star.png")}
                 width={803}
                 height={550}
                 alt="bg-star"

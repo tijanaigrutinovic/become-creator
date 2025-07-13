@@ -1,5 +1,6 @@
 // src/components/MoreWaysToEarnSlide2.jsx
 import React from 'react';
+import { getImagePath } from "../../utils/imagePath";
 
 const MoreWaysToEarnSlide3 = () => {
   return (
@@ -10,17 +11,17 @@ const MoreWaysToEarnSlide3 = () => {
                         md:w-[350px] xl:w-[500px] h-[585px] 3xl:h-[850px]
                         lg:top-[-15%] top-[-80px] lg:left-[-20%]">
           <img
-            src="/images/more-ways-to-earn/frame-3.png"
+            src={getImagePath("/images/more-ways-to-earn/frame-3.png")}
             alt="iPhone"
             className="h-full object-cover rounded-[30px] mwte-image-animate" // Dodata klasa za CSS animaciju
           />
           <img
-            src="/images/more-ways-to-earn/money.png"
+            src={getImagePath("/images/more-ways-to-earn/money.png")}
             alt="Overlay"
             className="absolute left-[10%] z-20 top-[20%] object-cover rounded-[30px] mwte-overlay-animate" // Dodata klasa za CSS animaciju
           />
           <img
-          src="/images/more-ways-to-earn/tip.png"
+          src={getImagePath("/images/more-ways-to-earn/tip.png")}
           alt="Overlay"
           className="absolute left-[10%] top-0 object-cover 3xl:w-[80%] w-[60%] 3xl:left-[20%] left-[30%] z-10"
         />
@@ -40,7 +41,7 @@ const MoreWaysToEarnSlide3 = () => {
 
             <div>
               <img
-                src="/images/more-ways-to-earn/curved-stack-money.png"
+                src={getImagePath("/images/more-ways-to-earn/curved-stack-money.png")}
                 alt="3d-clock"
                 className="w-[50px] 3xl:w-[70px] 
                            absolute lg:relative
@@ -68,7 +69,7 @@ const MoreWaysToEarnSlide3 = () => {
                   <div className="circle circle3"></div>
                   <div className="relative z-10 flex items-center">
                       <img
-                          src="/icons/become-a-creator-icon.svg"
+                          src={getImagePath("/icons/become-a-creator-icon.svg")}
                           alt="Become a creator"
                           className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
                       />

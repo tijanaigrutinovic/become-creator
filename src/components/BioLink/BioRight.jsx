@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getImagePath } from "../../utils/imagePath";
 
 const imgsEven = [
   "rci-1.png",
@@ -114,7 +115,7 @@ const BioRight = () => {
               style={{ transitionDelay: `${ANIMATION_DELAYS[i]}ms` }}
             >
               <img
-                src={`/images/bio-link/${folder}/${img}`}
+                src={getImagePath(`/images/bio-link/${folder}/${img}`)}
                 width={140}
                 height={210}
                 alt={img}

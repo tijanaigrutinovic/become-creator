@@ -1,4 +1,5 @@
 import React from "react";
+import { getImagePath } from "../../utils/imagePath";
 
 const BioCenter = ({ isActive }) => {
   return (
@@ -32,7 +33,7 @@ const BioCenter = ({ isActive }) => {
             <div className="circle circle3"></div>
             <div className="relative z-10 flex items-center">
               <img
-                src="/icons/become-a-creator-icon.svg"
+                src={getImagePath("/icons/become-a-creator-icon.svg")}
                 alt="Become a creator"
                 className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
               />
@@ -46,7 +47,7 @@ const BioCenter = ({ isActive }) => {
         {/* Ljubičasti video u centralnom delu frame-a */}
         <div className="bio-center-scroll-frame-inside">
           <video
-            src={"/images/bio-link/bio-center/video.webm"}
+            src={getImagePath("/images/bio-link/bio-center/video.webm")}
             className=""
             autoPlay
             loop
@@ -56,7 +57,7 @@ const BioCenter = ({ isActive }) => {
           />
         </div>
         <img
-          src="/images/bio-link/bio-center/iphone.svg"
+          src={getImagePath("/images/bio-link/bio-center/iphone.svg")}
           className="frame-iphone"
           width={443}
           height={414}
@@ -71,7 +72,7 @@ const BioCenter = ({ isActive }) => {
         style={{ position: "absolute", top: "28%", left: "0%", margin: "0 auto", zIndex: 3 }}
       >
         <img
-          src="/images/bio-link/bio-center/bg-star.png"
+          src={getImagePath("/images/bio-link/bio-center/bg-star.png")}
           width={802}
           height={481}
           alt="star-frame"
@@ -83,7 +84,7 @@ const BioCenter = ({ isActive }) => {
         style={{ position: "absolute", top: "28%", left: "0%", margin: "0 auto", zIndex: 3 }}
       >
         <img
-          src="/images/bio-link/bio-center/bg-star.png"
+          src={getImagePath("/images/bio-link/bio-center/bg-star.png")}
           width={802}
           height={481}
           alt="star-frame"

@@ -2,6 +2,7 @@
 import React from 'react';
 import Typewriter from './Typewriter'; // Zadrzavate Typewriter komponentu
 import WaveCircleBox from "../Common/wave-circle-box";
+import { getImagePath } from "../../utils/imagePath";
 
 
 
@@ -49,7 +50,7 @@ const CreatorsPlatform = () => {
                             <div className="circle circle3"></div>
                             <div className="relative z-10 flex items-center">
                                 <img
-                                    src="/icons/become-a-creator-icon.svg"
+                                    src={getImagePath("/icons/become-a-creator-icon.svg")}
                                     alt="Become a creator"
                                     className="md:my-2 md:mr-[10px] w-6 h-6"
                                 />
@@ -74,7 +75,7 @@ const CreatorsPlatform = () => {
                             style={{}}
                         >
                             <video
-                                src={`${process.env.PUBLIC_URL}/images/CreatorsPlatform/cp-video.webm`}
+                                src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
                                 autoPlay
                                 muted
                                 loop
@@ -85,7 +86,7 @@ const CreatorsPlatform = () => {
                                 className="absolute overflow-hidden z-20 rounded-[40px] h-[304px] xl:w-[215px] 3xl:h-[651px] xl:h-[450px] mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                             >
                                 <video
-                                src={`${process.env.PUBLIC_URL}/images/CreatorsPlatform/cp-video.webm#t=0.2`}
+                                src={getImagePath("/images/CreatorsPlatform/cp-video.webm#t=0.2")}
                                 autoPlay
                                 muted
                                 loop
@@ -96,17 +97,17 @@ const CreatorsPlatform = () => {
 
                             <div className="cp-lock-slides lock-slides-container absolute z-30 top-[44%] left-1/2 -translate-x-1/2 lg:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
                                 <img
-                                    src="/images/CreatorsPlatform/lock-to-view.svg"
+                                    src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                     alt="Content on phone"
                                     className="lock-slide lock-slide-1 p-[25px]"
                                 />
                                 <img
-                                    src="/images/CreatorsPlatform/lock-to-view.svg"
+                                    src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                     alt="Content on phone"
                                     className="lock-slide lock-slide-2 p-[25px]"
                                 />
                                 <img
-                                    src="/images/CreatorsPlatform/lock-to-view.svg"
+                                    src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
                                     alt="Content on phone"
                                     className="lock-slide lock-slide-3 p-[25px]"
                                 />
@@ -115,12 +116,12 @@ const CreatorsPlatform = () => {
 
                         {/* Mobile frame je sada globalan, ne prikazuj ga ovde! */}
                          <img
-                            src="/images/CreatorsPlatform/mobile-frame.svg"
+                            src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
                             className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
                             alt="Mobile Frame"
                         />
                         <img
-                            src="/images/CreatorsPlatform/mobile-mask.png"
+                            src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
                             className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] 3xl:w-[300px] 3xl:h-[651px] lg:h-[450px]"
                             alt="Mobile Frame"
                         />

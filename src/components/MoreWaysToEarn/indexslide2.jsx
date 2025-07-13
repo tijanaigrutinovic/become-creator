@@ -1,5 +1,6 @@
 // src/components/MoreWaysToEarnSlide2.jsx
 import React from 'react';
+import { getImagePath } from "../../utils/imagePath";
 
 const MoreWaysToEarnSlide2 = () => {
   return (
@@ -10,7 +11,7 @@ const MoreWaysToEarnSlide2 = () => {
                         md:w-[350px] xl:w-[500px] h-[585px] 3xl:h-[850px]
                         lg:top-[-15%] top-[-80px] lg:left-[-20%]">
           <img
-            src="/images/more-ways-to-earn/iphone-mockup.png"
+            src={getImagePath("/images/more-ways-to-earn/iphone-mockup.png")}
             alt="iPhone"
             className="h-full w-full object-cover rounded-[30px] mwte-image-animate" // Dodata klasa
           />
@@ -18,7 +19,7 @@ const MoreWaysToEarnSlide2 = () => {
           <div className="card-swiper absolute left-[10%] bottom-0 w-[50%] h-auto pointer-events-none z-0 mwte-card-swiper-animate"> {/* Dodata klasa */}
             <div className="card-slide">
               <img
-                src="/images/more-ways-to-earn/flip-1.png"
+                src={getImagePath("/images/more-ways-to-earn/flip-1.png")}
                 alt="Card 1"
                 className="img-slide object-cover rounded-[30px]"
                 data-number="1"
@@ -26,7 +27,7 @@ const MoreWaysToEarnSlide2 = () => {
             </div>
             <div className="card-slide">
               <img
-                src="/images/more-ways-to-earn/flip-2.png"
+                src={getImagePath("/images/more-ways-to-earn/flip-2.png")}
                 alt="Card 2"
                 className="img-slide object-cover rounded-[30px]"
                 data-number="2"
@@ -34,7 +35,7 @@ const MoreWaysToEarnSlide2 = () => {
             </div>
             <div className="card-slide">
               <img
-                src="/images/more-ways-to-earn/flip-3.png"
+                src={getImagePath("/images/more-ways-to-earn/flip-3.png")}
                 alt="Card 3"
                 className="img-slide object-cover rounded-[30px]"
                 data-number="3"
@@ -44,7 +45,7 @@ const MoreWaysToEarnSlide2 = () => {
           {/* Ovaj video-call.png overlay se ponavljao u vasem kodu, proverite da li je namerno ili je greska.
               Ako treba da bude deo iPhone mockup-a, onda je ok. */}
           <img
-            src="/images/more-ways-to-earn/video-call.png"
+            src={getImagePath("/images/more-ways-to-earn/video-call.png")}
             alt="Overlay"
             className="absolute left-[10%] top-[40%] object-cover rounded-[30px] mwte-overlay-animate" // Dodata klasa
           />
@@ -62,7 +63,7 @@ const MoreWaysToEarnSlide2 = () => {
                           sm:p-10 lg:p-16 flex flex-col justify-center">
             <div>
               <img
-                src="/images/more-ways-to-earn/3d-lock.png"
+                src={getImagePath("/images/more-ways-to-earn/3d-lock.png")}
                 alt="3d-clock"
                 className="w-[50px] 3xl:w-[70px]
                            absolute lg:relative
@@ -91,7 +92,7 @@ const MoreWaysToEarnSlide2 = () => {
                   <div className="circle circle3"></div>
                   <div className="relative z-10 flex items-center">
                       <img
-                          src="/icons/become-a-creator-icon.svg"
+                          src={getImagePath("/icons/become-a-creator-icon.svg")}
                           alt="Become a creator"
                           className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
                       />
