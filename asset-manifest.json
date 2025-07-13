@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/become-creator/static/css/main.4060def0.css",
-    "main.js": "/become-creator/static/js/main.01c283ce.js",
+    "main.css": "/become-creator/static/css/main.7d401c6f.css",
+    "main.js": "/become-creator/static/js/main.50ea20c5.js",
     "static/js/488.a27b3c46.chunk.js": "/become-creator/static/js/488.a27b3c46.chunk.js",
     "static/media/mobile-frame.svg": "/become-creator/static/media/mobile-frame.3f7f0327cb58c751c109.svg",
     "service-worker.js": "/become-creator/service-worker.js",
     "index.html": "/become-creator/index.html",
-    "main.4060def0.css.map": "/become-creator/static/css/main.4060def0.css.map",
-    "main.01c283ce.js.map": "/become-creator/static/js/main.01c283ce.js.map",
+    "main.7d401c6f.css.map": "/become-creator/static/css/main.7d401c6f.css.map",
+    "main.50ea20c5.js.map": "/become-creator/static/js/main.50ea20c5.js.map",
     "488.a27b3c46.chunk.js.map": "/become-creator/static/js/488.a27b3c46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4060def0.css",
-    "static/js/main.01c283ce.js"
+    "static/css/main.7d401c6f.css",
+    "static/js/main.50ea20c5.js"
   ]
 }
