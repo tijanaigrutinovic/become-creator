@@ -501,7 +501,7 @@ function App() {
 
     const sectionComponentsMap = {
         'creators-platform': CreatorsPlatform,
-        'trusted-creators': TestTruseted,
+        'trusted-creators': TestTrusted,
         'more-ways-to-earn': MoreWaysToEarn,
         'why-linkstackz': WhyLinkstackz,
         'analyze-fans': AnalyzeFans,

@@ -9,7 +9,7 @@ const TcSliderList = [
   "22.png", "23.png", "24.png", "25.png", "26.png", "27.png",
 ];
 
-const TestTruseted = () => {
+const TestTrusted = () => {
 
   return (
     <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
@@ -54,4 +54,4 @@ const TestTruseted = () => {
 );
 };
 
-export default TestTruseted;
+export default TestTrusted;
