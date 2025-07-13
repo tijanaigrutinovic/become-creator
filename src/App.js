@@ -490,10 +490,10 @@ function App() {
     const moreWaysToEarnComponentRef = useRef(null);
 
     const sectionsData = [
-        { id: 'creators-platform', animationType: 'creators-platform-anim', elements: [], className: 'pt-[140px] ' },
+        { id: 'creators-platform', animationType: 'creators-platform-anim', elements: [], className: 'lg:pt-[140px] pt-[85px]' },
         { id: 'trusted-creators', animationType: 'trusted-creators-anim', elements: [], },
-        { id: 'more-ways-to-earn', animationType: 'more-ways-to-earn-anim', elements: [], className: 'pt-[140px] ' },
-        { id: 'why-linkstackz', animationType: 'why-linkstackz-anim', elements: [] , className: 'pt-[140px] ' },
+        { id: 'more-ways-to-earn', animationType: 'more-ways-to-earn-anim', elements: [], className: 'lg:pt-[140px] pt-[85px]' },
+        { id: 'why-linkstackz', animationType: 'why-linkstackz-anim', elements: [] , className: 'lg:pt-[140px] pt-[85px]' },
         { id: 'analyze-fans', animationType: 'analyze-fans-anim', elements: [] },
         { id: 'bio-link', animationType: 'bio-link-anim', elements: [] },
         { id: 'faq-section', animationType: 'faq-anim', elements: [] },

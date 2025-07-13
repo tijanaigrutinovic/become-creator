@@ -52,7 +52,7 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
       <BgBounceAnimate />
 
       <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-white lg:mb-4 mb-3">
           <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
         </h2>
         <p className="text-white text-lg font-gilroy font-bold max-w-2xl lg:block hidden">
@@ -61,7 +61,7 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
       </div>
 
       <div className="w-full rounded-[50px] overflow-hidden">
-        <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-[5px] p-[5px] rounded-[50px] h-full">
+        <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-[5px] md:p-[5px] rounded-[50px] h-full">
           {dataList.map((item, index) => (
             <DataList key={`dl-${index}`} data={item} />
           ))}

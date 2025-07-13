@@ -35,21 +35,21 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
               <p className="pb-1 ai-paragraph text-white 3xl:text-lg lg:text-base text-sm font-bold font-gilroy capitalize leading-loose">
                 Track your engagement over time, monitor revenue and learn what's converting your audience. Make informed updates on the fly to keep them coming back.
               </p>
-              <div className="ai-button cp-buttons max-w-[500px] flex mt-[15px]">
-                <button className="relative flex items-center w-fit bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize overflow-hidden group animated-button whitespace-nowrap">
+              <div className="cp-buttons max-w-[500px] flex">
+              <button className="relative flex items-center w-fit items-center w-[100%] bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group animated-button whitespace-nowrap">
                   <div className="circle circle1"></div>
                   <div className="circle circle2"></div>
                   <div className="circle circle3"></div>
                   <div className="relative z-10 flex items-center">
-                    <img
-                      src={getImagePath("/icons/become-a-creator-icon.svg")}
-                      alt="Become a creator"
-                      className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
-                    />
-                    Become a creator
+                      <img
+                          src={getImagePath("/icons/become-a-creator-icon.svg")}
+                          alt="Become a creator"
+                          className="w-4 h-4 sm:w-6 sm:h-6 mr-[8px] my-1"
+                      />
+                      Become a creator
                   </div>
-                </button>
-              </div>
+              </button>
+          </div>
             </div>
           </div>
         </div>

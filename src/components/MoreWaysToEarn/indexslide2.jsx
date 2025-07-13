@@ -8,7 +8,7 @@ const MoreWaysToEarnSlide2 = () => {
     <div className="mwte-slide-content flex flex-col-reverse lg:flex-row md:mx-auto 3xl:max-w-[1670px] 2xl:max-w-[1300px] xl:max-w-[1200px] md:max-w-[900px] mwte-slide">
       <div className="lg:w-1/3 w-full flex justify-center items-center">
         <div className="relative absolute md:relative flex-shrink-0
-                        md:w-[350px] xl:w-[500px] h-[585px] 3xl:h-[850px]
+                        w-[350px] xl:w-[500px] lg:h-[585px] h-[450px] 3xl:h-[850px]
                         lg:top-[-15%] top-[-80px] lg:left-[-20%]">
           <img
             src={getImagePath("/images/more-ways-to-earn/iphone-mockup.png")}
@@ -52,7 +52,7 @@ const MoreWaysToEarnSlide2 = () => {
         </div>
       </div>
 
-      <div className="lg:w-2/3 w-full flex items-start 3xl:mt-[85px] lg:mt-[65px] mt-[25px]">
+      <div className="lg:w-2/3 w-full flex items-start 3xl:mt-[85px] lg:mt-[65px] mt-[25px] md:px-0 px-[20px]">
         <div className="flex-1 corners mwte-content-box-animate"> {/* Dodata klasa */}
           <div className="h-auto w-full max-h-[450px]
                           bg-[#202020b3] backdrop-blur-[7px]
@@ -65,16 +65,16 @@ const MoreWaysToEarnSlide2 = () => {
               <img
                 src={getImagePath("/images/more-ways-to-earn/3d-lock.png")}
                 alt="3d-clock"
-                className="w-[50px] 3xl:w-[70px]
+                className="md:w-[50px] w-[30px] 3xl:w-[70px] 
                            absolute lg:relative
-                           top-[-11%] lg:top-0
+                           top-[-2%] md:top-0
                            left-0 pb-0 md:pb-2 mwte-icon-animate" // Dodata klasa
               />
             </div>
 
             <h3 className="mwte-slide-heading text-xl lg:text-3xl md:text-2xl 3xl:text-4xl
                            font-gilroy font-[1000] capitalize text-white
-                           leading-tight lg:leading-loose mb-[10px] lg:mb-4">
+                           leading-tight lg:leading-loose mb-[8px] lg:mb-4">
               Locked<span className="text-[#E91E63]"> Content </span>(Pay-to-View)
             </h3>
 
@@ -94,7 +94,7 @@ const MoreWaysToEarnSlide2 = () => {
                       <img
                           src={getImagePath("/icons/become-a-creator-icon.svg")}
                           alt="Become a creator"
-                          className="w-5 h-5 sm:w-6 sm:h-6 mr-[8px] my-1"
+                          className="w-4 h-4 sm:w-6 sm:h-6 mr-[8px] my-1"
                       />
                       Become a creator
                   </div>

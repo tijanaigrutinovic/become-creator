@@ -17,11 +17,11 @@ const FaqItems = () => {
   };
   console.log("FaqItems loaded");
   return (
-    <div className="faq-items relateive flex flex-col items-start self-stretch gap-0 p-4 lg:p-[30px] bg-white/5 rounded-[20px]">
+    <div className="z-999 faq-items relateive flex flex-col items-start self-stretch gap-0 p-4 lg:p-[30px] bg-white/5 rounded-[20px]">
       {faqList.map((item, idx) => (
         <div
           key={item.key}
-          className={`faq-item w-full py-4 ${idx !== faqList.length - 1 ? 'border-b border-fullWhite/10' : ''} cursor-pointer`}
+          className={`z-999 faq-item w-full md:py-4 py-2 ${idx !== faqList.length - 1 ? 'border-b border-fullWhite/10' : ''} cursor-pointer`}
           onClick={() => handleFaqExpand(isExpandId === item.key ? "" : item.key)}
         >
           <div className={`flex justify-between gap-2 ${ isExpandId === item.key ? "items-start" : "items-center" }`}>
@@ -31,12 +31,12 @@ const FaqItems = () => {
                 <p className="fl-desc font-gilroy pt-[13px] pb-[15px] font-normal 3xl:text-lg lg:text-base text-xs text-white">{item.desc}</p>
               }
             </div>
-            <div className="toggel-action w-[24px] h-[24px]" >
-              <div className="w-[24px] h-[24px]">
+            <div className="toggel-action md:w-[24px] md:h-[24px] w-[16px] h-[16px]" >
+              <div className="md:h-[24px] w-[16px] h-[16px]">
                 {isExpandId === item.key ? (
-                  <img src="/icons/arrow-up.svg" alt="arrow down" width={24} height={24} className="w-[24px] h-[24px]"/>
+                  <img src="/icons/arrow-up.svg" alt="arrow down" className="md:w-[24px] md:h-[24px] w-[16px] h-[16px]"/>
                 ) : (
-                  <img src="/icons/arrow-down.svg" alt="arrow up" width={24} height={24}className="w-[24px] h-[24px]"/>
+                  <img src="/icons/arrow-down.svg" alt="arrow up" className="md:w-[24px] md:h-[24px] w-[16px] h-[16px]"/>
                 )}
               </div>
             </div>

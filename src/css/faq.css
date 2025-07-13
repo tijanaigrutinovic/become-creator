@@ -7,8 +7,8 @@
     height: 250px;
   }
   @media screen and (max-width:1024px) {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
 }
 .star-bg-img1, .star-bg-img2 {

@@ -26,7 +26,7 @@ const Faq = ({ isActive, transitionDirection, id, nextSectionId }) => {
       // isActive klasa se dodaje/uklanja iz App.jsx
       // transitionDirection prop se koristi za CSS klase leaving-down/up u App.jsx
     >
-      <div className="bc-faq pt-[140px]">
+      <div className="bc-faq lg:pt-[140px] pt-[85px]">
         <div className="max-w-[1645px] mx-auto faq-wraper grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-9 px-0 lg:px-[4.75rem] lg:py-[3.75rem] py-4 rounded-[100px_100px_0_0] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_0%,rgba(0,141,131,0.10)_100%)] backdrop-blur-[17px]">
           {/* Levi deo sa medaljom i tekstom */}
           <div className="faq-desc relative lg:border-r lg:border-b-0 border-b border-white/10 p-2 lg:pr-[50px]">
