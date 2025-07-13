@@ -48,6 +48,13 @@
   z-index: 9; /* Ovo odgovara z-9 u Tailwindu, pretpostavljajući da je to z-index: 9; */
 }
 
+.trusted-creators .tc-slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .trusted-creators .tc-slider-wrapper .tc-slider-list {
   -webkit-transition-timing-function: linear;
   -o-transition-timing-function: linear;
@@ -58,7 +65,8 @@
   gap: 1rem; /* @apply gap-4 (1rem = 16px, 4 = 1rem) */
   width: 100%; /* @apply w-full */
   position: relative; /* @apply relative */
-  z-index: 2; /* @apply z-2 */
+  z-index: 10; /* Povećan z-index da bude iznad gradijenata */
+  box-sizing: border-box;
 }
 
 .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
@@ -66,6 +74,7 @@
   width: 100%; /* @apply w-full */
   height: auto; /* @apply h-auto */
   max-width: 280px; /* @apply max-w-[12.44rem] */
+  box-sizing: border-box;
 }
 
 /* Duplirani selektor, ali ostavljam ga kako je bio u originalu.
@@ -95,6 +104,19 @@
     width: 100%;
     height: auto;
     max-width: 200px;
+    overflow: hidden;
+  }
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+    margin-bottom: 6rem; /* @apply mb-[6rem] */
+  }
+}
+
+@media screen and (min-width: 10px) and (max-width: 640px) {
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+    margin-top: 0.6rem;
+    width: 100%;
+    height: auto;
+    max-width: 160px;
   }
   .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
     margin-bottom: 6rem; /* @apply mb-[6rem] */

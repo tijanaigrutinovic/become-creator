@@ -1,13 +1,13 @@
 // src/App.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './App.css';
 import './css/globals.css'
+import './App.css';
 import WaveCircleBox from "./components/Common/wave-circle-box";
 import MobileFrame from './components/Common/MobileFrame';
 
 
 import CreatorsPlatform from './components/CreatorsPlatform';
-import TrustedCreators from './components/TrustedCreators';
+import TestTrusted from './components/TrustedCreators'
 import MoreWaysToEarn from './components/MoreWaysToEarn';
 import WhyLinkstackz from './components/WhyLinkstackz';
 import AnalyzeFans from './components/AnalyzeFans';
@@ -501,7 +501,7 @@ function App() {
 
     const sectionComponentsMap = {
         'creators-platform': CreatorsPlatform,
-        'trusted-creators': TrustedCreators,
+        'trusted-creators': TestTruseted,
         'more-ways-to-earn': MoreWaysToEarn,
         'why-linkstackz': WhyLinkstackz,
         'analyze-fans': AnalyzeFans,

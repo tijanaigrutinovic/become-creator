@@ -74,7 +74,7 @@ const CreatorsPlatform = () => {
                             style={{}}
                         >
                             <video
-                                src="/images/CreatorsPlatform/cp-video.webm"
+                                src={`${process.env.PUBLIC_URL}/images/CreatorsPlatform/cp-video.webm`}
                                 autoPlay
                                 muted
                                 loop
@@ -85,7 +85,7 @@ const CreatorsPlatform = () => {
                                 className="absolute overflow-hidden z-20 rounded-[40px] h-[304px] xl:w-[215px] 3xl:h-[651px] xl:h-[450px] mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                             >
                                 <video
-                                src="/images/CreatorsPlatform/cp-video.webm#t=0.2"
+                                src={`${process.env.PUBLIC_URL}/images/CreatorsPlatform/cp-video.webm#t=0.2`}
                                 autoPlay
                                 muted
                                 loop
