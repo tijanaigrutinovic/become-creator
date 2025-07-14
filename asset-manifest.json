@@ -1,17 +1,27 @@
 {
   "files": {
-    "main.css": "/become-creator/static/css/main.7d401c6f.css",
-    "main.js": "/become-creator/static/js/main.50ea20c5.js",
+    "main.css": "/become-creator/static/css/main.61ba64ed.css",
+    "main.js": "/become-creator/static/js/main.30dc883e.js",
     "static/js/488.a27b3c46.chunk.js": "/become-creator/static/js/488.a27b3c46.chunk.js",
     "static/media/mobile-frame.svg": "/become-creator/static/media/mobile-frame.3f7f0327cb58c751c109.svg",
+    "static/media/Gilroy-Thin.ttf": "/become-creator/static/media/Gilroy-Thin.28f856b7c4b3d473e0d1.ttf",
+    "static/media/Gilroy-UltraLight.ttf": "/become-creator/static/media/Gilroy-UltraLight.768c44ec57dc827381b3.ttf",
+    "static/media/Gilroy-Light.ttf": "/become-creator/static/media/Gilroy-Light.1822a291dd62fe2cca72.ttf",
+    "static/media/Gilroy-Regular.ttf": "/become-creator/static/media/Gilroy-Regular.5b89a8df3b17dccdb73f.ttf",
+    "static/media/Gilroy-Medium.ttf": "/become-creator/static/media/Gilroy-Medium.1b4da6582f83f45ea039.ttf",
+    "static/media/Gilroy-SemiBold.ttf": "/become-creator/static/media/Gilroy-SemiBold.07b9100a72fe7d46d20a.ttf",
+    "static/media/Gilroy-Bold.ttf": "/become-creator/static/media/Gilroy-Bold.ca49f7658c4eaac78b6d.ttf",
+    "static/media/Gilroy-ExtraBold.ttf": "/become-creator/static/media/Gilroy-ExtraBold.59a66eb8c577778daaa5.ttf",
+    "static/media/Gilroy-Black.ttf": "/become-creator/static/media/Gilroy-Black.3566c87fe5eaaa7052d5.ttf",
+    "static/media/Gilroy-Heavy.ttf": "/become-creator/static/media/Gilroy-Heavy.41ca3e2d8c1dc7d3cde9.ttf",
     "service-worker.js": "/become-creator/service-worker.js",
     "index.html": "/become-creator/index.html",
-    "main.7d401c6f.css.map": "/become-creator/static/css/main.7d401c6f.css.map",
-    "main.50ea20c5.js.map": "/become-creator/static/js/main.50ea20c5.js.map",
+    "main.61ba64ed.css.map": "/become-creator/static/css/main.61ba64ed.css.map",
+    "main.30dc883e.js.map": "/become-creator/static/js/main.30dc883e.js.map",
     "488.a27b3c46.chunk.js.map": "/become-creator/static/js/488.a27b3c46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d401c6f.css",
-    "static/js/main.50ea20c5.js"
+    "static/css/main.61ba64ed.css",
+    "static/js/main.30dc883e.js"
   ]
 }
