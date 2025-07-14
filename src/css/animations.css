@@ -102,7 +102,7 @@
   height: 100vh;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.2s ease;
+  transition: opacity 2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,17 +126,17 @@
 .screen-section[data-animation-in="creators-platform-anim"] .cp-left-block {
   opacity: 1;
   transform: translateX(-1000px);
-  transition: opacity 1s ease-out, transform 1s ease-in;
+  transition: opacity 2s ease-out, transform 2s ease-in;
 }
 
 .screen-section[data-animation-in="creators-platform-anim"] .cp-right-block {
   opacity: 1;
   transform: translateX(1000px);
-  transition: opacity 1s ease-out, transform 1s ease-in;
+  transition: opacity 2s ease-out, transform 2s ease-in;
 }
 
 .screen-section[data-animation-in="creators-platform-anim"] .cp-heading {
-  transition-delay: 0.1s;
+  transition-delay: 0.2s;
 }
 
 .screen-section[data-animation-in="creators-platform-anim"] .cp-typewriter-box {
@@ -166,27 +166,27 @@
 .screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-right-block {
   opacity: 0;
   transform: translateX(100%);
-  transition-delay: 1.1s !important;
+  transition-delay: 2s !important;
 }
 
 .screen-section[data-animation-in="trusted-creators-anim"] .tc-heading {
   opacity: 1;
   transform: translateY(-300px);
-  transition: opacity 1s ease, transform 1.2s ease;
+  transition: opacity 2s ease, transform 2s ease;
   transition-delay: 0.5s;
 }
 
 .screen-section[data-animation-in="trusted-creators-anim"] .tc-paragraph {
   opacity: 0;
   transform: translateY(-300px);
-  transition: opacity 1s ease, transform 1.2s ease;
+  transition: opacity 2s ease, transform 2s ease;
   transition-delay: 0.5s;
 }
 
 .screen-section[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
   opacity: 1;
   transform: translateY(700px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 2s ease, transform 2s ease;
   transition-delay: 0.5s;
 }
 
@@ -212,7 +212,7 @@
 .screen-section.section-leaving[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
   opacity: 0;
   transform: translateY(100px);
-  transition-delay: 1s;
+  transition-delay: 2s;
 }
 
 .screen-section.section-leaving.leaving-down[data-animation-in="faq-anim"] {
@@ -282,7 +282,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) translateY(-200px) scale(0.8);
-  transition: opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1), transform 1s cubic-bezier(0.075, 0.82, 0.165, 1), border-radius 0.8s ease;
+  transition: opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1), transform 2s cubic-bezier(0.075, 0.82, 0.165, 1), border-radius 0.8s ease;
 }
 
 .ai-wraper {
@@ -309,7 +309,7 @@
 .screen-section[data-animation-in="analyze-fans-anim"] .analyze-content {
   opacity: 0;
   transform: translateX(-200px);
-  transition: opacity 1s ease-out, transform 1s ease;
+  transition: opacity 2s ease-out, transform 2s ease;
   transition-delay: 0.3s;
 }
 
@@ -364,22 +364,22 @@
 @media screen and (max-width: 1024px) {
   .screen-section[data-animation-in="creators-platform-anim"] .cp-left-block {
     transform: translateY(-1000px);
-    transition: opacity 1s ease-out, transform 1s ease-in;
+    transition: opacity 2s ease-out, transform 2s ease-in;
   }
 
   .screen-section[data-animation-in="creators-platform-anim"] .cp-right-block {
     transform: translateY(1000px);
-    transition: opacity 1s ease-out, transform 1s ease-in;
+    transition: opacity 2s ease-out, transform 2s ease-in;
   }
 
   .screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-left-block {
     transform: translateY(-100%);
-    transition: opacity 1s ease-out, transform 1s ease-in;
+    transition: opacity 2s ease-out, transform 2s ease-in;
   }
 
   .screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-right-block {
     transform: translateY(100%);
-    transition: opacity 1s ease-out, transform 1s ease-in;
+    transition: opacity 2s ease-out, transform 2s ease-in;
   }
 }
 

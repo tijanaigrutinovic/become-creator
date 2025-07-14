@@ -11,31 +11,27 @@ const Typewriter = ({ sentences }) => {
     const currentSentence = sentences[sentenceIndex];
 
     if (!isDeleting) {
-      // Typing mode: add one character at a time.
       if (charIndex < currentSentence.length) {
         timeout = setTimeout(() => {
           setText(currentSentence.substring(0, charIndex + 1));
           setCharIndex(charIndex + 1);
-        }, 100); // Typing speed (ms)
+        }, 100);
       } else {
-        // Sentence complete; pause before deleting.
         timeout = setTimeout(() => {
           setIsDeleting(true);
-        }, 1000); // Pause duration (ms)
+        }, 1000);
       }
     } else {
-      // Deleting mode: remove one character at a time.
       if (charIndex > 0) {
         timeout = setTimeout(() => {
           setText(currentSentence.substring(0, charIndex - 1));
           setCharIndex(charIndex - 1);
-        }, 50); // Deleting speed (ms)
+        }, 50);
       } else {
-        // Sentence completely deleted; move to next sentence.
         timeout = setTimeout(() => {
           setIsDeleting(false);
           setSentenceIndex((prev) => (prev + 1) % sentences.length);
-        }, 500); // Pause before typing the next sentence.
+        }, 500);
       }
     }
 

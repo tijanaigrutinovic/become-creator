@@ -25,7 +25,7 @@ export function useScrollAnimation(sectionRef, isActive, transitionDirection) {
       el.style.opacity = '0';
 
       requestAnimationFrame(() => {
-        el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+        el.style.transition = 'transform 2s ease, opacity 2s ease';
         el.style.transform = 'translateY(0)';
         el.style.opacity = '1';
       });
@@ -52,7 +52,7 @@ export function useScrollAnimation(sectionRef, isActive, transitionDirection) {
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+          el.style.transition = 'transform 2s ease, opacity 2s ease';
           el.style.transform = 'translateY(0)';
           el.style.opacity = '1';
         });
@@ -61,15 +61,15 @@ export function useScrollAnimation(sectionRef, isActive, transitionDirection) {
       const lastDir = lastExitDirectionRef.current || transitionDirection || 'down';
 
       if (lastDir === 'up') {
-        el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+        el.style.transition = 'transform 2s ease, opacity 2s ease';
         el.style.transform = 'translateY(1000px)';
         el.style.opacity = '0';
       } else if (lastDir === 'down') {
-        el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+        el.style.transition = 'transform 2s ease, opacity 2s ease';
         el.style.transform = 'translateY(-1000px)';
         el.style.opacity = '0';
       } else {
-        el.style.transition = 'opacity 1.2s ease';
+        el.style.transition = 'opacity 2s ease';
         el.style.opacity = '0';
       }
 

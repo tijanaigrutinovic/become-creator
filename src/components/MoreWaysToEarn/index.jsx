@@ -1,4 +1,3 @@
-// src/components/MoreWaysToEarn.jsx
 import React, {
   useState,
   useEffect,
@@ -7,13 +6,12 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react';
-import BgBounceAnimate from '../Common/bg-bounce-animate';
-import WaveCircleBox from '../Common/wave-circle-box';
-import MoreWaysToEarnSlide1 from './indexslide1';
-import MoreWaysToEarnSlide2 from './indexslide2';
-import MoreWaysToEarnSlide3 from './indexslide3';
+import BgBounceAnimate from '../Common/BgBounceAnimate';
+import MoreWaysToEarnSlide1 from './Slide1';
+import MoreWaysToEarnSlide2 from './Slide2';
+import MoreWaysToEarnSlide3 from './Slide3';
 
-const SLIDE_TRANSITION_DURATION = 1000;
+const SLIDE_TRANSITION_DURATION = 2000;
 
 const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -24,7 +22,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
 
   const slides = [MoreWaysToEarnSlide1, MoreWaysToEarnSlide2, MoreWaysToEarnSlide3];
 
-  // Responsive detekcija
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -34,7 +31,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Ulazna animacija sekcije
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -50,7 +46,7 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+          el.style.transition = 'transform 2s ease, opacity 2s ease';
           el.style.transform = 'translateY(0)';
           el.style.opacity = '1';
           el.style.transitionDelay = '0.5s';
@@ -59,7 +55,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     }
   }, [isActive, transitionDirection]);
 
-  // Izlazna animacija sekcije
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -73,7 +68,7 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
         translateYValue = '-1000px';
       }
 
-      el.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+      el.style.transition = 'transform 2s ease, opacity 2s ease';
       el.style.transform = `translateY(${translateYValue})`;
 
       const timeout = setTimeout(() => {}, SLIDE_TRANSITION_DURATION);
@@ -81,7 +76,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     }
   }, [isActive, currentSlideIndex]);
 
-  // Navigacija između slajdova
   const goToSlide = useCallback(
     (direction) => {
       if (isHorizontalAnimating.current || !slideContainerRef.current) return false;
@@ -118,7 +112,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     [currentSlideIndex, slides.length, isMobile]
   );
 
-  // Izlaganje funkcija roditelju
   useImperativeHandle(ref, () => ({
     moveSlide: (direction) => goToSlide(direction),
     canGoFurther: (direction) => {
@@ -129,7 +122,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     },
   }));
 
-  // Početni aktivni slajd
   useEffect(() => {
     if (slideContainerRef.current && slides.length > 0) {
       const initialSlide = slideContainerRef.current.children[currentSlideIndex];
@@ -139,7 +131,6 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     }
   }, [currentSlideIndex, slides.length]);
 
-  // Resetovanje transformacije kada se pređe sa desktop na mobile i obrnuto
   useEffect(() => {
     const offset = currentSlideIndex * -100;
     const transformValue = isMobile
@@ -172,14 +163,14 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
           className={`mwte-slides-inner-wrapper flex w-full h-full ${
             isMobile ? 'flex-col' : ''
           }`}
-          style={{ transition: 'transform 1.2s ease' }}
+          style={{ transition: 'transform 2s ease' }}
         >
           {slides.map((SlideComponent, index) => (
             <div
               key={index}
-              className={`mwte-slide shrink-0 w-full ${
-                isMobile ? 'h-full' : 'h-full'
-              } ${index === currentSlideIndex ? 'active' : ''}`}
+              className={`mwte-slide shrink-0 w-full h-full ${
+                index === currentSlideIndex ? 'active' : ''
+              }`}
               style={{
                 flexBasis: '100%',
                 height: isMobile ? '100%' : 'auto',

@@ -1,16 +1,15 @@
 import React, { forwardRef } from 'react';
 import { getImagePath } from "../../utils/imagePath";
 
-const WaveCircleBoxMobile = forwardRef(({ style = {}, className = '', ...props }, ref) => {
+const WaveCircleBox = forwardRef(({ style = {}, className = '', ...props }, ref) => {
   return (
     <div
       className={`absolute z-[-1] wave-circle-box ${className} top-[-20%] left-[-45%] w-[100%] opacity-1 right-[auto]`}
       ref={ref}
-      style={
-        
-        { top: '55%', left: '40%', width: '200%', opacity: 1 }
-      }
-      
+      style={{
+        ...style,
+      }}
+      {...props}
     >
       <img
         src={getImagePath("/images/common/stroke1.svg")}
@@ -37,4 +36,4 @@ const WaveCircleBoxMobile = forwardRef(({ style = {}, className = '', ...props }
   );
 });
 
-export default WaveCircleBoxMobile;
+export default WaveCircleBox;

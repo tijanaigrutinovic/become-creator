@@ -2,19 +2,19 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './css/globals.css'
 import './App.css';
-import WaveCircleBox from "./components/Common/wave-circle-box";
-import WaveCircleBoxMobile from './components/Common/wave-circle-box-mobile';
+import WaveCircleBox from './components/Common/WaveCircleBox';
+import WaveCircleBoxMobile from './components/Common/WaveCircleBoxMobile';
 import MobileFrame from './components/Common/MobileFrame';
 import './fonts.css';
 
 
 import CreatorsPlatform from './components/CreatorsPlatform';
-import TestTrusted from './components/TrustedCreators'
+import TrustedCreators from './components/TrustedCreators'
 import MoreWaysToEarn from './components/MoreWaysToEarn';
 import WhyLinkstackz from './components/WhyLinkstackz';
 import AnalyzeFans from './components/AnalyzeFans';
-import Faqtest from './components/Faq/indextest';
-import BioLinkTest from './components/BioLink/indextest';
+import Faq from './components/Faq'
+import BioLink from './components/BioLink';
 
 const SectionContent = ({ id, title, description, elements }) => (
     <div className="content-wrapper">
@@ -24,7 +24,7 @@ const SectionContent = ({ id, title, description, elements }) => (
     </div>
 );
 
-const ANIMATION_DURATION = 1200;
+const ANIMATION_DURATION = 2000;
 const SCROLL_DEBOUNCE_TIME = 800; // Increased debounce for touch for better feel
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
                 height: `450px`,
                 zIndex: 1000,
                 transition: 'none',
-                transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
             },
         });
     
@@ -132,7 +132,7 @@ function App() {
                         transform: 'translate(100px, 150px)',
                         transformOrigin: 'top left',
                         opacity: 1,
-                        transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                        transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
                     },
                 };
                 
@@ -186,7 +186,7 @@ function App() {
                   transform: 'translate(100px, 100px)',
                   transformOrigin: 'top left',
                   opacity: 1,
-                  transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                  transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
                 },
               });
     
@@ -246,7 +246,7 @@ function App() {
                 height: `${endHeight}px`,
                 zIndex: 1000,
                 transform: 'translateY(500px)',
-                transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
             },
         };
 
@@ -266,7 +266,7 @@ function App() {
                     zIndex: 1000,
                     transform: '',
                     opacity: 1,
-                    transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                    transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
                 },
             };
 
@@ -357,7 +357,7 @@ function App() {
                     transform: 'translate(340px, -20px)', // Ista transformacija kao u animateMobileFrame()
                     transformOrigin: 'top left',
                     opacity: 1,
-                    transition: 'top 1.2s, left 1.2s, width 1.2s, height 1.2s, transform 1.2s',
+                    transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
                 },
             };
 
@@ -479,7 +479,7 @@ function App() {
                     transform: exitDirection === 'down'
                         ? 'translateY(-800px)'
                         : 'translateY(400px)',
-                    transition: 'all 1.2s ease',
+                    transition: 'all 2s ease',
                 }
             }));
             setTimeout(() => {
@@ -503,12 +503,12 @@ function App() {
 
     const sectionComponentsMap = {
         'creators-platform': CreatorsPlatform,
-        'trusted-creators': TestTrusted,
+        'trusted-creators': TrustedCreators,
         'more-ways-to-earn': MoreWaysToEarn,
         'why-linkstackz': WhyLinkstackz,
         'analyze-fans': AnalyzeFans,
-        'bio-link': BioLinkTest,
-        'faq-section': Faqtest,
+        'bio-link': BioLink,
+        'faq-section': Faq,
     };
 
     const goToSection = useCallback((index, direction) => { // <-- VAŽNO: direction je ovde prisutan
@@ -759,7 +759,7 @@ function App() {
           const shiftY = direction === 1 ? 5 : direction === -1 ? -5 : 0;
           const shiftX = direction === 1 ? -3 : direction === -1 ? 3 : 0;
     
-          circle.style.transition = 'all 1.2s ease-in-out';
+          circle.style.transition = 'all 2s ease-in-out';
           circle.style.top = `calc(${pos.top} + ${shiftY}px)`;
           circle.style.left = `calc(${pos.left} + ${shiftX}px)`;
           circle.style.width = pos.width;

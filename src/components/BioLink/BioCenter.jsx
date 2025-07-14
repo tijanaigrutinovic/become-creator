@@ -3,17 +3,11 @@ import { getImagePath } from "../../utils/imagePath";
 
 const BioCenter = ({ isActive }) => {
   return (
-    <div
-      className="bl-col-center relative w-full 3xl:w-[678px] text-center z-10 mt-[100px] transition-all duration-700 flex flex-col items-center"
-    >
-      {/* POZADINSKI DIV - animiraj samo kada je sekcija aktivna */}
+    <div className="bl-col-center relative w-full 3xl:w-[678px] text-center z-10 mt-[100px] transition-all duration-700 flex flex-col items-center">
       {isActive && (
-        <div
-          className="section-bg-anim bio-link-anim absolute inset-0 z-0 pointer-events-none"
-        />
+        <div className="section-bg-anim bio-link-anim absolute inset-0 z-0 pointer-events-none" />
       )}
 
-      {/* Sadržaj */}
       <div className="2xl:w-[437px] xl:w-[400px] md:w-[370px] w-[324px] flex flex-col items-center">
         <h2 className="2xl:w-[437px] xl:w-[400px] md:w-[370px] w-[324px] lg:mb-5 mb-[10px] 2xl:text-5xl xl:text-4xl text-2xl font-bold text-center text-white lg:leading-[70px] leading-9 font-[1000] font-gilroy capitalize">
           Fully customizable
@@ -27,25 +21,24 @@ const BioCenter = ({ isActive }) => {
         </p>
 
         <div className="flex items-center justify-center py-[16px] w-full">
-        <div className="cp-buttons flex justify-center">
-                <button className="relative flex items-center w-fit bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize flex overflow-hidden group animated-button whitespace-nowrap">
-                    <div className="circle circle1"></div>
-                    <div className="circle circle2"></div>
-                    <div className="circle circle3"></div>
-                    <div className="relative z-10 flex items-center">
-                        <img
-                            src={getImagePath("/icons/become-a-creator-icon.svg")}
-                            alt="Become a creator"
-                            className="w-4 h-4 sm:w-6 sm:h-6 mr-[8px] my-1"
-                        />
-                        Become a creator
-                    </div>
-                </button>
-            </div>
+          <div className="cp-buttons flex justify-center">
+            <button className="relative flex items-center w-fit bg-[#E91E63] text-white md:px-[25px] px-[15px] md:py-[10px] py-[5px] md:rounded-[25px] rounded-[20px] text-sm font-bold font-gilroy capitalize overflow-hidden group animated-button whitespace-nowrap">
+              <div className="circle circle1"></div>
+              <div className="circle circle2"></div>
+              <div className="circle circle3"></div>
+              <div className="relative z-10 flex items-center">
+                <img
+                  src={getImagePath("/icons/become-a-creator-icon.svg")}
+                  alt="Become a creator"
+                  className="w-4 h-4 sm:w-6 sm:h-6 mr-[8px] my-1"
+                />
+                Become a creator
+              </div>
+            </button>
+          </div>
         </div>
 
         <div className="i-phone-frame mx-auto relative 2xl:w-[437px] xl:w-[400px] md:w-[370px] w-[324px] flex justify-center">
-          {/* Ljubičasti video u centralnom delu frame-a */}
           <div className="bio-center-scroll-frame-inside 2xl:w-[437px] xl:w-[400px] md:w-[370px] w-[324px] flex justify-center">
             <video
               src={getImagePath("/images/bio-link/bio-center/video.webm")}
@@ -66,7 +59,6 @@ const BioCenter = ({ isActive }) => {
         </div>
       </div>
 
-      {/* Pozadinske zvezde - ako želiš, možeš i njih animirati zasebno */}
       <div
         className="bg-star-img1"
         style={{ position: "absolute", top: "28%", left: "0%", margin: "0 auto", zIndex: 3 }}
@@ -90,8 +82,6 @@ const BioCenter = ({ isActive }) => {
           alt="star-frame"
         />
       </div>
-
-      {/* Dodaj ovde ako želiš i animacije pozadinskih zvezda */}
     </div>
   );
 };

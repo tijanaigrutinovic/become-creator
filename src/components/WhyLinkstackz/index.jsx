@@ -1,9 +1,7 @@
-import { useEffect, useRef } from 'react';
-import WaveCircleBox from "../Common/wave-circle-box";
+import { useRef } from 'react';
 import DataList from './DataList';
-import BgBounceAnimate from '../Common/bg-bounce-animate';
+import BgBounceAnimate from '../Common/BgBounceAnimate';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { getImagePath } from "../../utils/imagePath";
 
 const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id, nextSectionId }) => {
   const sectionRef = useRef();
@@ -47,7 +45,7 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
     <div
       id={id}
       ref={sectionRef}
-      className={`max-w-[1544px] mx-auto lg:px-6 px-[10px] pb-2 flex flex-col items-center justify-center`}
+      className="max-w-[1544px] mx-auto lg:px-6 px-[10px] pb-2 flex flex-col items-center justify-center"
     >
       <BgBounceAnimate />
 

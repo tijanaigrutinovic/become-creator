@@ -1,5 +1,5 @@
-import BgBounceAnimate from "../Common/bg-bounce-animate";
-import WaveCircleBox from "../Common/wave-circle-box";
+import BgBounceAnimate from "../Common/BgBounceAnimate";
+import WaveCircleBox from "../Common/WaveCircleBox";
 import { getImagePath } from "../../utils/imagePath";
 
 
@@ -9,7 +9,7 @@ const TcSliderList = [
   "22.png", "23.png", "24.png", "25.png", "26.png", "27.png",
 ];
 
-const TestTrusted = () => {
+const TrustedCreators = () => {
 
   return (
     <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
@@ -54,4 +54,4 @@ const TestTrusted = () => {
 );
 };
 
-export default TestTrusted;
+export default TrustedCreators;
