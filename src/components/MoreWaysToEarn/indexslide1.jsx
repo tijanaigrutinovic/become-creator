@@ -4,17 +4,16 @@ import { getImagePath } from "../../utils/imagePath";
 
 const MoreWaysToEarnSlide1 = () => {
   return (
-    // Dodajte klase za animaciju unutar slajda, koje ce ciljati animations.css
     <div className="mwte-slide-content flex flex-col-reverse lg:flex-row md:mx-auto 3xl:max-w-[1670px] 2xl:max-w-[1300px] xl:max-w-[1200px] md:max-w-[900px] mwte-slide">
       {/* Left image section */}
       <div className="lg:w-1/3 w-full flex justify-center items-center">
         <div className="relative absolute md:relative flex-shrink-0
                         w-[350px] xl:w-[500px] lg:h-[585px] h-[450px] 3xl:h-[850px]
-                        lg:top-[-15%] top-[-80px] lg:left-[-20%]">
+                        lg:top-[-20%] top-[-140px] lg:left-[-20%]">
           <img
             src={getImagePath("/images/more-ways-to-earn/iphone.png")}
             alt="iPhone"
-            className="h-full object-cover rounded-[30px] mwte-image-animate" // Dodata klasa za CSS animaciju
+            className="h-full object-cover rounded-[30px] mwte-image-animate"
           />
           <img
             src={getImagePath("/images/more-ways-to-earn/video-call.png")}

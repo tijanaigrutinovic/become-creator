@@ -3,7 +3,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './css/globals.css'
 import './App.css';
 import WaveCircleBox from "./components/Common/wave-circle-box";
+import WaveCircleBoxMobile from './components/Common/wave-circle-box-mobile';
 import MobileFrame from './components/Common/MobileFrame';
+import './fonts.css';
 
 
 import CreatorsPlatform from './components/CreatorsPlatform';
@@ -817,7 +819,7 @@ function App() {
                     <section
                         key={sectionData.id}
                         id={sectionData.id}
-                        className={`screen-section ${sectionData.className || ''} ${isCurrentActive ? 'active' : ''}`}                     data-animation-in={sectionData.animationType}
+                        className={`screen-section z-0 ${sectionData.className || ''} ${isCurrentActive ? 'active' : ''}`}                     data-animation-in={sectionData.animationType}
                         ref={el => sectionRefs.current[index] = el}
                         >
                             {sectionData.id === 'creators-platform' && (
@@ -877,7 +879,8 @@ function App() {
                         </section>
                 );
             })}
-            <WaveCircleBox ref={waveCircleRef} />
+            <WaveCircleBox ref={waveCircleRef} className="hidden lg:block" />
+            <WaveCircleBoxMobile className="block lg:hidden" />
         </div>
     );
 }

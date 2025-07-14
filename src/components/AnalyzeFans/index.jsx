@@ -15,7 +15,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, onNextSectionTrigger, id, 
     <section 
     id={id}
       ref={sectionRef}
-    className="h-[100vh] w-full 3xl:pt-[290px] xl:pt-[220px] lg:px-0 px-[15px] pt-[80px] analyze-fans relative">
+    className="h-[100vh] w-full 3xl:pt-[290px] xl:pt-[220px] lg:px-0 px-[15px] pt-[85px] analyze-fans relative">
         <BgBounceAnimate />
     
     <div className="af-wraper flex flex-col lg:flex-row md:mx-auto 3xl:max-w-[1670px] 2xl:max-w-[1300px] xl:max-w-[1200px] md:max-w-[900px]">

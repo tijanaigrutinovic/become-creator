@@ -12,7 +12,6 @@ export function useScrollAnimation(sectionRef, isActive, transitionDirection) {
     const prevIsActive = prevIsActiveRef.current;
     const prevDirection = prevTransitionDirectionRef.current;
 
-    // Provera ponovnog ulaska sa istim smerom
     const isReEnteringSameDirection =
       isActive &&
       prevIsActive &&

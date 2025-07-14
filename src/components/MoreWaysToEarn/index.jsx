@@ -157,7 +157,7 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
     >
       <BgBounceAnimate />
       <div className="mwte-title text-center mx-auto max-w-[766px]">
-        <h2 className="text-2xl 3xl:text-5xl xl:text-4xl font-bold font-[1000] text-white leading-tight lg:mb-4 mb-3">
+        <h2 className="font-gilroy text-2xl 2xl:text-5xl xl:text-4xl font-bold font-[1000] text-white leading-tight lg:mb-4 mb-3">
           More Ways to
           <span className="text-[#E91E63] font-gilroy capitalize"> Earn</span>
         </h2>
@@ -166,7 +166,7 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
         </p>
       </div>
 
-      <div className="mwte-slides-container w-full h-full relative overflow-hidden">
+      <div className="mwte-slides-container w-full h-full relative lg:overflow-visible overflow-hidden">
         <div
           ref={slideContainerRef}
           className={`mwte-slides-inner-wrapper flex w-full h-full ${

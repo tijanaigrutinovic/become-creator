@@ -1,0 +1,79 @@
+.trusted-creators .tc-slider-wrapper::before {
+    content: '';
+    background: linear-gradient(90deg, transparent, #111 94%);
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+  }
+  
+  .trusted-creators .tc-slider-wrapper::after {
+    content: '';
+    background: linear-gradient(90deg, #111 6%, transparent);
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+  }
+  
+  .trusted-creators .tc-slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .trusted-creators .tc-slider-wrapper .tc-slider-list {
+    transition-timing-function: linear;
+    animation: tcListSlider 30s linear infinite;
+    white-space: nowrap;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  
+  .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+    margin-top: 0.6rem;
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+    box-sizing: border-box;
+  }
+  
+  @media screen and (min-width: 10px) and (max-width: 1640px) {
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+      max-width: 240px;
+    }
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+      margin-bottom: 6rem;
+    }
+  }
+  
+  @media screen and (min-width: 10px) and (max-width: 992px) {
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+      max-width: 200px;
+      overflow: hidden;
+    }
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+      margin-bottom: 6rem;
+    }
+  }
+  
+  @media screen and (min-width: 10px) and (max-width: 640px) {
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item .tcs-img-slide {
+      max-width: 160px;
+    }
+    .trusted-creators .tc-slider-wrapper .tc-slider-list .tc-slider-item {
+      margin-bottom: 6rem;
+    }
+  }
+  

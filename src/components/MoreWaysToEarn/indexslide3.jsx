@@ -9,7 +9,7 @@ const MoreWaysToEarnSlide3 = () => {
       <div className="lg:w-1/3 w-full flex justify-center items-center">
         <div className="relative absolute md:relative flex-shrink-0
                         w-[350px] xl:w-[500px] lg:h-[585px] h-[450px] 3xl:h-[850px]
-                        lg:top-[-15%] top-[-80px] lg:left-[-20%]">
+                        lg:top-[-15%] top-[-120px] lg:left-[-20%]">
           <img
             src={getImagePath("/images/more-ways-to-earn/frame-3.png")}
             alt="iPhone"

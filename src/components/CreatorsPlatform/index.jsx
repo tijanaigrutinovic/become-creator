@@ -16,7 +16,7 @@ const CreatorsPlatform = () => {
                 className="cp-left-block lg:w-1/2 w-full flex max-w-[683px] items-start"
             >
                 <div className="flex flex-col justify-center">
-                    <h1 className="cp-heading mb-[15px] text-white 3xl:text-8xl 2xl:text-7xl lg:text-6xl text-2xl font-gilroy capitalize lg:leading-[100px] leading-9 font-[1000]">
+                    <h1 className="cp-heading mb-[15px] text-white 2xl:text-8xl xl:text-7xl lg:text-6xl text-2xl font-gilroy capitalize lg:leading-[100px] leading-9 font-[1000]">
                         The Creator's platform
                         <br />
                         of the
@@ -97,12 +97,12 @@ const CreatorsPlatform = () => {
                                     className="lock-slide lock-slide-1 p-[25px]"
                                 />
                                 <img
-                                    src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
+                                    src={getImagePath("/images/CreatorsPlatform/send-message.svg")}
                                     alt="Content on phone"
                                     className="lock-slide lock-slide-2 p-[25px]"
                                 />
                                 <img
-                                    src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
+                                    src={getImagePath("/images/CreatorsPlatform/video-call.svg")}
                                     alt="Content on phone"
                                     className="lock-slide lock-slide-3 p-[25px]"
                                 />
@@ -112,7 +112,7 @@ const CreatorsPlatform = () => {
                         {/* Mobile frame je sada globalan, ne prikazuj ga ovde! */}
                          <img
                             src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-                            className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
+                            className="block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
                             alt="Mobile Frame"
                         />
                         <img
