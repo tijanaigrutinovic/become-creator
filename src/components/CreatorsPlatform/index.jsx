@@ -112,7 +112,7 @@ const CreatorsPlatform = () => {
                         {/* Mobile frame je sada globalan, ne prikazuj ga ovde! */}
                          <img
                             src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-                            className="block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
+                            className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
                             alt="Mobile Frame"
                         />
                         <img
