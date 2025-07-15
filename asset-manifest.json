@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/become-creator/static/css/main.61ba64ed.css",
-    "main.js": "/become-creator/static/js/main.c7c4e5d7.js",
+    "main.css": "/become-creator/static/css/main.41341869.css",
+    "main.js": "/become-creator/static/js/main.bac190e1.js",
     "static/js/488.a27b3c46.chunk.js": "/become-creator/static/js/488.a27b3c46.chunk.js",
     "static/media/mobile-frame.svg": "/become-creator/static/media/mobile-frame.3f7f0327cb58c751c109.svg",
     "static/media/Gilroy-Thin.ttf": "/become-creator/static/media/Gilroy-Thin.28f856b7c4b3d473e0d1.ttf",
@@ -16,12 +16,12 @@
     "static/media/Gilroy-Heavy.ttf": "/become-creator/static/media/Gilroy-Heavy.41ca3e2d8c1dc7d3cde9.ttf",
     "service-worker.js": "/become-creator/service-worker.js",
     "index.html": "/become-creator/index.html",
-    "main.61ba64ed.css.map": "/become-creator/static/css/main.61ba64ed.css.map",
-    "main.c7c4e5d7.js.map": "/become-creator/static/js/main.c7c4e5d7.js.map",
+    "main.41341869.css.map": "/become-creator/static/css/main.41341869.css.map",
+    "main.bac190e1.js.map": "/become-creator/static/js/main.bac190e1.js.map",
     "488.a27b3c46.chunk.js.map": "/become-creator/static/js/488.a27b3c46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61ba64ed.css",
-    "static/js/main.c7c4e5d7.js"
+    "static/css/main.41341869.css",
+    "static/js/main.bac190e1.js"
   ]
 }
