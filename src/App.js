@@ -16,13 +16,7 @@ import AnalyzeFans from './components/AnalyzeFans';
 import Faq from './components/Faq'
 import BioLink from './components/BioLink';
 
-const SectionContent = ({ id, title, description, elements }) => (
-    <div className="content-wrapper">
-        {elements && elements.map((el, index) => <div key={index} className={el}></div>)}
-        <h1>{title}</h1>
-        <p>{description}</p>
-    </div>
-);
+
 
 const ANIMATION_DURATION = 2000;
 const SCROLL_DEBOUNCE_TIME = 800; // Increased debounce for touch for better feel
@@ -49,79 +43,113 @@ function App() {
     const touchEndY = useRef(0);
     const minSwipeDistance = 50; // Minimum distance for a swipe to be recognized
 
-    const animateMobileFrame = useCallback(() => {
-        if (!creatorsFrameRef.current || !mobileFrameRef.current) return;
-    
-        const startRect = creatorsFrameRef.current.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
-    
+    const mobileFrameImgRef = useRef(null); // Ref for mobile frame image in CreatorsPlatform
+    const initialMobileFrameRect = useRef(null); // Store initial rect
+    const trustedCarouselRef = useRef(null); // Ref for TrustedCreators carousel
+    const trustedPositionRef = useRef(null); // Store TrustedCreators position
+    const trustedMobileFrameRef = useRef(null); // Ref for mobile frame img in TrustedCreators
 
-    
+    const animateMobileFrame = useCallback(() => {
+        // UVEK koristi trustedCarouselRef za krajnju poziciju
+        const startElem = mobileFrameImgRef.current || creatorsFrameRef.current;
+        console.log('[ANIMACIJA] Creators → Trusted');
+        console.log('currentSectionIndex:', currentSectionIndex, 'prevSectionIndex:', prevSectionIndex);
+        console.log('startElem.getBoundingClientRect():', startElem ? startElem.getBoundingClientRect() : null);
+        console.log('window.scrollY:', window.scrollY || window.pageYOffset);
+        if (!startElem || !mobileFrameRef.current) {
+            console.warn('No startElem or mobileFrameRef.current for animation');
+            return;
+        }
+
+        const startRect = startElem.getBoundingClientRect();
+        console.log('startRect:', startRect);
+        const scrollY = window.scrollY || window.pageYOffset;
+
         // Postavi početnu poziciju
+        const styleToSet = {
+            position: 'fixed',
+            top: `${startRect.top + scrollY}px`,
+            left: `${startRect.left}px`,
+            width: `${startRect.width}px`,
+            height: `450px`,
+            zIndex: 1000,
+            transition: 'none',
+            transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
+        };
+        console.log('Postavljam MobileFrame na:', styleToSet);
         setMobileFrameState({
             visible: true,
             position: 'animating',
-            style: {
-                position: 'fixed',
-                top: `${startRect.top + scrollY}px`,
-                left: `${startRect.left}px`,
-                width: `${startRect.width}px`,
-                height: `450px`,
-                zIndex: 1000,
-                transition: 'none',
-                transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
-            },
+            style: styleToSet,
         });
-    
-        // ⏳ Sačekaj da trustedFrameAnchorRef ima dimenzije
+
+        // ⏳ Sačekaj da trustedCarouselRef ima dimenzije
         let attempts = 0;
         const maxAttempts = 100; // 5 sekundi (100 * 50ms)
-        
-        const waitForAnchor = () => {
+
+        const waitForTrustedFrame = () => {
             attempts++;
-            
+
             if (attempts > maxAttempts) {
-                console.error("❌ Timeout: trustedFrameAnchorRef se nije pojavio u očekivanom vremenu");
+                console.error("❌ Timeout: trustedCarouselRef se nije pojavio u očekivanom vremenu");
                 return;
             }
-            
-            // Prvo proveri da li je sekcija renderovana
-            const trustedSection = document.getElementById('trusted-creators');
-            if (!trustedSection) {
 
-                setTimeout(waitForAnchor, 50);
+            if (!trustedCarouselRef.current) {
+                setTimeout(waitForTrustedFrame, 50);
                 return;
             }
-    
-            if (!trustedFrameAnchorRef.current) {
 
-                setTimeout(waitForAnchor, 50);
-                return;
-            }
-    
-            const endRect = trustedFrameAnchorRef.current.getBoundingClientRect();
-            const windowWidth = window.innerWidth;
-            const isMobile = windowWidth < 1024;
-            
+            const trustedFrameRect = trustedCarouselRef.current.getBoundingClientRect();
+            const scrollY = window.scrollY || window.pageYOffset;
+            const endWidth = 319;
+            const endHeight = 450;
+            // Dinamičko centriranje na carousel
+            const endTop = trustedFrameRect.top + scrollY - 900;
+            const endLeft = trustedFrameRect.left + (trustedFrameRect.width / 2) - (endWidth / 2);
 
-    
-            // Ako je desktop, koristi fiksne koordinate
-            if (!isMobile) {
+            console.log('→ KRAJNJA POZICIJA Trusted (carousel, dinamički centar):', {
+                trustedFrameRect,
+                scrollY,
+                endTop,
+                endLeft,
+                endWidth,
+                endHeight
+            });
 
-                
-                // Fiksne koordinate za desktop (trusted-creators sekcija)
-                const trustedSectionRect = trustedSection.getBoundingClientRect();
-                const endTop = trustedSectionRect.top + scrollY + 150; // Centar sekcije
-                const endLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170; // Centar (209px / 2)
-                const endWidth = 209;
-                const endHeight = 427;
-                
+            // Sačuvaj TrustedCreators poziciju
+            trustedPositionRef.current = {
+                top: endTop,
+                left: endLeft,
+                width: endWidth,
+                height: endHeight,
+            };
 
-                
-                // Pokreni animaciju
-                const animatingState = {
+            // Pokreni animaciju
+            const animatingState = {
+                visible: true,
+                position: 'animating',
+                style: {
+                    position: 'fixed',
+                    top: `${endTop}px`,
+                    left: `${endLeft}px`,
+                    width: `${endWidth}px`,
+                    height: `${endHeight}px`,
+                    zIndex: 1000,
+                    transform: 'translate(100px, 150px)',
+                    transformOrigin: 'top left',
+                    opacity: 1,
+                    transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
+                },
+            };
+
+            setMobileFrameState(animatingState);
+
+            // Završna pozicija
+            setTimeout(() => {
+                const trustedState = {
                     visible: true,
-                    position: 'animating',
+                    position: 'trusted',
                     style: {
                         position: 'fixed',
                         top: `${endTop}px`,
@@ -129,112 +157,47 @@ function App() {
                         width: `${endWidth}px`,
                         height: `${endHeight}px`,
                         zIndex: 1000,
-                        transform: 'translate(100px, 150px)',
-                        transformOrigin: 'top left',
-                        opacity: 1,
-                        transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
-                    },
-                };
-                
-
-                setMobileFrameState(animatingState);
-                
-                // Završna pozicija
-                setTimeout(() => {
-                    const trustedState = {
-                        visible: true,
-                        position: 'trusted',
-                        style: {
-                            position: 'fixed',
-                            top: `${endTop + 150}px`,
-                            left: `${endLeft + 100}px`,
-                            width: `${endWidth}px`,
-                            height: `${endHeight}px`,
-                            zIndex: 1000,
-                            transform: 'none',
-                            opacity: 1,
-                            transition: 'none',
-                        },
-                    };
-                    
-
-                    setMobileFrameState(trustedState);
-                }, 1300);
-                
-                return;
-            }
-    
-            if (endRect.width === 0 || endRect.height === 0) {
-
-                setTimeout(waitForAnchor, 50);
-                return;
-            }
-    
-
-    
-            // Pokreni animaciju za mobilne
-            setMobileFrameState({
-                visible: true,
-                position: 'animating',
-                style: {
-                  position: 'fixed',
-                  top: `${endRect.top + scrollY}px`,
-                  left: `${endRect.left}px`,
-                  width: `${endRect.width}px`,
-                  height: `${endRect.height}px`,
-                  zIndex: 1000,
-                  transform: 'translate(100px, 100px)',
-                  transformOrigin: 'top left',
-                  opacity: 1,
-                  transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
-                },
-              });
-    
-            // Završna pozicija
-            setTimeout(() => {
-                setMobileFrameState({
-                    visible: true,
-                    position: 'trusted',
-                    style: {
-                        position: 'fixed',
-                        top: `${endRect.top + scrollY + 150}px`,
-                        left: `${endRect.left + 100}px`,
-                        width: `${endRect.width}px`,
-                        height: `${endRect.height}px`,
-                        zIndex: 1000,
-                        transform: 'translateX(100px, 100px)',
+                        transform: 'none',
                         opacity: 1,
                         transition: 'none',
                     },
-                });
+                };
+
+                setMobileFrameState(trustedState);
             }, 1300);
         };
-    
-        waitForAnchor(); // 👈 pokreni proveru
-    }, []);
+
+        waitForTrustedFrame(); // 👈 pokreni proveru
+    }, [currentSectionIndex, prevSectionIndex]);
 
     const animateMobileFrameToTrusted = useCallback(() => {
-
-    
-        // Koristi fiksne koordinate za trusted-creators sekciju
-        const trustedSection = document.getElementById('trusted-creators');
-        if (!trustedSection) {
-
+        // UVEK koristi trustedCarouselRef za poziciju
+        if (!trustedCarouselRef.current) {
+            console.warn('trustedCarouselRef.current nije dostupan za animaciju iz MoreWaysToEarn → Trusted');
             return;
         }
-        
-        const trustedSectionRect = trustedSection.getBoundingClientRect();
+        const trustedFrameRect = trustedCarouselRef.current.getBoundingClientRect();
         const scrollY = window.scrollY || window.pageYOffset;
-        
-        // Fiksne koordinate za trusted poziciju
-        const endTop = trustedSectionRect.top + scrollY + 150;
-        const endLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170;
-        const endWidth = 209;
-        const endHeight = 427;
-    
+        const endWidth = 319;
+        const endHeight = 450;
+        // Dinamičko centriranje na carousel
+        const endTop = trustedFrameRect.top + scrollY - 900;
+        const endLeft = trustedFrameRect.left + (trustedFrameRect.width / 2) - (endWidth / 2);
 
-    
-        // Postavi početnu poziciju (iz treće sekcije)
+        console.log('[ANIMACIJA] MoreWaysToEarn → Trusted');
+        console.log('currentSectionIndex:', currentSectionIndex, 'prevSectionIndex:', prevSectionIndex);
+        console.log('trustedFrameRect:', trustedFrameRect);
+        console.log('window.scrollY:', scrollY);
+        console.log('→ KRAJNJA POZICIJA Trusted (carousel, dinamički centar):', {
+            trustedFrameRect,
+            scrollY,
+            endTop,
+            endLeft,
+            endWidth,
+            endHeight
+        });
+
+        // Postavi početnu poziciju (iz treće sekcije, možeš koristiti neku logiku za start, ovde je primer)
         const toTrustedStartState = {
             visible: true,
             position: 'animating',
@@ -251,7 +214,7 @@ function App() {
         };
 
         setMobileFrameState(toTrustedStartState);
-    
+
         // Pokreni animaciju prelaska u trusted
         setTimeout(() => {
             const toTrustedAnimatingState = {
@@ -259,7 +222,7 @@ function App() {
                 position: 'animating',
                 style: {
                     position: 'fixed',
-                    top: `${endTop + 150}px`,
+                    top: `${endTop}px`,
                     left: `${endLeft}px`,
                     width: `${endWidth}px`,
                     height: `${endHeight}px`,
@@ -272,7 +235,7 @@ function App() {
 
             setMobileFrameState(toTrustedAnimatingState);
         }, 50);
-    
+
         // Završna pozicija (trusted)
         setTimeout(() => {
             const toTrustedFinalState = {
@@ -280,7 +243,7 @@ function App() {
                 position: 'trusted',
                 style: {
                     position: 'fixed',
-                    top: `${endTop + 150}px`,
+                    top: `${endTop}px`,
                     left: `${endLeft}px`,
                     width: `${endWidth}px`,
                     height: `${endHeight}px`,
@@ -293,87 +256,61 @@ function App() {
 
             setMobileFrameState(toTrustedFinalState);
         }, 1300);
-    }, []);
+    }, [currentSectionIndex, prevSectionIndex]);
 
     const animateMobileFrameBack = useCallback(() => {
-
-    
-        // Koristi creatorsFrameRef kao u animateMobileFrame()
-        if (!creatorsFrameRef.current || !mobileFrameRef.current) {
+        // Povratak koristi trustedPositionRef (koji je uvek izračunat iz trustedCarouselRef)
+        const trustedPos = trustedPositionRef.current;
+        const initialRect = initialMobileFrameRect.current;
+        console.log('[ANIMACIJA] Trusted → Creators');
+        console.log('currentSectionIndex:', currentSectionIndex, 'prevSectionIndex:', prevSectionIndex);
+        console.log('trustedPositionRef.current:', trustedPos);
+        console.log('initialMobileFrameRect.current:', initialRect);
+        console.log('window.scrollY:', window.scrollY || window.pageYOffset);
+        if (!trustedPos || !initialRect || !mobileFrameRef.current) {
+            console.warn('Nema trustedPositionRef ili initialMobileFrameRect ili mobileFrameRef.current za povratak');
             return;
         }
 
-        const startRect = creatorsFrameRef.current.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
-        
-        // Koristi fiksne koordinate za creators poziciju (centar sekcije)
-        const creatorsSection = document.getElementById('creators-platform');
-        const creatorsSectionRect = creatorsSection.getBoundingClientRect();
-        const endTop = creatorsSectionRect.top + scrollY + (creatorsSectionRect.height / 2) - 152; // Centar (304px / 2)
-        const endLeft = creatorsSectionRect.left + (creatorsSectionRect.width / 2) - 159.5; // Centar (319px / 2)
-        const endWidth = 319;
-        const endHeight = 450;
-    
-
-    
-        // Postavi početnu poziciju (iz trusted pozicije - ista kao trusted finalna pozicija)
-        const trustedSection = document.getElementById('trusted-creators');
-        const trustedSectionRect = trustedSection.getBoundingClientRect();
-        const trustedTop = trustedSectionRect.top + scrollY + 150;
-        const trustedLeft = trustedSectionRect.left + (trustedSectionRect.width / 2) - 170;
-        const trustedWidth = 209;
-        const trustedHeight = 427;
-    
-        const backStartState = {
-            visible: true,
-            position: 'animating',
-            style: {
-                position: 'fixed',
-                top: `${trustedTop + 150}px`, // Iz trusted finalne pozicije
-                left: `${trustedLeft + 100}px`, // Iz trusted finalne pozicije
-                width: `${trustedWidth}px`, // Iz trusted pozicije
-                height: `${trustedHeight}px`, // Iz trusted pozicije
-                zIndex: 1000,
-                transform: 'none',
-                transition: 'none',
-            },
+        // Početna pozicija (iz TrustedCreators pozicije)
+        const startStyle = {
+            position: 'fixed',
+            top: `${trustedPos.top}px`,
+            left: `${trustedPos.left}px`,
+            width: `${trustedPos.width}px`,
+            height: `${trustedPos.height}px`,
+            zIndex: 1000,
+            transition: 'none',
         };
 
-        setMobileFrameState(backStartState);
-    
-        // Pokreni animaciju povratka - koristi istu logiku kao animateMobileFrame()
+        console.log('Početna pozicija za povratak (iz TrustedCreators):', startStyle);
+        setMobileFrameState({
+            visible: true,
+            position: 'animating',
+            style: startStyle,
+        });
+
+        // Animacija povratka na početnu poziciju
         setTimeout(() => {
-            // Koristi startRect kao u animateMobileFrame()
-            const backAnimatingState = {
+            const endStyle = {
+                position: 'fixed',
+                top: `${initialRect.top}px`,
+                left: `${initialRect.left}px`,
+                width: `${initialRect.width}px`,
+                height: `${initialRect.height}px`,
+                zIndex: 1000,
+                transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
+            };
+            console.log('→ POVRATAK NA Creators:', endStyle);
+            setMobileFrameState({
                 visible: true,
                 position: 'animating',
-                style: {
-                    position: 'fixed',
-                    top: `${startRect.top + scrollY}px`,
-                    left: `${startRect.left}px`,
-                    width: `${startRect.width}px`,
-                    height: `450px`,
-                    zIndex: 1000,
-                    transform: 'translate(340px, -20px)', // Ista transformacija kao u animateMobileFrame()
-                    transformOrigin: 'top left',
-                    opacity: 1,
-                    transition: 'top 2s, left 2s, width 2s, height 2s, transform 2s',
-                },
-            };
-
-            setMobileFrameState(backAnimatingState);
+                style: endStyle,
+            });
         }, 50);
-    
-        // Završna pozicija (creators) - koristi CSS klase
-        setTimeout(() => {
-            const backFinalState = {
-                visible: true,
-                position: 'creators',
-                style: {}, // Prazan style - koristi CSS klase iz className
-            };
-            setMobileFrameState(backFinalState);
-        }, 1300);
-    }, []);
+
+        // Ne resetuj na 'creators' - ostaje u 'animating' modu
+    }, [currentSectionIndex, prevSectionIndex]);
 
     const [isExitingTrusted, setIsExitingTrusted] = useState(false);
     const [exitDirection, setExitDirection] = useState('up'); // 'up' ili 'down'
@@ -741,6 +678,13 @@ function App() {
         if (firstDot) {
             firstDot.classList.add('active');
         }
+        // Loguj poziciju carousela na load
+        if (trustedCarouselRef.current) {
+            const carouselRect = trustedCarouselRef.current.getBoundingClientRect();
+            console.log('POCETNA POZICIJA CAROUSELA (trustedCarouselRef):', carouselRect);
+        } else {
+            console.log('trustedCarouselRef.current nije dostupan na loadu');
+        }
     }, []);
     useEffect(() => {
         if (waveCircleRef.current) {
@@ -766,6 +710,36 @@ function App() {
           circle.style.opacity = pos.opacity;
         }
       }, [currentSectionIndex, prevSectionIndex]);
+
+    useEffect(() => {
+        // On initial load, set MobileFrame to the position of the mobileFrameImgRef (if available)
+        if (mobileFrameImgRef.current) {
+            const rect = mobileFrameImgRef.current.getBoundingClientRect();
+            const scrollY = window.scrollY || window.pageYOffset;
+            initialMobileFrameRect.current = {
+                top: rect.top + scrollY,
+                left: rect.left,
+                width: rect.width,
+                height: rect.height,
+            };
+            const styleToSet = {
+                position: 'fixed',
+                top: `${rect.top + scrollY}px`,
+                left: `${rect.left}px`,
+                width: `${rect.width}px`,
+                height: `${rect.height}px`,
+                zIndex: 2000,
+            };
+            console.log('On load, postavljam MobileFrame na:', styleToSet);
+            setMobileFrameState({
+                visible: true,
+                position: 'animating',
+                style: styleToSet,
+            });
+        } else {
+            console.warn('mobileFrameImgRef.current nije dostupan na loadu');
+        }
+    }, []);
 
     return (
         <div className="fixed-viewport">
@@ -852,7 +826,7 @@ function App() {
                                     }}
                                 />
                                 )}
-                            
+                            {/* Pass the ref to CreatorsPlatform only for the creators-platform section */}
                         {sectionData.id === 'more-ways-to-earn' ? (
                             <SpecificSectionComponent
                             isActive={isCurrentActive}
@@ -862,6 +836,31 @@ function App() {
                                 null
                             }
                             ref={moreWaysToEarnComponentRef}
+                            />
+                        ) : sectionData.id === 'creators-platform' ? (
+                            <SpecificSectionComponent
+                                ref={mobileFrameImgRef}
+                                isActive={isCurrentActive}
+                                transitionDirection={
+                                    index > prevSectionIndex ? 'down' :
+                                    index < prevSectionIndex ? 'up' :
+                                    null
+                                }
+                                id={sectionData.id}
+                                nextSectionId={sectionsData[index + 1] ? sectionsData[index + 1].id : null}
+                            />
+                        ) : sectionData.id === 'trusted-creators' ? (
+                            <SpecificSectionComponent
+                                ref={trustedCarouselRef}
+                                mobileFrameRef={trustedMobileFrameRef} // <-- Prosleđi ref
+                                isActive={isCurrentActive}
+                                transitionDirection={
+                                    index > prevSectionIndex ? 'down' :
+                                    index < prevSectionIndex ? 'up' :
+                                    null
+                                }
+                                id={sectionData.id}
+                                nextSectionId={sectionsData[index + 1] ? sectionsData[index + 1].id : null}
                             />
                         ) : (
                             <SpecificSectionComponent

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Typewriter from './Typewriter';
 import { getImagePath } from "../../utils/imagePath";
 
-const CreatorsPlatform = () => {
+const CreatorsPlatform = forwardRef((props, ref) => {
   return (
     <div className="lg:justify-between content-wrapper h-full w-full flex flex-col lg:flex-row lg:mx-auto px-[5px] lg:px-[15px] 3xl:max-w-[1670px] 2xl:max-w-[1400px] xl:max-w-[1200px] md:max-w-[900px]">
       <div className="cp-left-block lg:w-1/2 w-full flex max-w-[683px] items-start">
@@ -93,8 +93,9 @@ const CreatorsPlatform = () => {
               </div>
             </div>
             <img
+              ref={ref} // <-- attach forwarded ref here
               src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-              className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
+              className="lg:opacity-0 opacity-1 mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
               alt="Mobile Frame"
             />
             <img
@@ -107,6 +108,6 @@ const CreatorsPlatform = () => {
       </div>
     </div>
   );
-};
+});
 
 export default CreatorsPlatform;

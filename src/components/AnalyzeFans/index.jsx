@@ -52,7 +52,7 @@ const AnalyzeFans = ({ isActive, transitionDirection, id }) => {
 
         <div className="lg:w-1/2 w-full flex">
           <div className="analyze-statistics w-1/2 xl:w-full relative">
-            <div className="test card-list relative z-2 xl:scale-85 lg:h-[500px] lg:scale-75 scale-150 md:h-[450px] md:scale-65 sm:h-[400px] sm:scale-80">
+            <div className="analyze-list card-list relative z-2 xl:scale-85 lg:h-[500px] lg:scale-75 scale-150 md:h-[450px] md:scale-65 sm:h-[400px] sm:scale-80">
               <div className="card-item absolute top-[1rem] left-[3rem] z-4 w-[285px] rounded-[4rem] backdrop-blur-[5px] skew-x-[12deg] transition-all animate-afTopLayer">
                 <img
                   src={getImagePath("/images/analyze-fans/card-1.png")}

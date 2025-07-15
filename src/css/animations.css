@@ -185,7 +185,7 @@
 
 .screen-section[data-animation-in="trusted-creators-anim"] .tc-slider-wrapper-anim {
   opacity: 1;
-  transform: translateY(700px);
+  transform: translateY(1000px);
   transition: opacity 2s ease, transform 2s ease;
   transition-delay: 0.5s;
 }
@@ -251,27 +251,27 @@
   transition-delay: 0s !important;
 }
 
-.screen-section[data-animation-in="why-linkstackz-anim"] .test {
+.screen-section[data-animation-in="why-linkstackz-anim"] .analyze-list {
   opacity: 0;
   transform: translateY(-500px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 2s ease-out, transform 2s ease-out;
 }
 
-.screen-section.active[data-animation-in="why-linkstackz-anim"] .test {
+.screen-section.active[data-animation-in="why-linkstackz-anim"] .analyze-list {
   opacity: 1;
   transform: translateY(0);
 }
 
-.screen-section.test.section-leaving.leaving-up[data-animation-in="why-linkstackz-anim"] .test {
+.screen-section.analyze-list.section-leaving.leaving-up[data-animation-in="why-linkstackz-anim"] .analyze-list {
   opacity: 1;
   transform: translateY(-100px);
-  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+  transition: opacity 2s ease-in, transform 2s ease-in;
 }
 
-.screen-section.section-leaving.leaving-down[data-animation-in="why-linkstackz-anim"] .test {
+.screen-section.section-leaving.leaving-down[data-animation-in="why-linkstackz-anim"] .analyze-list {
   opacity: 1;
   transform: translateY(150px);
-  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+  transition: opacity 2s ease-in, transform 2s ease-in;
 }
 
 .section-bg-anim {
@@ -282,7 +282,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) translateY(-200px) scale(0.8);
-  transition: opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1), transform 2s cubic-bezier(0.075, 0.82, 0.165, 1), border-radius 0.8s ease;
+  transition: opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1), transform 2s cubic-bezier(0.075, 0.82, 0.165, 1), border-radius 2s ease;
 }
 
 .ai-wraper {
@@ -294,7 +294,7 @@
   opacity: 0 !important;
 }
 
-.screen-section.test.section-leaving.leaving-up[data-animation-in="analyze-fans-anim"] .analyze-content {
+.screen-section.analyze-list.section-leaving.leaving-up[data-animation-in="analyze-fans-anim"] .analyze-content {
   opacity: 1;
   transform: translateY(-100px) translateX(200px);
   transition: opacity 0.5s ease-in, transform 0.5s ease-in;

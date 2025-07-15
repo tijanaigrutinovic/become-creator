@@ -1,5 +1,5 @@
+import React, { forwardRef } from "react";
 import BgBounceAnimate from "../Common/BgBounceAnimate";
-import WaveCircleBox from "../Common/WaveCircleBox";
 import { getImagePath } from "../../utils/imagePath";
 
 
@@ -9,7 +9,7 @@ const TcSliderList = [
   "22.png", "23.png", "24.png", "25.png", "26.png", "27.png",
 ];
 
-const TrustedCreators = () => {
+const TrustedCreators = forwardRef((props, ref) => {
 
   return (
     <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
@@ -26,14 +26,16 @@ const TrustedCreators = () => {
           </p>
         </div>
         <div
+            ref={ref}
             className="tc-slider-wrapper-anim tc-slider-wrapper relative 3xl:pt-[130px] xl:pt-[100px] pt-[80px] w-full max-w-full"
             data-slider-wrapper
         >
            
             
             <img
+                ref={props.mobileFrameRef}
                 src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-                className="lg:hidden block mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px]"
+                className="lg:opacity-0 opacity-1 mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-y-[-1000px] pointer-events-none lg:h-[450px] h-[304px]"
                 alt="Mobile Frame"
             />
             <div className="tc-slider-list flex gap-6 w-full">
@@ -52,6 +54,6 @@ const TrustedCreators = () => {
         </div>
     </div>
 );
-};
+});
 
 export default TrustedCreators;
