@@ -373,12 +373,12 @@
   }
 
   .screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-left-block {
-    transform: translateY(-100%);
+    transform: translateY(-1000px);
     transition: opacity 2s ease-out, transform 2s ease-in;
   }
 
   .screen-section.section-leaving[data-animation-in="creators-platform-anim"] .cp-right-block {
-    transform: translateY(100%);
+    transform: translateY(1000px);
     transition: opacity 2s ease-out, transform 2s ease-in;
   }
 }

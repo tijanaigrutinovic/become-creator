@@ -46,7 +46,7 @@ const MoreWaysToEarnSlide2 = () => {
       </div>
 
       <div className="lg:w-2/3 w-full flex items-start 3xl:mt-[85px] lg:mt-[65px] mt-[25px] md:px-0 px-[20px]">
-        <div className="flex-1 corners mwte-content-box-animate">
+        <div className="flex-1 corners mwte-content-box-animate max-w-[850px]">
           <div className="h-auto w-full max-h-[450px] bg-[#202020b3] backdrop-blur-[7px] rounded-tl-[60px] rounded-br-[60px] sm:rounded-tl-[80px] sm:rounded-br-[80px] lg:rounded-tl-[150px] lg:rounded-br-[150px] px-[19px] pr-[11px] pt-[31px] pb-[12px] sm:p-10 lg:p-16 flex flex-col justify-center">
             <div>
               <img

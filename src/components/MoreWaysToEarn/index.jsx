@@ -99,13 +99,16 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
       slideContainerRef.current.style.transform = transformValue;
       slideContainerRef.current.style.transition = `transform ${SLIDE_TRANSITION_DURATION / 1000}s ease`;
 
-      setTimeout(() => {
+      // Koristi transitionend umesto setTimeout
+      const onTransitionEnd = () => {
         setCurrentSlideIndex(newIndex);
         isHorizontalAnimating.current = false;
         if (currentSlideEl) currentSlideEl.classList.remove('slide-leaving');
         const nextSlideEl = slideContainerRef.current.children[newIndex];
         if (nextSlideEl) nextSlideEl.classList.add('active');
-      }, SLIDE_TRANSITION_DURATION);
+        slideContainerRef.current.removeEventListener('transitionend', onTransitionEnd);
+      };
+      slideContainerRef.current.addEventListener('transitionend', onTransitionEnd);
 
       return true;
     },
@@ -120,6 +123,7 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
         ? currentSlideIndex === 0
         : currentSlideIndex === slides.length - 1;
     },
+    isHorizontalAnimating: () => isHorizontalAnimating.current,
   }));
 
   useEffect(() => {
@@ -140,6 +144,14 @@ const MoreWaysToEarn = forwardRef(({ isActive, transitionDirection }, ref) => {
       slideContainerRef.current.style.transform = transformValue;
     }
   }, [isMobile, currentSlideIndex]);
+
+  useEffect(() => {
+    if (!isActive) {
+      isHorizontalAnimating.current = false;
+      // Eventualno možeš resetovati slajd na prvi, ako želiš:
+      // setCurrentSlideIndex(0);
+    }
+  }, [isActive]);
 
   return (
     <div

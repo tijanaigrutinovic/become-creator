@@ -457,6 +457,16 @@ function App() {
 
     useEffect(() => {
         const handleWheel = (event) => {
+            if (
+                isAnimating ||
+                (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
+                 moreWaysToEarnComponentRef.current &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating())
+            ) {
+                event.preventDefault();
+                return;
+            }
             const now = new Date().getTime();
             if (now - lastScrollTime.current < SCROLL_DEBOUNCE_TIME) {
                 event.preventDefault();
@@ -491,6 +501,16 @@ function App() {
         };
 
         const handleKeyDown = (event) => {
+            if (
+                isAnimating ||
+                (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
+                 moreWaysToEarnComponentRef.current &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating())
+            ) {
+                event.preventDefault();
+                return;
+            }
             const currentSectionId = sectionsData[currentSectionIndex].id;
             let direction = 0;
 
@@ -540,6 +560,15 @@ function App() {
         };
 
         const handleTouchEnd = () => {
+            if (
+                isAnimating ||
+                (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
+                 moreWaysToEarnComponentRef.current &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating())
+            ) {
+                return;
+            }
             const now = new Date().getTime();
             if (now - lastScrollTime.current < SCROLL_DEBOUNCE_TIME) {
                 return;
@@ -673,7 +702,7 @@ function App() {
                     transform: 'translate(-50%, -50%)',
                     zIndex: -1,
                     pointerEvents: 'none',
-                    transition: 'all 0.8s ease'
+                    transition: 'all 2s ease'
                 }}
             />
             

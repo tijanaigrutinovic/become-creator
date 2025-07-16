@@ -143,7 +143,7 @@
     padding-left: 78px;
     padding-right: 78px;
     padding-top: 78px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
   }
 }
 
