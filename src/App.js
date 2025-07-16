@@ -74,7 +74,7 @@ function App() {
             const endWidth = 319;
             const endHeight = 450;
             const endLeft = trustedFrameRect.left + (trustedFrameRect.width / 2) - (endWidth / 2);
-            const endTop = trustedFrameRect.top + scrollY - 910;
+            const endTop = trustedFrameRect.top + scrollY - 930;
             const deltaX = (endLeft + endWidth / 2) - (startLeft + startWidth / 2);
             const deltaY = (endTop + endHeight / 2) - (startTop + startHeight / 2);
             const startStyle = {
@@ -138,7 +138,7 @@ function App() {
         const scrollY = window.scrollY || window.pageYOffset;
         const endWidth = 319;
         const endHeight = 450;
-        const endTop = trustedFrameRect.top + scrollY - 910;
+        const endTop = trustedFrameRect.top + scrollY - 930;
         const endLeft = trustedFrameRect.left + (trustedFrameRect.width / 2) - (endWidth / 2);
 
         const toTrustedStartState = {
@@ -371,7 +371,7 @@ function App() {
         { id: 'creators-platform', animationType: 'creators-platform-anim', elements: [], className: 'lg:pt-[140px] pt-[85px]' },
         { id: 'trusted-creators', animationType: 'trusted-creators-anim', elements: [], },
         { id: 'more-ways-to-earn', animationType: 'more-ways-to-earn-anim', elements: [], className: 'lg:pt-[140px] pt-[85px]' },
-        { id: 'why-linkstackz', animationType: 'why-linkstackz-anim', elements: [] , className: 'lg:pt-[140px] pt-[85px]' },
+        { id: 'why-linkstackz', animationType: 'why-linkstackz-anim', elements: [] , className: 'lg:pt-[140px] pt-[85px] lg:items-center !items-start' },
         { id: 'analyze-fans', animationType: 'analyze-fans-anim', elements: [] },
         { id: 'bio-link', animationType: 'bio-link-anim', elements: [] },
         { id: 'faq-section', animationType: 'faq-anim', elements: [] },

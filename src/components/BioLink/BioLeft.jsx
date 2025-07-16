@@ -4,7 +4,7 @@ import { getImagePath } from "../../utils/imagePath";
 const imgsEven = ["lci-1.png", "lci-2.png", "lci-3.png", "lci-4.png"];
 const imgsOdd = ["lci-5.png", "lci-6.png", "lci-7.png", "lci-8.png"];
 
-const ANIMATION_DURATION = 1100;
+const ANIMATION_DURATION = 5000;
 const ANIMATION_DELAYS = [0, 250, 500, 750];
 
 const BioLeft = () => {

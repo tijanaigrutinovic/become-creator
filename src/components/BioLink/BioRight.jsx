@@ -4,7 +4,7 @@ import { getImagePath } from "../../utils/imagePath";
 const imgsEven = ["rci-1.png", "rci-2.png", "rci-3.png", "rci-4.png"];
 const imgsOdd = ["rci-5.png", "rci-6.png", "rci-7.png", "rci-8.png"];
 
-const ANIMATION_DURATION = 1100;
+const ANIMATION_DURATION = 5000;
 const ANIMATION_DELAYS = [0, 250, 500, 750];
 
 const BioRight = () => {

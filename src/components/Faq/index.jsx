@@ -13,6 +13,11 @@ const Faq = () => {
       <div className="bc-faq">
         <div className="max-w-[1645px] mx-auto faq-wraper grid grid-cols-1 lg:grid-cols-2 relative z-9 px-0 lg:px-[4.75rem] 3xl:py-[3.75rem] lg:py-[50px] py-4 rounded-[100px_100px_0_0] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_0%,rgba(0,141,131,0.10)_100%)] backdrop-blur-[17px]">
           <div className="faq-desc relative lg:border-r lg:border-b-0 border-b border-white/10 p-2 lg:pr-[50px]">
+          <img
+                src={getImagePath("/images/faq/bg-star.png")}
+                alt="medal-gold"
+                className="absolute w-full lg:h-auto h-[150px]"
+              />
             <div className="medal-gold w-[50%] mx-auto lg:w-full md:mb-6">
               <img
                 src={getImagePath("/images/faq/medal-gold.png")}

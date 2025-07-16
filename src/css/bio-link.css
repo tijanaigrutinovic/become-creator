@@ -242,20 +242,24 @@
 
 .slide-up-animate {
   opacity: 1;
-  animation: slideUpAndReturn 2.2s cubic-bezier(0.4, 0.3, 0.2, 1) forwards;
+  animation: slideUpAndReturn 5s cubic-bezier(0.4, 0.3, 0.2, 1) forwards;
 }
 
 @keyframes slideUpAndReturn {
   0% {
-    opacity: 1;
+    opacity: 0;
     transform: translateY(0);
   }
   40% {
     opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
     transform: translateY(-200%);
   }
   100% {
-    opacity: 1;
+    opacity: 0;
     transform: translateY(0);
   }
 }
@@ -267,6 +271,10 @@
   gap: 1.5rem;
   width: 18rem;
   height: 20rem;
+  @media screen and (max-width:1024px) {
+    align-items: center;
+    width: unset;
+  }
 }
 
 .grid-img {
@@ -274,8 +282,6 @@
   height: 260px;
   overflow: hidden;
   border-radius: 1.2rem;
-  background: #fff;
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,7 +311,7 @@
 .slide-in-animate {
   opacity: 0;
   transform: translateY(60px);
-  animation: slideInBioLink 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInBioLink 5s ease;
 }
 
 @keyframes slideInBioLink {
@@ -321,7 +327,7 @@
 
 .fade-in-animate {
   opacity: 0;
-  animation: fadeInBioLink 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeInBioLink 5s ease;
 }
 
 @keyframes fadeInBioLink {
@@ -381,14 +387,22 @@
 
 @keyframes slideUpAndFadeOut {
   0% {
-    opacity: 1;
-    transform: translateY(60px);
+    opacity: 0;
+    transform: translateY(100px);
   }
-  30% {
-    opacity: 1;
-    transform: translateY(-300px);
+  20% {
+    opacity: 0.3;
+    transform: translateY(-50px);
+  }
+  40% {
+    opacity: 0.9;
+    transform: translateY(-200px);
   }
   60% {
+    opacity: 1;
+    transform: translateY(-400px);
+  }
+  80% {
     opacity: 0.5;
     transform: translateY(-600px);
   }
@@ -399,8 +413,41 @@
 }
 
 .img-wraper {
-  animation: slideUpAndFadeOut 5s ease forwards;
+  animation: slideUpAndFadeOut 5s ease-in-out forwards;
 }
+
+@keyframes slideUpAndFadeOutMobile {
+  0% {
+    opacity: 0;
+    transform: translateY(-800px);
+  }
+  20% {
+    opacity: 0.3;
+    transform: translateY(-900px);
+  }
+  40% {
+    opacity: 0.9;
+    transform: translateY(-1000px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-1200px);
+  }
+  80% {
+    opacity: 0.5;
+    transform: translateY(-1300px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-1500px);
+  }
+}
+@media screen and (max-width:1024px){
+  .img-wraper {
+    animation: slideUpAndFadeOutMobile 5s ease-in-out forwards;
+  }
+}
+
 
 .img-wraper:nth-child(1) {
   animation-delay: 0s;
