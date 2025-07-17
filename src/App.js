@@ -701,7 +701,6 @@ function App() {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     zIndex: -1,
-                    pointerEvents: 'none',
                     transition: 'all 2s ease'
                 }}
             />

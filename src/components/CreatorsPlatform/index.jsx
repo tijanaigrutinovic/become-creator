@@ -1,8 +1,50 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useState, useEffect } from 'react';
 import Typewriter from './Typewriter';
 import { getImagePath } from "../../utils/imagePath";
 
 const CreatorsPlatform = forwardRef((props, ref) => {
+  const video1Ref = useRef(null);
+  const video2Ref = useRef(null);
+  const [videosReady, setVideosReady] = useState({ v1: false, v2: false });
+
+  useEffect(() => {
+    if (videosReady.v1 && videosReady.v2) {
+      video1Ref.current.play();
+      video2Ref.current.play();
+    }
+  }, [videosReady]);
+
+  useEffect(() => {
+    const v1 = video1Ref.current;
+    const v2 = video2Ref.current;
+    if (!v1 || !v2) return;
+
+    const syncPlay = () => { if (v2.paused) v2.play(); };
+    const syncPause = () => { if (!v2.paused) v2.pause(); };
+    const syncSeek = () => { if (Math.abs(v1.currentTime - v2.currentTime) > 0.1) v2.currentTime = v1.currentTime; };
+
+    v1.addEventListener('play', syncPlay);
+    v1.addEventListener('pause', syncPause);
+    v1.addEventListener('seeked', syncSeek);
+
+    const syncPlay2 = () => { if (v1.paused) v1.play(); };
+    const syncPause2 = () => { if (!v1.paused) v1.pause(); };
+    const syncSeek2 = () => { if (Math.abs(v2.currentTime - v1.currentTime) > 0.1) v1.currentTime = v2.currentTime; };
+
+    v2.addEventListener('play', syncPlay2);
+    v2.addEventListener('pause', syncPause2);
+    v2.addEventListener('seeked', syncSeek2);
+
+    return () => {
+      v1.removeEventListener('play', syncPlay);
+      v1.removeEventListener('pause', syncPause);
+      v1.removeEventListener('seeked', syncSeek);
+      v2.removeEventListener('play', syncPlay2);
+      v2.removeEventListener('pause', syncPause2);
+      v2.removeEventListener('seeked', syncSeek2);
+    };
+  }, [videosReady]);
+
   return (
     <div className="lg:justify-between content-wrapper h-full w-full flex flex-col lg:flex-row lg:mx-auto px-[5px] lg:px-[15px] 3xl:max-w-[1670px] 2xl:max-w-[1400px] xl:max-w-[1200px] md:max-w-[900px]">
       <div className="cp-left-block lg:w-1/2 w-full flex max-w-[683px] items-start">
@@ -57,20 +99,24 @@ const CreatorsPlatform = forwardRef((props, ref) => {
           <div className="relative w-full h-full">
             <div className="absolute overflow-hidden z-20 w-full h-full top-0 left-0">
               <video
+                ref={video1Ref}
                 src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
                 autoPlay
                 muted
                 loop
                 playsInline
+                onLoadedData={() => setVideosReady(v => ({ ...v, v1: true }))}
                 className="w-full h-full object-cover absolute top-0 left-0 3xl:rounded-tl-[300px] 3xl:rounded-br-[300px] lg:rounded-tl-[250px] lg:rounded-br-[250px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px] max-w-[348px] max-h-[340px] filter grayscale"
               />
               <div className="absolute overflow-hidden z-20 rounded-[40px] h-[304px] xl:w-[215px] 3xl:h-[651px] xl:h-[450px] mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[300px] w-[150px]">
                 <video
+                  ref={video2Ref}
                   src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  onLoadedData={() => setVideosReady(v => ({ ...v, v2: true }))}
                   className="w-full h-full object-cover absolute w-[50px]"
                 />
               </div>
