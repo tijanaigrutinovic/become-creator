@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/become-creator/static/css/main.d8b5d4d1.css",
-    "main.js": "/become-creator/static/js/main.f5ee42df.js",
+    "main.js": "/become-creator/static/js/main.7c884f7e.js",
     "static/js/488.a27b3c46.chunk.js": "/become-creator/static/js/488.a27b3c46.chunk.js",
     "static/media/mobile-frame.svg": "/become-creator/static/media/mobile-frame.3f7f0327cb58c751c109.svg",
     "static/media/Gilroy-Thin.ttf": "/become-creator/static/media/Gilroy-Thin.28f856b7c4b3d473e0d1.ttf",
@@ -17,11 +17,11 @@
     "service-worker.js": "/become-creator/service-worker.js",
     "index.html": "/become-creator/index.html",
     "main.d8b5d4d1.css.map": "/become-creator/static/css/main.d8b5d4d1.css.map",
-    "main.f5ee42df.js.map": "/become-creator/static/js/main.f5ee42df.js.map",
+    "main.7c884f7e.js.map": "/become-creator/static/js/main.7c884f7e.js.map",
     "488.a27b3c46.chunk.js.map": "/become-creator/static/js/488.a27b3c46.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d8b5d4d1.css",
-    "static/js/main.f5ee42df.js"
+    "static/js/main.7c884f7e.js"
   ]
 }
