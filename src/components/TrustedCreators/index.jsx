@@ -14,7 +14,7 @@ const TrustedCreators = forwardRef((props, ref) => {
   return (
     <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
         <BgBounceAnimate/>
-        <div className="tc-content w-full max-w-6xl">
+        <div className="tc-content w-full max-w-6xl md:px-0 px-[10px]">
           <h2 className="tc-heading text-white 2xl:text-5xl xl:text-4xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">
               Trusted By The World&apos;s Biggest{" "}
               <span className="text-[#E91E63]">Creators</span>
@@ -33,7 +33,7 @@ const TrustedCreators = forwardRef((props, ref) => {
             <img
                 ref={props.mobileFrameRef}
                 src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-                className="lg:opacity-0 opacity-1 mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-y-[-1000px] pointer-events-none h-[304px]"
+                className="frame-visibility mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-y-[-1000px] pointer-events-none h-[304px]"
                 alt="Mobile Frame"
             />
             <div className="tc-slider-list flex gap-6 w-full">
