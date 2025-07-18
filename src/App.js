@@ -14,7 +14,6 @@ import WhyLinkstackz from './components/WhyLinkstackz';
 import AnalyzeFans from './components/AnalyzeFans';
 import Faq from './components/Faq';
 import BioLink from './components/BioLink';
-import { preloadImagesFromList } from './utils/preloadImagesFromList';
 
 const ANIMATION_DURATION = 2000;
 const SCROLL_DEBOUNCE_TIME = 800;
@@ -620,10 +619,6 @@ function App() {
             window.removeEventListener('touchend', handleTouchEnd);
         };
     }, [currentSectionIndex, goToSection, sectionsData]);
-
-    useEffect(() => {
-        preloadImagesFromList('/images/image-list.json');
-    }, []);
 
     useEffect(() => {
         if (sectionRefs.current[0]) {
