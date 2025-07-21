@@ -1,49 +1,95 @@
-import React, { forwardRef, useRef, useState, useEffect } from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 import Typewriter from './Typewriter';
 import { getImagePath } from "../../utils/imagePath";
 
 const CreatorsPlatform = forwardRef((props, ref) => {
-  const video1Ref = useRef(null);
-  const video2Ref = useRef(null);
-  const [videosReady, setVideosReady] = useState({ v1: false, v2: false });
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (videosReady.v1 && videosReady.v2) {
-      video1Ref.current.play();
-      video2Ref.current.play();
-    }
-  }, [videosReady]);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        canvas.width = width;
+        canvas.height = height;
+      }
+    });
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    const v1 = video1Ref.current;
-    const v2 = video2Ref.current;
-    if (!v1 || !v2) return;
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
 
-    const syncPlay = () => { if (v2.paused) v2.play(); };
-    const syncPause = () => { if (!v2.paused) v2.pause(); };
-    const syncSeek = () => { if (Math.abs(v1.currentTime - v2.currentTime) > 0.1) v2.currentTime = v1.currentTime; };
+    const draw = () => {
+      if (video.readyState >= 2 && canvas.width > 0 && canvas.height > 0) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const frameData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = frameData.data;
 
-    v1.addEventListener('play', syncPlay);
-    v1.addEventListener('pause', syncPause);
-    v1.addEventListener('seeked', syncSeek);
+        const isMobile = window.innerWidth < 1024;
+        const rectWidth = isMobile ? 140 : 200;
+        const rectHeight = isMobile ? 304 : 450;
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const left = cx - rectWidth / 2;
+        const top = cy - rectHeight / 2;
+        const right = left + rectWidth;
+        const bottom = top + rectHeight;
+        const radius = isMobile ? 20 : 30;
 
-    const syncPlay2 = () => { if (v1.paused) v1.play(); };
-    const syncPause2 = () => { if (!v1.paused) v1.pause(); };
-    const syncSeek2 = () => { if (Math.abs(v2.currentTime - v1.currentTime) > 0.1) v1.currentTime = v2.currentTime; };
-
-    v2.addEventListener('play', syncPlay2);
-    v2.addEventListener('pause', syncPause2);
-    v2.addEventListener('seeked', syncSeek2);
-
-    return () => {
-      v1.removeEventListener('play', syncPlay);
-      v1.removeEventListener('pause', syncPause);
-      v1.removeEventListener('seeked', syncSeek);
-      v2.removeEventListener('play', syncPlay2);
-      v2.removeEventListener('pause', syncPause2);
-      v2.removeEventListener('seeked', syncSeek2);
+        for (let i = 0; i < data.length; i += 4) {
+          const x = (i / 4) % canvas.width;
+          const y = Math.floor((i / 4) / canvas.width);
+          let inRect = false;
+          if (
+            x >= left + radius && x <= right - radius && y >= top && y <= bottom || 
+            x >= left && x <= right && y >= top + radius && y <= bottom - radius 
+          ) {
+            inRect = true;
+          } else {
+            const distTL = Math.hypot(x - (left + radius), y - (top + radius));
+            const distTR = Math.hypot(x - (right - radius), y - (top + radius));
+            const distBL = Math.hypot(x - (left + radius), y - (bottom - radius));
+            const distBR = Math.hypot(x - (right - radius), y - (bottom - radius));
+            if (
+              (x < left + radius && y < top + radius && distTL <= radius) ||
+              (x > right - radius && y < top + radius && distTR <= radius) ||
+              (x < left + radius && y > bottom - radius && distBL <= radius) ||
+              (x > right - radius && y > bottom - radius && distBR <= radius)
+            ) {
+              inRect = true;
+            }
+          }
+          if (!inRect) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+            data[i] = gray;
+            data[i + 1] = gray;
+            data[i + 2] = gray;
+          }
+        }
+        ctx.putImageData(frameData, 0, 0);
+      }
+      animationFrameId = requestAnimationFrame(draw);
     };
-  }, [videosReady]);
+
+    video.play().then(() => {
+      draw();
+    }).catch(() => {
+      draw();
+    });
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
 
   return (
     <div className="lg:justify-between content-wrapper h-full w-full flex flex-col lg:flex-row lg:mx-auto px-[5px] lg:px-[15px] 3xl:max-w-[1670px] 2xl:max-w-[1400px] xl:max-w-[1200px] md:max-w-[900px]">
@@ -97,29 +143,27 @@ const CreatorsPlatform = forwardRef((props, ref) => {
       <div className="cp-right-block lg:w-1/2 w-full flex justify-center lg:mt-0 md:mt-[42px] mt-[12px] max-w-[819px] items-start">
         <div className="relative w-full 3xl:max-w-[747px] lg:max-w-[620px] 3xl:aspect-[747/728] xl:aspect-[620/550] aspect-[348/340] max-w-[348px] 3xl:max-h-[728px] xl:max-h-[550px] max-h-[340px] lg:h-auto corners z-15">
           <div className="relative w-full h-full">
-            <div className="absolute overflow-hidden z-20 w-full h-full top-0 left-0">
               <video
-                ref={video1Ref}
+              ref={videoRef}
                 src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
-                autoPlay
-                muted
-                loop
-                playsInline
-                onLoadedData={() => setVideosReady(v => ({ ...v, v1: true }))}
-                className="w-full h-full object-cover absolute top-0 left-0 3xl:rounded-tl-[300px] 3xl:rounded-br-[300px] lg:rounded-tl-[250px] lg:rounded-br-[250px] rounded-tl-[150px] rounded-br-[150px] max-w-[747.25px] max-h-[728.78px] max-w-[348px] max-h-[340px] filter grayscale"
-              />
-              <div className="absolute overflow-hidden z-20 rounded-[40px] h-[304px] xl:w-[215px] 3xl:h-[651px] xl:h-[450px] mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[300px] w-[150px]">
-                <video
-                  ref={video2Ref}
-                  src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  onLoadedData={() => setVideosReady(v => ({ ...v, v2: true }))}
-                  className="w-full h-full object-cover absolute w-[50px]"
-                />
-              </div>
+              autoPlay muted loop playsInline
+              style={{ display: 'none' }}
+            />
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full object-cover absolute top-0 left-0 3xl:rounded-tl-[300px] 3xl:rounded-br-[300px] lg:rounded-tl-[250px] lg:rounded-br-[250px] rounded-tl-[150px] rounded-br-[150px]"
+            />
+            <img
+              ref={ref}
+              src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
+              className="frame-visibility mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
+              alt="Mobile Frame"
+            />
+            <img
+              src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
+              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] 3xl:w-[300px] 3xl:h-[651px] lg:h-[450px]"
+              alt="Mobile Frame"
+            />
               <div className="cp-lock-slides lock-slides-container absolute z-30 lg:top-[44%] top-[60%] left-1/2 -translate-x-1/2 lg:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
                 <img
                   src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
@@ -137,18 +181,6 @@ const CreatorsPlatform = forwardRef((props, ref) => {
                   className="lock-slide lock-slide-3 p-[25px]"
                 />
               </div>
-            </div>
-            <img
-              ref={ref} // <-- attach forwarded ref here
-              src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
-              className="frame-visibility mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
-              alt="Mobile Frame"
-            />
-            <img
-              src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
-              className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] 3xl:w-[300px] 3xl:h-[651px] lg:h-[450px]"
-              alt="Mobile Frame"
-            />
           </div>
         </div>
       </div>

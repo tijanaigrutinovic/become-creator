@@ -11,7 +11,7 @@ const MoreWaysToEarnSlide2 = () => {
             alt="iPhone"
             className="h-full w-full object-cover rounded-[30px] mwte-image-animate"
           />
-          <div className="card-swiper absolute left-[10%] bottom-0 w-[50%] h-auto pointer-events-none z-0 mwte-card-swiper-animate">
+          <div className="card-swiper absolute lg:left-[10%] left-[1%] bottom-0 w-[50%] h-auto pointer-events-none z-0 mwte-card-swiper-animate">
             <div className="card-slide">
               <img
                 src={getImagePath("/images/more-ways-to-earn/flip-1.png")}
