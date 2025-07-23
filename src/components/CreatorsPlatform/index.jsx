@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useEffect } from 'react';
 import Typewriter from './Typewriter';
-import { getImagePath } from "../../utils/imagePath";
+import { getImagePath } from '../../utils/imagePath';
 
 const CreatorsPlatform = forwardRef((props, ref) => {
   const videoRef = useRef(null);
@@ -19,6 +19,25 @@ const CreatorsPlatform = forwardRef((props, ref) => {
     observer.observe(canvas);
     return () => observer.disconnect();
   }, []);
+
+  const isInRoundedRect = (x, y, left, top, right, bottom, radius) => {
+    if (
+      x >= left + radius && x <= right - radius &&
+      y >= top && y <= bottom
+    ) return true;
+    if (
+      x >= left && x <= right &&
+      y >= top + radius && y <= bottom - radius
+    ) return true;
+
+    const inCorner = (cx, cy) => Math.hypot(x - cx, y - cy) <= radius;
+    return (
+      inCorner(left + radius, top + radius) ||
+      inCorner(right - radius, top + radius) ||
+      inCorner(left + radius, bottom - radius) ||
+      inCorner(right - radius, bottom - radius)
+    );
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -47,46 +66,23 @@ const CreatorsPlatform = forwardRef((props, ref) => {
         for (let i = 0; i < data.length; i += 4) {
           const x = (i / 4) % canvas.width;
           const y = Math.floor((i / 4) / canvas.width);
-          let inRect = false;
-          if (
-            x >= left + radius && x <= right - radius && y >= top && y <= bottom || 
-            x >= left && x <= right && y >= top + radius && y <= bottom - radius 
-          ) {
-            inRect = true;
-          } else {
-            const distTL = Math.hypot(x - (left + radius), y - (top + radius));
-            const distTR = Math.hypot(x - (right - radius), y - (top + radius));
-            const distBL = Math.hypot(x - (left + radius), y - (bottom - radius));
-            const distBR = Math.hypot(x - (right - radius), y - (bottom - radius));
-            if (
-              (x < left + radius && y < top + radius && distTL <= radius) ||
-              (x > right - radius && y < top + radius && distTR <= radius) ||
-              (x < left + radius && y > bottom - radius && distBL <= radius) ||
-              (x > right - radius && y > bottom - radius && distBR <= radius)
-            ) {
-              inRect = true;
-            }
-          }
-          if (!inRect) {
+
+          if (!isInRoundedRect(x, y, left, top, right, bottom, radius)) {
             const r = data[i];
             const g = data[i + 1];
             const b = data[i + 2];
             const gray = 0.299 * r + 0.587 * g + 0.114 * b;
-            data[i] = gray;
-            data[i + 1] = gray;
-            data[i + 2] = gray;
+            data[i] = data[i + 1] = data[i + 2] = gray;
           }
         }
+
         ctx.putImageData(frameData, 0, 0);
       }
+
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    video.play().then(() => {
-      draw();
-    }).catch(() => {
-      draw();
-    });
+    video.play().then(draw).catch(draw);
 
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
@@ -129,7 +125,7 @@ const CreatorsPlatform = forwardRef((props, ref) => {
               <div className="circle circle3"></div>
               <div className="relative z-10 flex items-center">
                 <img
-                  src={getImagePath("/icons/become-a-creator-icon.svg")}
+                  src={getImagePath('/icons/become-a-creator-icon.svg')}
                   alt="Become a creator"
                   className="w-4 h-4 sm:w-6 sm:h-6 mr-[8px] my-1"
                 />
@@ -143,10 +139,13 @@ const CreatorsPlatform = forwardRef((props, ref) => {
       <div className="cp-right-block lg:w-1/2 w-full flex justify-center lg:mt-0 md:mt-[42px] mt-[12px] max-w-[819px] items-start">
         <div className="relative w-full 3xl:max-w-[747px] lg:max-w-[620px] 3xl:aspect-[747/728] xl:aspect-[620/550] aspect-[348/340] max-w-[348px] 3xl:max-h-[728px] xl:max-h-[550px] max-h-[340px] lg:h-auto corners z-15">
           <div className="relative w-full h-full">
-              <video
+            <video
               ref={videoRef}
-                src={getImagePath("/images/CreatorsPlatform/cp-video.webm")}
-              autoPlay muted loop playsInline
+              src={getImagePath('/images/CreatorsPlatform/cp-video.webm')}
+              autoPlay
+              muted
+              loop
+              playsInline
               style={{ display: 'none' }}
             />
             <canvas
@@ -155,32 +154,32 @@ const CreatorsPlatform = forwardRef((props, ref) => {
             />
             <img
               ref={ref}
-              src={getImagePath("/images/CreatorsPlatform/mobile-frame.svg")}
+              src={getImagePath('/images/CreatorsPlatform/mobile-frame.svg')}
               className="frame-visibility mobile-frame absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] xl:w-[319px] 3xl:h-[651px] xl:h-[450px]"
               alt="Mobile Frame"
             />
             <img
-              src={getImagePath("/images/CreatorsPlatform/mobile-mask.png")}
+              src={getImagePath('/images/CreatorsPlatform/mobile-mask.png')}
               className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none h-[304px] 3xl:w-[300px] 3xl:h-[651px] lg:h-[450px]"
-              alt="Mobile Frame"
+              alt="Mobile Mask"
             />
-              <div className="cp-lock-slides lock-slides-container absolute z-30 lg:top-[44%] top-[60%] left-1/2 -translate-x-1/2 lg:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
-                <img
-                  src={getImagePath("/images/CreatorsPlatform/lock-to-view.svg")}
-                  alt="Content on phone"
-                  className="lock-slide lock-slide-1 p-[25px]"
-                />
-                <img
-                  src={getImagePath("/images/CreatorsPlatform/send-message.svg")}
-                  alt="Content on phone"
-                  className="lock-slide lock-slide-2 p-[25px]"
-                />
-                <img
-                  src={getImagePath("/images/CreatorsPlatform/video-call.svg")}
-                  alt="Content on phone"
-                  className="lock-slide lock-slide-3 p-[25px]"
-                />
-              </div>
+            <div className="cp-lock-slides lock-slides-container absolute z-30 lg:top-[44%] top-[60%] left-1/2 -translate-x-1/2 lg:translate-y-1/3 -translate-y-1/3 pointer-events-none max-w-[256px]">
+              <img
+                src={getImagePath('/images/CreatorsPlatform/lock-to-view.svg')}
+                alt="Content on phone"
+                className="lock-slide lock-slide-1 p-[25px]"
+              />
+              <img
+                src={getImagePath('/images/CreatorsPlatform/send-message.svg')}
+                alt="Content on phone"
+                className="lock-slide lock-slide-2 p-[25px]"
+              />
+              <img
+                src={getImagePath('/images/CreatorsPlatform/video-call.svg')}
+                alt="Content on phone"
+                className="lock-slide lock-slide-3 p-[25px]"
+              />
+            </div>
           </div>
         </div>
       </div>

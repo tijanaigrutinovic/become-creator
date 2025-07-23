@@ -7,7 +7,7 @@ const Faq = () => {
 
   return (
     <div
-      className="relative bc-faq-body lg:pt-[140px] pt-[85px] md:px-0 px-[10px]"
+      className="relative bc-faq-body lg:pt-[140px] md:px-0 px-[10px]"
     >
         <BgBounceAnimate />
       <div className="bc-faq">

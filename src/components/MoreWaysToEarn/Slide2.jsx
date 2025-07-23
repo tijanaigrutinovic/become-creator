@@ -5,7 +5,7 @@ const MoreWaysToEarnSlide2 = () => {
   return (
     <div className="mwte-slide-content flex flex-col-reverse lg:flex-row md:mx-auto 3xl:max-w-[1670px] 2xl:max-w-[1300px] xl:max-w-[1200px] md:max-w-[900px] mwte-slide">
       <div className="lg:w-1/3 w-full flex justify-center items-center">
-        <div className="relative absolute md:relative flex-shrink-0 w-[350px] xl:w-[500px] lg:h-[585px] h-[450px] 3xl:h-[850px] lg:top-[-15%] top-[-80px] lg:left-[-20%]">
+        <div className="relative absolute md:relative flex-shrink-0 w-[350px] xl:w-[500px] lg:h-[585px] h-[450px] 3xl:h-[850px] lg:top-[-15%] top-[-100px] lg:left-[-20%]">
           <img
             src={getImagePath("/images/more-ways-to-earn/iphone-mockup.png")}
             alt="iPhone"
