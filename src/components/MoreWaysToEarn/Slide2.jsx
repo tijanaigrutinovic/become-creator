@@ -38,9 +38,9 @@ const MoreWaysToEarnSlide2 = () => {
             </div>
           </div>
           <img
-            src={getImagePath("/images/more-ways-to-earn/video-call.png")}
+            src={getImagePath("/images/more-ways-to-earn/lock-to-view.png")}
             alt="Overlay"
-            className="absolute left-[10%] top-[40%] object-cover rounded-[30px] mwte-overlay-animate"
+            className="w-[60%] absolute left-[30%] top-[-3%] object-cover rounded-[30px] mwte-overlay-animate"
           />
         </div>
       </div>

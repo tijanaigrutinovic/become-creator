@@ -304,7 +304,7 @@
   top: 16px;
 }
 .grid-img:nth-child(4) {
-  top: 0;
+  top: 0px;
 }
 
 .slide-in-animate {
@@ -386,20 +386,16 @@
 
 @keyframes slideUpAndFadeOut {
   0% {
-    opacity: 0;
-    transform: translateY(100px);
+    opacity: 1;
+    transform: translateY(0);
   }
-  20% {
-    opacity: 0.3;
-    transform: translateY(-50px);
-  }
-  40% {
-    opacity: 0.9;
-    transform: translateY(-200px);
+  30% {
+    opacity: 1;
+    transform: translateY(-100px);
   }
   60% {
-    opacity: 1;
-    transform: translateY(-400px);
+    opacity: 0.8;
+    transform: translateY(-300px);
   }
   80% {
     opacity: 0.5;
@@ -459,6 +455,9 @@
 .img-wraper:nth-child(3) {
   animation-delay: 1s;
 }
+.img-wraper:nth-child(4) {
+  animation-delay: 1.5s;
+}
 
 .bio-link .bl-wraper .bl-slide-animate .animate-item .img-wraper {
   opacity: 0;
@@ -471,13 +470,13 @@
 }
 
 .bio-link .bl-wraper .bl-slide-animate .animate-item .img-wraper:nth-child(2) {
-  animation-delay: 0.5s;
+  animation-delay: 0.2s;
 }
 
 .bio-link .bl-wraper .bl-slide-animate .animate-item .img-wraper:nth-child(3) {
-  animation-delay: 1s;
+  animation-delay: 0.4s;
 }
 
 .bio-link .bl-wraper .bl-slide-animate .animate-item .img-wraper:nth-child(4) {
-  animation-delay: 1.5s;
+  animation-delay: 0.6s;
 }
