@@ -190,3 +190,11 @@
     left: -10px;
   }
 }
+
+.lock-to-view {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform, top, left;
+  transition: all 0.3s ease;
+  transform: skew(8deg) rotate(-2deg);
+}

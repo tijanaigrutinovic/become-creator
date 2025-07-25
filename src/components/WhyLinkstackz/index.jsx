@@ -50,7 +50,7 @@ const WhyLinkstackz = ({ isActive, transitionDirection, onNextSectionTrigger, id
       <BgBounceAnimate />
 
       <div className="flex flex-col items-center text-center lg:mb-12 mwte-title">
-        <h2 className="text-4xl md:text-5xl font-bold text-white lg:mb-4 mb-3">
+        <h2 className="md:text-4xl xl:text-5xl text-2xl font-bold text-white lg:mb-4 mb-3">
           <span className="text-[#E91E63] font-gilroy font-[1000]">Why</span> Linkstackz?
         </h2>
         <p className="text-white text-lg font-gilroy font-bold max-w-2xl lg:block hidden">
