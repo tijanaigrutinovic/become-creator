@@ -4,7 +4,7 @@ import FaqItems from './FaqItems'
 import { getImagePath } from "../../utils/imagePath";
 import DashboardFooter from "../DashboardFooter";
 
-const Faq = ({ isActive, goToPrevSection }) => {
+const Faq = ({ isActive, goToPrevSection, transitionDirection }) => {
   const wrapperRef = useRef(null);
   const touchStartY = useRef(0);
   const touchEndY = useRef(0);
@@ -60,7 +60,10 @@ const Faq = ({ isActive, goToPrevSection }) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative bc-faq-body lg:pt-[140px] pt-[80px] md:px-0 px-[10px] w-[100%] overflow-x-hidden"
+      className={`relative bc-faq-body lg:pt-[140px] pt-[80px] md:px-0 px-[10px] w-[100%] overflow-x-hidden h-[120%] ${
+        transitionDirection === 'down' ? 'entering-from-bottom' : 
+        transitionDirection === 'up' ? 'entering-from-top' : ''
+      }`}
     >
         <BgBounceAnimate />
       <div className="bc-faq overflow-y-auto overflow-x-hidden h-[110%]">
@@ -106,8 +109,8 @@ const Faq = ({ isActive, goToPrevSection }) => {
             <FaqItems />
           </div>
         </div>
-        <DashboardFooter />
       </div>
+      <DashboardFooter />
     </div>
   );
 }

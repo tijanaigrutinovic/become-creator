@@ -1026,6 +1026,11 @@ function App() {
                                 <Faq
                                     isActive={isCurrentActive}
                                     goToPrevSection={() => goToSection(currentSectionIndex - 1, -1)}
+                                    transitionDirection={
+                                        index > prevSectionIndex ? 'down' :
+                                        index < prevSectionIndex ? 'up' :
+                                        null
+                                    }
                                 />
                             ) : (
                                 <SpecificSectionComponent
