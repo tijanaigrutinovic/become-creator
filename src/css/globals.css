@@ -26,6 +26,12 @@
     position: relative;
 }
 
+.screen-section.active#faq-section {
+    overflow: auto;
+    height: auto;
+    min-height: 100vh;
+}
+
 
 #creators-mobile-frame-anchor, #trusted-mobile-frame-anchor {
     outline: 2px solid red !important;

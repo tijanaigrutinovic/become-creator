@@ -122,12 +122,12 @@
   top: 0;
   left: 0;
   opacity: 0;
-  animation: slideUp 6s infinite;
+  animation: slideUp 8s infinite ease-in-out;
 }
 
 .lock-slide-1 { animation-delay: 0s; }
-.lock-slide-2 { animation-delay: 2s; }
-.lock-slide-3 { animation-delay: 4s; }
+.lock-slide-2 { animation-delay: 2.67s; }
+.lock-slide-3 { animation-delay: 5.33s; }
 
 @keyframes slideUp {
   0%, 33.33% {
@@ -141,6 +141,31 @@
   33.33%, 100% {
     transform: translateY(-100%);
     opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .lock-slide {
+    animation: slideUp 10s infinite ease-in-out;
+  }
+  
+  .lock-slide-1 { animation-delay: 0s; }
+  .lock-slide-2 { animation-delay: 3.33s; }
+  .lock-slide-3 { animation-delay: 6.67s; }
+  
+  @keyframes slideUp {
+    0%, 30% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    5%, 25% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    30%, 100% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
   }
 }
 
@@ -680,4 +705,49 @@
   @media screen and (max-width:1024px){
     opacity: 1;
   }
+}
+
+.video-layered {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-layered video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: grayscale(100%);
+  -webkit-backdrop-filter: grayscale(100%);
+  pointer-events: none;
+  mask-image: linear-gradient(to right, black 0%, black calc(50% - 100px), transparent calc(50% - 100px), transparent calc(50% + 100px), black calc(50% + 100px), black 100%),
+  linear-gradient(to bottom, black 0%, black calc(50% - 215px), transparent calc(50% - 215px), transparent calc(50% + 215px), black calc(50% + 215px), black 100%);
+  -webkit-mask-image: linear-gradient(to right, black 0%, black calc(50% - 100px), transparent calc(50% - 100px), transparent calc(50% + 100px), black calc(50% + 100px), black 100%),
+  linear-gradient(to bottom, black 0%, black calc(50% - 215px), transparent calc(50% - 215px), transparent calc(50% + 215px), black calc(50% + 215px), black 100%);
+  border-radius: 30px;
+}
+
+@media screen and (max-width: 1024px) {
+  .overlay {
+    mask-image: linear-gradient(to right, black 0%, black calc(50% - 70px), transparent calc(50% - 70px), transparent calc(50% + 70px), black calc(50% + 70px), black 100%),
+    linear-gradient(to bottom, black 0%, black calc(50% - 150px), transparent calc(50% - 150px), transparent calc(50% + 150px), black calc(50% + 150px), black 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, black calc(50% - 70px), transparent calc(50% - 70px), transparent calc(50% + 70px), black calc(50% + 70px), black 100%),
+    linear-gradient(to bottom, black 0%, black calc(50% - 150px), transparent calc(50% - 150px), transparent calc(50% + 150px), black calc(50% + 150px), black 100%);
+  border-radius: 30px;
+    
+  }
+}
+
+.video-wrapper,
+.overlay {
+  border-radius: 30px;
+  overflow: hidden;
 }

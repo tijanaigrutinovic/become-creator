@@ -12,7 +12,7 @@ const TcSliderList = [
 const TrustedCreators = forwardRef((props, ref) => {
 
   return (
-    <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px]">
+    <div className="overflow-hidden trusted-creators block content-wrapper flex flex-col items-center justify-center text-center lg:pt-[140px] lg:mt-[140px] lg:pb-[130px] pt-[80px] lg:h-[unset] h-[100%]">
         <BgBounceAnimate/>
         <div className="tc-content w-full max-w-6xl md:px-0 px-[10px]">
           <h2 className="tc-heading text-white 2xl:text-5xl xl:text-4xl text-2xl font-gilroy capitalize md:leading-[70px] leading-9 font-[1000]">

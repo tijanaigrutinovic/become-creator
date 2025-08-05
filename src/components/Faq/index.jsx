@@ -1,16 +1,69 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import BgBounceAnimate from "../Common/BgBounceAnimate";
 import FaqItems from './FaqItems'
 import { getImagePath } from "../../utils/imagePath";
+import DashboardFooter from "../DashboardFooter";
 
-const Faq = () => {
+const Faq = ({ isActive, goToPrevSection }) => {
+  const wrapperRef = useRef(null);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+  const minSwipeDistance = 50;
+
+  useEffect(() => {
+    if (!isActive) return;
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const onTouchStart = (e) => {
+      if (e.touches.length !== 1) return;
+      touchStartY.current = e.touches[0].clientY;
+      touchEndY.current = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e) => {
+      if (e.touches.length !== 1) return;
+      touchEndY.current = e.touches[0].clientY;
+    };
+
+    const onTouchEnd = () => {
+      const deltaY = touchEndY.current - touchStartY.current;
+      if (deltaY > minSwipeDistance) {
+        const scrollable = el.querySelector('.bc-faq');
+        if (scrollable && scrollable.scrollTop <= 0) {
+          goToPrevSection && goToPrevSection();
+        }
+      }
+    };
+
+    const onWheel = (e) => {
+      const scrollable = el.querySelector('.bc-faq');
+      if (scrollable && scrollable.scrollTop <= 0 && e.deltaY < 0) {
+        e.preventDefault();
+        goToPrevSection && goToPrevSection();
+      }
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [isActive, goToPrevSection]);
 
   return (
     <div
-      className="relative bc-faq-body lg:pt-[140px] md:px-0 px-[10px]"
+      ref={wrapperRef}
+      className="relative bc-faq-body lg:pt-[140px] pt-[80px] md:px-0 px-[10px] w-[100%] overflow-x-hidden"
     >
         <BgBounceAnimate />
-      <div className="bc-faq">
+      <div className="bc-faq overflow-y-auto overflow-x-hidden h-[110%]">
         <div className="max-w-[1645px] mx-auto faq-wraper grid grid-cols-1 lg:grid-cols-2 relative z-9 px-0 lg:px-[4.75rem] 3xl:py-[3.75rem] lg:py-[50px] py-4 rounded-[100px_100px_0_0] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_0%,rgba(0,141,131,0.10)_100%)] backdrop-blur-[17px]">
           <div className="faq-desc relative lg:border-r lg:border-b-0 border-b border-white/10 p-2 lg:pr-[50px]">
           <img
@@ -53,6 +106,7 @@ const Faq = () => {
             <FaqItems />
           </div>
         </div>
+        <DashboardFooter />
       </div>
     </div>
   );

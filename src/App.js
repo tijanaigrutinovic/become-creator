@@ -22,7 +22,10 @@ function App() {
     const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
     const [prevSectionIndex, setPrevSectionIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const lastScrollTime = useRef(0);
+    const faqTransitionRef = useRef(false);
+    const SCROLL_DEBOUNCE_TIME = 150;
     const sectionRefs = useRef([]);
     const waveCircleRef = useRef(null);
 
@@ -388,14 +391,31 @@ function App() {
     };
 
     const goToSection = useCallback((index, direction) => {
+        console.log('goToSection called:', { index, direction, currentSectionIndex });
         
+        if (sectionsData[currentSectionIndex].id === 'faq-section' && faqTransitionRef.current) {
+            console.log('FAQ transition blocked - already in progress');
+            return;
+        }
+        
+        if (index < 0 || index >= sectionsData.length) {
+            return;
+        }
 
-        if (isAnimating || index === currentSectionIndex || index < 0 || index >= sectionsData.length) {
+        if (isAnimating) {
             return;
         }
 
         setIsAnimating(true);
         setPrevSectionIndex(currentSectionIndex);
+        setCurrentSectionIndex(index);
+        
+        if (sectionsData[index].id === 'faq-section' || sectionsData[currentSectionIndex].id === 'faq-section') {
+            faqTransitionRef.current = true;
+            setTimeout(() => {
+                faqTransitionRef.current = false;
+            }, 1000);
+        }
 
         const prevSectionEl = sectionRefs.current[currentSectionIndex];
         const nextSectionEl = sectionRefs.current[index];
@@ -450,13 +470,15 @@ function App() {
             }
             setIsAnimating(false);
         }, ANIMATION_DURATION);
-
-        setCurrentSectionIndex(index);
-    }, [currentSectionIndex, isAnimating, sectionsData.length]);
+    }, [currentSectionIndex, isAnimating, sectionsData]);
 
 
     useEffect(() => {
         const handleWheel = (event) => {
+            if (Math.abs(event.deltaY) < 10) {
+                return;
+            }
+            
             if (
                 isAnimating ||
                 (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
@@ -476,6 +498,12 @@ function App() {
             const currentSectionId = sectionsData[currentSectionIndex].id;
             const direction = event.deltaY > 0 ? 1 : -1; 
 
+            console.log('Current Section Check:', { currentSectionId, isFAQ: currentSectionId === 'faq-section', direction });
+
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ Block Entered - Direction:', direction);
+                return;
+            }
 
             if (currentSectionId === 'more-ways-to-earn' && moreWaysToEarnComponentRef.current) {
                 const movedInternally = moreWaysToEarnComponentRef.current.moveSlide(direction);
@@ -529,6 +557,46 @@ function App() {
             }
             lastScrollTime.current = now;
 
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ Block Entered - Direction:', direction);
+                const faqSection = sectionRefs.current[currentSectionIndex];
+                if (faqSection) {
+                    console.log('FAQ Section Found');
+                    const faqContent = faqSection.querySelector('.bc-faq');
+                    if (faqContent) {
+                        console.log('FAQ Content Found');
+                        const scrollTop = faqContent.scrollTop;
+                        const scrollHeight = faqContent.scrollHeight;
+                        const clientHeight = faqContent.clientHeight;
+                        
+                        console.log('FAQ Scroll Info:', { scrollTop, scrollHeight, clientHeight, direction });
+                        
+                        if (direction < 0 && scrollTop <= 0) {
+                            console.log('FAQ: At top, navigating to previous section');
+                            event.preventDefault();
+                            lastScrollTime.current = now;
+                            goToSection(currentSectionIndex + direction, direction);
+                            return;
+                        }
+                        
+                        if (direction > 0 && scrollTop >= scrollHeight - clientHeight) {
+                            console.log('FAQ: At bottom, navigating to next section');
+                            event.preventDefault();
+                            lastScrollTime.current = now;
+                            goToSection(currentSectionIndex + direction, direction);
+                            return;
+                        }
+                        
+                        console.log('FAQ: Allowing internal scroll');
+                        return;
+                    } else {
+                        console.log('FAQ Content Not Found');
+                    }
+                } else {
+                    console.log('FAQ Section Not Found');
+                }
+            }
+
             if (currentSectionId === 'more-ways-to-earn' && moreWaysToEarnComponentRef.current) {
                 const movedInternally = moreWaysToEarnComponentRef.current.moveSlide(direction);
 
@@ -550,16 +618,39 @@ function App() {
         };
 
         const handleTouchStart = (event) => {
+            const currentSectionId = sectionsData[currentSectionIndex].id;
+            
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ touch start Block Entered - skipping main handler');
+                return;
+            }
+            
             touchStartY.current = event.touches[0].clientY;
             touchEndY.current = 0;
         };
 
         const handleTouchMove = (event) => {
+            const currentSectionId = sectionsData[currentSectionIndex].id;
+            
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ touch move Block Entered - skipping main handler');
+                return;
+            }
+            
             event.preventDefault();
             touchEndY.current = event.touches[0].clientY;
         };
 
         const handleTouchEnd = () => {
+            const currentSectionId = sectionsData[currentSectionIndex].id;
+            
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ touch end Block Entered - skipping main handler');
+                return;
+            }
+            
+            console.log('Touch End:', { currentSectionId: sectionsData[currentSectionIndex].id, isAnimating });
+            
             if (
                 isAnimating ||
                 (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
@@ -575,7 +666,6 @@ function App() {
             }
 
             const distance = touchStartY.current - touchEndY.current;
-            const currentSectionId = sectionsData[currentSectionIndex].id;
             let direction = 0;
 
             if (distance > minSwipeDistance) {
@@ -585,6 +675,8 @@ function App() {
             } else {
                 return;
             }
+
+            console.log('Touch Direction:', { direction, distance, currentSectionId });
 
             lastScrollTime.current = now;
 
@@ -604,11 +696,129 @@ function App() {
             goToSection(currentSectionIndex + direction, direction);
         };
 
+        const handleTouchBar = (event) => {
+            if (Math.abs(event.deltaY) < 5 || Math.abs(event.deltaY) > 50) return;
+            
+            const currentSectionId = sectionsData[currentSectionIndex].id;
+            const direction = event.deltaY > 0 ? 1 : -1;
+            
+            console.log('Touchbar Event:', { currentSectionId, direction, deltaY: event.deltaY });
+            
+            if (
+                isAnimating ||
+                (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
+                 moreWaysToEarnComponentRef.current &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating())
+            ) {
+                event.preventDefault();
+                return;
+            }
+            
+            const now = new Date().getTime();
+            if (now - lastScrollTime.current < SCROLL_DEBOUNCE_TIME) {
+                event.preventDefault();
+                return;
+            }
+
+            if (currentSectionId === 'faq-section' && faqTransitionRef.current) {
+                console.log('FAQ touchbar transition blocked - already in progress');
+                event.preventDefault();
+                return;
+            }
+
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ touchbar Block Entered - Direction:', direction);
+                return;
+            }
+
+            if (currentSectionId === 'more-ways-to-earn' && moreWaysToEarnComponentRef.current) {
+                const movedInternally = moreWaysToEarnComponentRef.current.moveSlide(direction);
+
+                if (movedInternally) {
+                    event.preventDefault();
+                    lastScrollTime.current = now;
+                    return;
+                } else {
+                    const canGoGlobal = moreWaysToEarnComponentRef.current.canGoFurther(direction);
+                    if (canGoGlobal) {
+                        lastScrollTime.current = now;
+                        goToSection(currentSectionIndex + direction, direction);
+                        event.preventDefault();
+                        return;
+                    }
+                }
+            }
+
+            event.preventDefault();
+            lastScrollTime.current = now;
+            goToSection(currentSectionIndex + direction, direction);
+        };
+
+        const handleGesture = (event) => {
+            const currentSectionId = sectionsData[currentSectionIndex].id;
+            const direction = event.deltaY > 0 ? 1 : -1;
+            
+            console.log('Gesture Event:', { currentSectionId, direction, deltaY: event.deltaY });
+            
+            if (
+                isAnimating ||
+                (sectionsData[currentSectionIndex].id === 'more-ways-to-earn' &&
+                 moreWaysToEarnComponentRef.current &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating &&
+                 moreWaysToEarnComponentRef.current.isHorizontalAnimating())
+            ) {
+                event.preventDefault();
+                return;
+            }
+            
+            const now = new Date().getTime();
+            if (now - lastScrollTime.current < SCROLL_DEBOUNCE_TIME) {
+                event.preventDefault();
+                return;
+            }
+
+            if (currentSectionId === 'faq-section' && faqTransitionRef.current) {
+                console.log('FAQ gesture transition blocked - already in progress');
+                event.preventDefault();
+                return;
+            }
+
+            if (currentSectionId === 'faq-section') {
+                console.log('FAQ gesture Block Entered - Direction:', direction);
+                return;
+            }
+
+            if (currentSectionId === 'more-ways-to-earn' && moreWaysToEarnComponentRef.current) {
+                const movedInternally = moreWaysToEarnComponentRef.current.moveSlide(direction);
+
+                if (movedInternally) {
+                    event.preventDefault();
+                    lastScrollTime.current = now;
+                    return;
+                } else {
+                    const canGoGlobal = moreWaysToEarnComponentRef.current.canGoFurther(direction);
+                    if (canGoGlobal) {
+                        lastScrollTime.current = now;
+                        goToSection(currentSectionIndex + direction, direction);
+                        event.preventDefault();
+                        return;
+                    }
+                }
+            }
+
+            event.preventDefault();
+            lastScrollTime.current = now;
+            goToSection(currentSectionIndex + direction, direction);
+        };
+
         window.addEventListener('wheel', handleWheel, { passive: false });
         document.addEventListener('keydown', handleKeyDown);
         window.addEventListener('touchstart', handleTouchStart, { passive: false });
         window.addEventListener('touchmove', handleTouchMove, { passive: false });
         window.addEventListener('touchend', handleTouchEnd);
+        window.addEventListener('wheel', handleTouchBar, { passive: false }); 
+        window.addEventListener('gesturestart', handleGesture, { passive: false });
 
 
         return () => {
@@ -617,6 +827,8 @@ function App() {
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchmove', handleTouchMove);
             window.removeEventListener('touchend', handleTouchEnd);
+            window.removeEventListener('wheel', handleTouchBar);
+            window.removeEventListener('gesturestart', handleGesture);
         };
     }, [currentSectionIndex, goToSection, sectionsData]);
 
@@ -810,17 +1022,23 @@ function App() {
                                 nextSectionId={sectionsData[index + 1] ? sectionsData[index + 1].id : null}
                             />
                         ) : (
-                            <SpecificSectionComponent
-                            isActive={isCurrentActive}
-                            transitionDirection={
-                                index > prevSectionIndex ? 'down' :
-                                index < prevSectionIndex ? 'up' :
-                                null
-                            }
-                            id={sectionData.id}
-                            nextSectionId={sectionsData[index + 1] ? sectionsData[index + 1].id : null}
-                            />
-                            
+                            sectionData.id === 'faq-section' ? (
+                                <Faq
+                                    isActive={isCurrentActive}
+                                    goToPrevSection={() => goToSection(currentSectionIndex - 1, -1)}
+                                />
+                            ) : (
+                                <SpecificSectionComponent
+                                    isActive={isCurrentActive}
+                                    transitionDirection={
+                                        index > prevSectionIndex ? 'down' :
+                                        index < prevSectionIndex ? 'up' :
+                                        null
+                                    }
+                                    id={sectionData.id}
+                                    nextSectionId={sectionsData[index + 1] ? sectionsData[index + 1].id : null}
+                                />
+                            )
                         )}
                         </section>
                 );
