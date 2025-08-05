@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/become-creator/static/css/main.7120cdee.css",
-    "main.js": "/become-creator/static/js/main.e3f272c7.js",
+    "main.css": "/become-creator/static/css/main.11ed562f.css",
+    "main.js": "/become-creator/static/js/main.8d2926fe.js",
     "static/js/488.a27b3c46.chunk.js": "/become-creator/static/js/488.a27b3c46.chunk.js",
     "static/media/mobile-frame.svg": "/become-creator/static/media/mobile-frame.3f7f0327cb58c751c109.svg",
     "static/media/Gilroy-Thin.ttf": "/become-creator/static/media/Gilroy-Thin.28f856b7c4b3d473e0d1.ttf",
@@ -16,12 +16,12 @@
     "static/media/Gilroy-Heavy.ttf": "/become-creator/static/media/Gilroy-Heavy.41ca3e2d8c1dc7d3cde9.ttf",
     "service-worker.js": "/become-creator/service-worker.js",
     "index.html": "/become-creator/index.html",
-    "main.7120cdee.css.map": "/become-creator/static/css/main.7120cdee.css.map",
-    "main.e3f272c7.js.map": "/become-creator/static/js/main.e3f272c7.js.map",
+    "main.11ed562f.css.map": "/become-creator/static/css/main.11ed562f.css.map",
+    "main.8d2926fe.js.map": "/become-creator/static/js/main.8d2926fe.js.map",
     "488.a27b3c46.chunk.js.map": "/become-creator/static/js/488.a27b3c46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7120cdee.css",
-    "static/js/main.e3f272c7.js"
+    "static/css/main.11ed562f.css",
+    "static/js/main.8d2926fe.js"
   ]
 }
